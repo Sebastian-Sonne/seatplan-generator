@@ -19,7 +19,7 @@ const initialState: Appstate = {
         [-1, -1, -1, -1, -1],
         [-1, -1, -1, -1, -1],
         [-1, -1, -1, -1, -1],
-    ]
+    ],
 }
 
 const appSlice = createSlice({
@@ -43,7 +43,7 @@ const appSlice = createSlice({
                 [-1, -1, -1, -1, -1],
                 [-1, -1, -1, -1, -1],
             ];
-        }
+        },
     },
 });
 

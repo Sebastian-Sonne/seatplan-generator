@@ -1,4 +1,4 @@
-import AddStudentsScreen from "./components/AddStudentsScreen";
+import AddStudentsScreen from "./components/addStudentsScreen/AddStudentsScreen";
 import CreateClassroomScreen from "./components/CreateClassroomScreen";
 import AssignSeatsScreen from "./components/AssignSeatsScreen";
 import Progressbar from "./components/Progressbar";
@@ -10,7 +10,7 @@ const App = () => {
   const step = useSelector((state: RootState) => state.app.step);
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-4">
+    <div className="w-full max-w-4xl mx-auto p-4 bg-gray-50 mt-5 rounded-3xl">
       <Progressbar />
 
       {step === ProcessSteps.STEP_ONE && (
