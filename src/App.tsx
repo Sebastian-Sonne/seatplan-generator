@@ -1,35 +1,31 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import AddStudentsScreen from "./components/AddStudentsScreen";
+import CreateClassroomScreen from "./components/CreateClassroomScreen";
+import AssignSeatsScreen from "./components/AssignSeatsScreen";
+import Progressbar from "./components/Progressbar";
+import { useSelector } from "react-redux";
+import { RootState } from "./state/store";
+import { ProcessSteps } from "./state/slices/appSlice";
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  const step = useSelector((state: RootState) => state.app.step);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className="w-full max-w-4xl mx-auto p-4">
+      <Progressbar />
 
-export default App
+      {step === ProcessSteps.STEP_ONE && (
+        <AddStudentsScreen />
+      )}
+
+      {step === ProcessSteps.STEP_TWO && (
+        <CreateClassroomScreen />
+      )}
+
+      {step === ProcessSteps.STEP_THREE && (
+        <AssignSeatsScreen />
+      )}
+    </div>
+  );
+};
+
+export default App;
