@@ -15,7 +15,7 @@ const Progressbar = () => {
                                 : "border-gray-300 text-gray-500"
                             }`}
                     >
-                        Step {index + 1}: {label}
+                        {label}
                     </div>
                 )
             )}

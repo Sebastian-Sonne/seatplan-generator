@@ -12,7 +12,7 @@ const AssignSeatsScreen = () => {
     }
     return (
         <div>
-            <h2 className="text-xl font-bold mb-4">Step 3: Assign Students</h2>
+            <h2 className="text-xl font-bold mb-4">Assign Students</h2>
             <button
                 onClick={() => console.log("not implemented")}
                 className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
