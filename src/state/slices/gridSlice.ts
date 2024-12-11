@@ -8,6 +8,7 @@ export interface Coordinates {
 
 interface Gridstate {
     deskSetup: number[][],
+    numberOfDesks: number,
 }
 
 const initialState: Gridstate = {
@@ -18,6 +19,7 @@ const initialState: Gridstate = {
         [-1, -1, -1, -1, -1],
         [-1, -1, -1, -1, -1],
     ],
+    numberOfDesks: 0,
 }
 
 const gridSlice = createSlice({
@@ -25,19 +27,26 @@ const gridSlice = createSlice({
     initialState,
     reducers: {
         addDesk: (state, action: PayloadAction<Coordinates>) => {
-            state.deskSetup[action.payload.row][action.payload.col] = 1;
+            if (state.deskSetup[action.payload.row][action.payload.col] === -1) {
+                state.deskSetup[action.payload.row][action.payload.col] = 1;
+                state.numberOfDesks++;
+            }
         },
         removeDesk: (state, action: PayloadAction<Coordinates>) => {
-            state.deskSetup[action.payload.row][action.payload.col] = -1;
+            if (state.deskSetup[action.payload.row][action.payload.col] === 1) {
+                state.deskSetup[action.payload.row][action.payload.col] = -1;
+                state.numberOfDesks--;
+            }
         },
         resetDesks: (state) => {
-            state.deskSetup = [
-                [-1, -1, -1, -1, -1],
-                [-1, -1, -1, -1, -1],
-                [-1, -1, -1, -1, -1],
-                [-1, -1, -1, -1, -1],
-                [-1, -1, -1, -1, -1],
-            ];
+            const numRows = state.deskSetup.length;
+            const numCols = state.deskSetup[0]?.length || 0;
+
+            state.deskSetup = Array(numRows)
+                .fill(0)
+                .map(() => Array(numCols).fill(-1));
+
+            state.numberOfDesks = 0;
         },
         addRow: (state) => {
             const newRow = new Array(state.deskSetup[0].length).fill(-1);
@@ -45,6 +54,10 @@ const gridSlice = createSlice({
         },
         removeRow: (state) => {
             if (state.deskSetup.length > 0) {
+                const desksInLastRow = state.deskSetup[state.deskSetup.length - 1].filter(
+                    (cell) => cell === 1
+                ).length;
+                state.numberOfDesks -= desksInLastRow;
                 state.deskSetup = state.deskSetup.slice(0, -1);
             }
         },
@@ -52,9 +65,15 @@ const gridSlice = createSlice({
             state.deskSetup = state.deskSetup.map((row) => [...row, -1]);
         },
         removeCol: (state) => {
-            state.deskSetup = state.deskSetup.map((row) =>
-                row.length > 0 ? row.slice(0, -1) : row
-            );
+            state.deskSetup = state.deskSetup.map((row) => {
+                if (row.length > 0) {
+                    if (row[row.length - 1] === 1) {
+                        state.numberOfDesks--;
+                    }
+                    return row.slice(0, -1);
+                }
+                return row;
+            });
         },
 
     },

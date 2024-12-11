@@ -1,6 +1,6 @@
 import AddStudentsScreen from "./components/addStudentsScreen/AddStudentsScreen";
-import CreateClassroomScreen from "./components/createClassroom/CreateClassroomScreen";
-import AssignSeatsScreen from "./components/AssignSeatsScreen";
+import CreateClassroomScreen from "./components/createClassroomScreen/CreateClassroomScreen";
+import AssignSeatsScreen from "./components/assignSeatsScreen/AssignSeatsScreen";
 import Progressbar from "./components/Progressbar";
 import { useSelector } from "react-redux";
 import { RootState } from "./state/store";

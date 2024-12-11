@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { setProcessStep } from "../state/slices/appSlice";
+import { setProcessStep } from "../../state/slices/appSlice";
 
 const AssignSeatsScreen = () => {
     const desks: string[] = [];

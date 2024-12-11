@@ -15,8 +15,6 @@ const AddStudentsScreen = () => {
       <h2 className="text-xl font-bold mb-4">Upload or Add Students</h2>
       <div className="flex gap-4 items-center">
         <UploadFile />
-
-        
       </div>
 
       <Studentlist />
