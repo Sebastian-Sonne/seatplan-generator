@@ -6,7 +6,7 @@ import AddButton from "./buttons/AddButton";
 import RemoveButton from "./buttons/RemoveButton";
 import { RootState } from "../../state/store";
 import { selectStudentIds } from "../../state/slices/studentSlice";
-import CreateButton from "./buttons/CreateButtons";
+import CreateButton from "./buttons/CreateButton";
 import GoBackButton from "./buttons/GoBackButton";
 
 const CreateClassroomScreen = () => {
@@ -14,11 +14,12 @@ const CreateClassroomScreen = () => {
   const numberOfStudents = useSelector(selectStudentIds).length;
   const dispatch = useDispatch();
 
-  const handleNextStep = () => {
-    dispatch(setProcessStep(3));
-  }
   const handlePrevStep = () => {
     dispatch(setProcessStep(1));
+  }
+
+  const handleCreateClassroom = () => {
+    dispatch(setProcessStep(3));
   }
 
   return (
@@ -53,8 +54,8 @@ const CreateClassroomScreen = () => {
             </div>
 
             <div className="flex flex-row gap-2">
-              <GoBackButton handleClick={handlePrevStep} />
-              <CreateButton />
+              <GoBackButton onClick={handlePrevStep} />
+              <CreateButton onClick={handleCreateClassroom} />
             </div>
 
           </div>

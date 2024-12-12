@@ -1,12 +1,12 @@
 
 interface GoBackButtonProps {
-    handleClick: () => void;
+    onClick: () => void;
 }
-const GoBackButton: React.FC<GoBackButtonProps> = ({ handleClick }) => {
+const GoBackButton: React.FC<GoBackButtonProps> = ({ onClick }) => {
 
     return (
         <button
-            onClick={handleClick}
+            onClick={onClick}
             className="bg-gray-300 text-white px-4 py-2 rounded hover:bg-gray-400">
             Go Back
         </button>
