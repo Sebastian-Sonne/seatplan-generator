@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { addDesk } from "../../state/slices/gridSlice";
 import DeskElement from "./Deskelement";
 import { useDeskState } from "../../hooks/useDeskState";
-import DeskButton from "./buttons/Deskbutton";
+import DeskButton from "./buttons/DeskButton";
 
 interface GridElementProps {
     row: number;

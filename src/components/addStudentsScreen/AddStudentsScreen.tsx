@@ -1,30 +1,14 @@
-import { useDispatch } from "react-redux";
-import { setProcessStep } from "../../state/slices/appSlice";
-import UploadFile from "./UploadFile";
-import Studentlist from "./Studentlist";
+import FileUploadArea from "./UploadFile";
 
 const AddStudentsScreen = () => {
-  const dispatch = useDispatch();
-
-  const handleNextStep = () => {
-    dispatch(setProcessStep(2));
-  }
 
   return (
     <div>
-      <h2 className="text-xl font-bold mb-4">Upload or Add Students</h2>
+      <h2 className="text-xl font-bold mb-4">Upload Files or add Students manually</h2>
       <div className="flex gap-4 items-center">
-        <UploadFile />
+        <FileUploadArea />
       </div>
 
-      <Studentlist />
-      
-      <button
-        onClick={handleNextStep}
-        className="mt-6 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
-      >
-        Next Step
-      </button>
     </div>
   )
 }
