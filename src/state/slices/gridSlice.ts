@@ -1,24 +1,33 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-
 export interface Coordinates {
     row: number;
     col: number
 }
 
+export interface Desk {
+    deskState: -1 | 1; // -1 = no desk, 1 = desk
+    studentId: string | null;
+}
+
 interface Gridstate {
-    deskSetup: number[][],
+    deskSetup: Desk[][],
     numberOfDesks: number,
 }
 
+const createEmptyGrid = (rows: number, cols: number): Desk[][] => {
+    return Array(rows)
+        .fill(0)
+        .map(() =>
+            Array(cols)
+                .fill({
+                    deskState: -1,
+                    studentId: null,
+                }))
+};
+
 const initialState: Gridstate = {
-    deskSetup: [
-        [-1, -1, -1, -1, -1],
-        [-1, -1, -1, -1, -1],
-        [-1, -1, -1, -1, -1],
-        [-1, -1, -1, -1, -1],
-        [-1, -1, -1, -1, -1],
-    ],
+    deskSetup: createEmptyGrid(5, 5),
     numberOfDesks: 0,
 }
 
@@ -27,47 +36,51 @@ const gridSlice = createSlice({
     initialState,
     reducers: {
         addDesk: (state, action: PayloadAction<Coordinates>) => {
-            if (state.deskSetup[action.payload.row][action.payload.col] === -1) {
-                state.deskSetup[action.payload.row][action.payload.col] = 1;
+            const cell = state.deskSetup[action.payload.row][action.payload.col];
+            if (cell.deskState === -1) {
+                cell.deskState = 1;
                 state.numberOfDesks++;
             }
         },
         removeDesk: (state, action: PayloadAction<Coordinates>) => {
-            if (state.deskSetup[action.payload.row][action.payload.col] === 1) {
-                state.deskSetup[action.payload.row][action.payload.col] = -1;
+            const cell = state.deskSetup[action.payload.row][action.payload.col];
+            if (cell.deskState === 1) {
+                cell.deskState = -1;
+                cell.studentId = null;
                 state.numberOfDesks--;
             }
         },
+        setDeskGrid: (state, action: PayloadAction<Desk[][]>) => {
+            state.deskSetup = action.payload;
+        },
         resetDesks: (state) => {
             const numRows = state.deskSetup.length;
-            const numCols = state.deskSetup[0]?.length || 0;
+            const numCols = state.deskSetup[0]?.length;
 
-            state.deskSetup = Array(numRows)
-                .fill(0)
-                .map(() => Array(numCols).fill(-1));
+            state.deskSetup = createEmptyGrid(numRows, numCols)
 
             state.numberOfDesks = 0;
         },
         addRow: (state) => {
-            const newRow = new Array(state.deskSetup[0].length).fill(-1);
+            const newRow = Array(state.deskSetup[0].length).fill({ deskState: -1, studentId: null });
             state.deskSetup = [...state.deskSetup, newRow];
         },
         removeRow: (state) => {
             if (state.deskSetup.length > 0) {
                 const desksInLastRow = state.deskSetup[state.deskSetup.length - 1].filter(
-                    (cell) => cell === 1
+                    (cell) => cell.deskState === 1
                 ).length;
                 state.numberOfDesks -= desksInLastRow;
                 state.deskSetup = state.deskSetup.slice(0, -1);
             }
         },
         addCol: (state) => {
-            state.deskSetup = state.deskSetup.map((row) => [...row, -1]);
+            state.deskSetup = state.deskSetup.map((row) => [...row, { deskState: -1, studentId: null }]);
         },
         removeCol: (state) => {
             state.deskSetup = state.deskSetup.map((row) => {
                 if (row.length > 0) {
-                    if (row[row.length - 1] === 1) {
+                    if (row[row.length - 1].deskState === 1) {
                         state.numberOfDesks--;
                     }
                     return row.slice(0, -1);
@@ -75,9 +88,40 @@ const gridSlice = createSlice({
                 return row;
             });
         },
-
+        /**
+         * function to shuffle and assign students
+         * @param state 
+         * @param action students ids
+         */
+        assignStudents: (state, action: PayloadAction<string[]>) => {
+            // Collect all desks
+            const availableDesks: { row: number; col: number }[] = [];
+            state.deskSetup.forEach((row, rowIndex) => {
+              row.forEach((cell, colIndex) => {
+                if (cell.deskState === 1 && !cell.studentId) {
+                  availableDesks.push({ row: rowIndex, col: colIndex });
+                }
+              });
+            });
+      
+            // Shuffle students and assign to desks
+            const shuffledDesks = availableDesks.sort(() => Math.random() - 0.5);
+            action.payload.forEach((studentId, index) => {
+              if (shuffledDesks[index]) {
+                const { row, col } = shuffledDesks[index];
+                state.deskSetup[row][col].studentId = studentId;
+              }
+            });
+          },
+        clearAssignments: (state) => {
+            state.deskSetup.forEach((row) =>
+                row.forEach((cell) => {
+                    if (cell.deskState === 1) cell.studentId = null;
+                })
+            );
+        },
     },
 });
 
-export const { addDesk, removeDesk, resetDesks, addCol, addRow, removeCol, removeRow } = gridSlice.actions;
+export const { addDesk, removeDesk, setDeskGrid, resetDesks, addCol, addRow, removeCol, removeRow, assignStudents, clearAssignments } = gridSlice.actions;
 export default gridSlice.reducer;

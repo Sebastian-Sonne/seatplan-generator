@@ -1,46 +1,33 @@
-import { useDispatch, useSelector } from "react-redux";
-import { addDesk, removeDesk } from "../../state/slices/gridSlice";
-import { RootState } from "../../state/store";
-import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addDesk } from "../../state/slices/gridSlice";
+import DeskElement from "./Deskelement";
+import { useDeskState } from "../../hooks/useDeskState";
+import DeskButton from "./buttons/Deskbutton";
 
 interface GridElementProps {
     row: number;
     col: number;
-    isDisabled?: boolean;
+    editable?: boolean;
 }
-const GridElement: React.FC<GridElementProps> = ({ row, col, isDisabled }) => {
-    const deskState = useSelector((state: RootState) => state.grid.deskSetup[row][col]);
-    const [isHovered, setIsHovered] = useState(false);
+
+const GridElement: React.FC<GridElementProps> = ({ row, col, editable = false }) => {
     const dispatch = useDispatch();
+    const { deskState } = useDeskState(row, col);
 
-    const handleAddDeskClick = () => {
-        dispatch(addDesk({ row: row, col: col }));
-    }
-    const handleRemoveDeskClick = () => {
-        dispatch(removeDesk({ row: row, col: col }));
-    }
+    const handleAddDesk = () => dispatch(addDesk({ row, col }));
 
-    return (
-        (deskState == -1 ? (
-            <button
-                onClick={handleAddDeskClick}
-                disabled={isDisabled}
-                className={`border h-16  flex justify-center items-center rounded bg-gray-100 ${isDisabled ? "" : "hover:bg-gray-200"}`}
-            >
-                <span className="text-gray-500">+</span>
-            </button>
-        ) : (
-            <button
-                onClick={handleRemoveDeskClick}
-                disabled={isDisabled}
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
-                className={`border-2 border-gray-700 h-16 flex justify-center items-center rounded bg-gray-50 text-gray-500 ${isDisabled ? "" : "hover:text-white hover:bg-red-500"}  transition-all`}
-            >
-                <span>{isHovered ? "Remove" : "Desk"}</span>
-            </button>
-        ))
+    return deskState?.deskState === -1 ? (
+        <DeskButton
+            onClick={handleAddDesk}
+            disabled={editable}
+            hoverStyle="hover:bg-gray-200"
+            baseStyle="bg-gray-100 text-gray-500"
+        >
+            <span>+</span>
+        </DeskButton>
+    ) : (
+        <DeskElement row={row} col={col} editable={editable} />
+    );
+};
 
-    )
-}
-export default GridElement
+export default GridElement;

@@ -1,11 +1,22 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setProcessStep } from "../../state/slices/appSlice";
+import ClassroomGrid from "../createClassroomScreen/ClassroomGrid";
+import { useEffect } from "react";
+import { selectStudentIds } from "../../state/slices/studentSlice";
+import { assignStudents, clearAssignments, } from "../../state/slices/gridSlice";
 
 const AssignSeatsScreen = () => {
-    const desks: string[] = [];
-    const assignedSeats: string[] = [];
-
     const dispatch = useDispatch();
+    const studentIds = useSelector(selectStudentIds);
+
+    useEffect(() => {
+        shuffleStudents();
+    }, [])
+
+    const shuffleStudents = () => {
+        dispatch(clearAssignments())
+        dispatch(assignStudents(studentIds));
+    }
 
     const handlePrevStep = () => {
         dispatch(setProcessStep(2));
@@ -13,26 +24,15 @@ const AssignSeatsScreen = () => {
     return (
         <div>
             <h2 className="text-xl font-bold mb-4">Assign Students</h2>
-            <button
-                onClick={() => console.log("not implemented")}
-                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-            >
-                Shuffle and Assign Students
-            </button>
-            <div
-                className="grid gap-2 mt-4"
-                style={{
-                    gridTemplateColumns: `repeat(${0}, 1fr)`,
-                }}
-            >
-                {desks.map((_, idx) => (
-                    <div
-                        key={idx}
-                        className="border h-16 flex justify-center items-center rounded bg-gray-100"
-                    >
-                        {assignedSeats[idx] || ""}
-                    </div>
-                ))}
+
+            <div className="mb-5">
+                <button
+                    onClick={shuffleStudents}
+                    className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 shadow-md">Shuffle</button>
+            </div>
+
+            <div className="p-5 bg-white rounded-2xl shadow-md">
+                <ClassroomGrid editable={false} />
             </div>
 
             <button
