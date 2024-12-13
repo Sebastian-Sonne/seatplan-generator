@@ -3,10 +3,10 @@ import { RootState } from "../../state/store";
 import GridElement from "./GridElement";
 
 interface ClassroomGridProps {
-    editable?: boolean;
+    disabled?: boolean;
 }
 
-const ClassroomGrid: React.FC<ClassroomGridProps> = ({ editable = false }) => {
+const ClassroomGrid: React.FC<ClassroomGridProps> = ({ disabled = false }) => {
     const deskSetup = useSelector((state: RootState) => state.grid.deskSetup);
 
     return (
@@ -16,7 +16,7 @@ const ClassroomGrid: React.FC<ClassroomGridProps> = ({ editable = false }) => {
         >
             {deskSetup.map((row, rowIndex) =>
                 row.map((_, colIndex) => (
-                    <GridElement key={`${rowIndex}-${colIndex}`} row={rowIndex} col={colIndex} editable={editable} />
+                    <GridElement key={`${rowIndex}-${colIndex}`} row={rowIndex} col={colIndex} disabled={disabled} />
                 ))
             )}
         </div>

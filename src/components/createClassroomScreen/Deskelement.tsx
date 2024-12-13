@@ -6,10 +6,10 @@ import { useDeskState } from "../../hooks/useDeskState";
 interface DeskElementProps {
     row: number;
     col: number;
-    editable?: boolean;
+    disabled?: boolean;
 }
 
-const DeskElement: React.FC<DeskElementProps> = ({ row, col, editable = false }) => {
+const DeskElement: React.FC<DeskElementProps> = ({ row, col, disabled = false }) => {
     const dispatch = useDispatch();
     const { student } = useDeskState(row, col);
     const [isHovered, setIsHovered] = useState(false);
@@ -19,16 +19,16 @@ const DeskElement: React.FC<DeskElementProps> = ({ row, col, editable = false })
     return (
         <button
             onClick={handleRemoveDesk}
-            disabled={editable}
+            disabled={disabled}
             onMouseEnter={() => setIsHovered(true)} 
             onMouseLeave={() => setIsHovered(false)}
             className={`border-2 border-gray-700 h-16 flex justify-center items-center rounded 
                         bg-gray-50 text-gray-500 transition-all
-                        ${editable ? "" : "hover:text-white hover:bg-red-500"}`}
+                        ${disabled ? "" : "hover:text-white hover:bg-red-500"}`}
         >
             {/* Dynamic button text based on isHovered */}
-            <span>
-                {editable ? (isHovered ? "Remove" : "Desk") : student?.name || ""}
+            <span className="font-semibold text-gray-600">
+                {!disabled ? (isHovered ? "Remove" : "Desk") : student?.name || ""}
             </span>
         </button>
     );

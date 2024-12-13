@@ -32,7 +32,7 @@ const AssignSeatsScreen = () => {
             </div>
 
             <div className="p-5 bg-white rounded-2xl shadow-md">
-                <ClassroomGrid editable={false} />
+                <ClassroomGrid disabled={true} />
             </div>
 
             <button

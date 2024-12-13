@@ -7,10 +7,10 @@ import DeskButton from "./buttons/DeskButton";
 interface GridElementProps {
     row: number;
     col: number;
-    editable?: boolean;
+    disabled?: boolean;
 }
 
-const GridElement: React.FC<GridElementProps> = ({ row, col, editable = false }) => {
+const GridElement: React.FC<GridElementProps> = ({ row, col, disabled = false }) => {
     const dispatch = useDispatch();
     const { deskState } = useDeskState(row, col);
 
@@ -19,14 +19,14 @@ const GridElement: React.FC<GridElementProps> = ({ row, col, editable = false })
     return deskState?.deskState === -1 ? (
         <DeskButton
             onClick={handleAddDesk}
-            disabled={editable}
+            disabled={disabled}
             hoverStyle="hover:bg-gray-200"
             baseStyle="bg-gray-100 text-gray-500"
         >
-            <span>+</span>
+            <span>{disabled ? "" : "+"}</span>
         </DeskButton>
     ) : (
-        <DeskElement row={row} col={col} editable={editable} />
+        <DeskElement row={row} col={col} disabled={disabled} />
     );
 };
 
