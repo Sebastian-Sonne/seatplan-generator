@@ -4,13 +4,32 @@ import { addStudents } from "../../state/slices/studentSlice";
 import * as XLSX from "xlsx";
 import { useCallback, useState } from "react";
 import { useDropzone } from 'react-dropzone';
-import { ExcelIcon, UploadIcon } from "../icons/Icons";
+import { UploadIcon } from "../icons/Icons";
 import { setProcessStep } from "../../state/slices/appSlice";
+import Loadingbar from "../loading/LoadingScreen";
+import FileItem from "./FileItem";
 
 const FileUploadArea = () => {
-  const dispatch = useDispatch();
   const [file, setFile] = useState<File | null>(null);
   const [error, setError] = useState<string | null>(null);
+
+  return (
+    <div className="w-full max-w-[600px] mx-auto p-6 bg-white rounded-xl shadow-md">
+      <DragAndDropArea setError={setError} setFile={setFile} />
+
+      {error && <ErrorArea error={error} />}
+
+      {file && <UploadedFiles file={file} setFile={setFile} setError={setError} />}
+    </div>
+  );
+};
+export default FileUploadArea;
+
+interface DragAndDropAreaProps {
+  setError: React.Dispatch<React.SetStateAction<string | null>>;
+  setFile: React.Dispatch<React.SetStateAction<File | null>>;
+}
+const DragAndDropArea: React.FC<DragAndDropAreaProps> = ({ setError, setFile }) => {
 
   const onDrop = useCallback(
     (acceptedFile: File[], fileRejections: any[]) => {
@@ -37,23 +56,69 @@ const FileUploadArea = () => {
     maxFiles: 1,
   });
 
-  const handleSubmit = () => {
-    handleFileUpload();
+  return (
+    <div
+      {...getRootProps()}
+      className={`border-2 border-dashed rounded-xl p-6 cursor-pointer transition duration-200 ease-in-out 
+          ${isDragActive ? 'border-blue-500 bg-blue-50' : 'border-gray-300 bg-gray-50'}`}
+    >
+      <input {...getInputProps()} />
+      <div className="text-center">
+        <div className="flex justify-center mb-2 w-full h-16">
+          <UploadIcon />
+        </div>
+        {isDragActive ? (
+          <p className="text-blue-600">Drop the files here...</p>
+        ) : (
+          <>
+            <p className="text-gray-600 font-semibold text-lg">Choose a file or drag & drop it here</p>
+            <p className="text-gray-400 font-normal text-md">.xlsx and .xls formats, max 50MB</p>
+          </>
+        )}
+      </div>
+    </div>
+  )
+}
 
-    if (!error) {
-      dispatch(setProcessStep(2));
+interface ErrorAreaProps {
+  error: string;
+}
+const ErrorArea: React.FC<ErrorAreaProps> = ({ error }) => {
+
+  return <p className="text-red-500 text-sm mt-3">{error}</p>
+}
+
+interface UploadedFilesProps {
+  file: File;
+  setFile: React.Dispatch<React.SetStateAction<File | null>>;
+  setError: React.Dispatch<React.SetStateAction<string | null>>;
+}
+const UploadedFiles: React.FC<UploadedFilesProps> = ({ file, setFile, setError }) => {
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = () => {
+    if (!file) {
+      setError("Please upload a file to continue.");
+      return;
     }
+
+    setError(null);
+    setLoading(true);
+    handleFileUpload();
   }
 
   const handleFileUpload = () => {
     if (!file) {
       console.log("No file selected");
-      setError("Please upload a file to continue.")
+      setError("Please upload a file to continue.");
+      setLoading(false);
       return;
     }
 
     if (!file.name.endsWith(".xlsx") && !file.name.endsWith(".xls")) {
-      setError("Please upload a valid Excel file.")
+      setError("Please upload a valid Excel file.");
+      setLoading(false);
       return;
     }
 
@@ -85,64 +150,25 @@ const FileUploadArea = () => {
     reader.readAsArrayBuffer(file);
   }
 
+  const handleLoadingComplete = () => {
+    setLoading(false);
+    dispatch(setProcessStep(2));
+  }
+
   return (
-    <div className="w-full max-w-[600px] mx-auto p-6 bg-white rounded-xl shadow-md">
+    <ul className="space-y-4">
+      <FileItem file={file} setFile={setFile}/>
 
-      {/* Drag and Drop Area */}
-      <div
-        {...getRootProps()}
-        className={`border-2 border-dashed rounded-xl p-6 cursor-pointer transition duration-200 ease-in-out 
-          ${isDragActive ? 'border-blue-500 bg-blue-50' : 'border-gray-300 bg-gray-50'}`}
-      >
-        <input {...getInputProps()} />
-        <div className="text-center">
-          <div className="flex justify-center mb-2 w-full h-16">
-            <UploadIcon />
-          </div>
-          {isDragActive ? (
-            <p className="text-blue-600">Drop the files here...</p>
-          ) : (
-            <>
-              <p className="text-gray-600 font-semibold text-lg">Choose a file or drag & drop it here</p>
-              <p className="text-gray-400 font-normal text-md">.xlsx and .xls formats, max 50MB</p>
-            </>
-          )}
-        </div>
+      <div className="flex flex-row justify-end items-center gap-4">
+
+        {loading && <Loadingbar onComplete={handleLoadingComplete}/>}
+        
+        <button
+          onClick={handleSubmit}
+          className="text-white font-semibold bg-green-500 hover:bg-green-600 px-4 py-2 rounded-lg transition-colors">
+          Submit
+        </button>
       </div>
-
-      {/* Error Message */}
-      {error && <p className="text-red-500 text-sm mt-3">{error}</p>}
-
-      {/* Uploaded Files */}
-      {file && (
-        <ul className="space-y-4">
-          <li className="flex items-center justify-between mt-2 p-3 bg-gray-100 rounded-lg">
-            <div className="flex flex-row items-center gap-4">
-              <div className="h-10 aspect-square">
-                <ExcelIcon />
-              </div>
-              <span className="text-gray-700 font-semibold truncate">{file.name}</span>
-            </div>
-
-            <button
-              className="text-red-500 hover:text-red-700 text-sm"
-              onClick={() => setFile(null)}
-            >
-              Remove
-            </button>
-          </li>
-
-
-          <div className="flex flex-row justify-end">
-            <button
-              onClick={handleSubmit}
-              className="text-white font-semibold bg-green-500 hover:bg-green-600 px-4 py-2 rounded-lg transition-colors">
-              Submit
-            </button>
-          </div>
-        </ul>
-      )}
-    </div>
-  );
-};
-export default FileUploadArea;
+    </ul>
+  )
+}

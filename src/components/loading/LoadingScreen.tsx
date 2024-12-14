@@ -1,0 +1,33 @@
+import { useEffect, useState } from "react"
+
+interface LoadingbarProps {
+    onComplete: () => void;
+}
+const Loadingbar: React.FC<LoadingbarProps> = ({onComplete}) => {
+    const [percent, setPercent] = useState(0);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setPercent((p) => {
+                if (p < 10) {
+                    return p + 1;
+                } else if (p < 100) {
+                    return p + Math.floor(Math.random() * 10) + 1;
+                } else {
+                    clearInterval(interval);
+                    onComplete();
+                    return 0;
+                }
+            });
+        }, 50);
+
+        return () => clearInterval(interval);
+    }, []);
+
+    return (
+        <div className="w-full bg-gray-200 rounded-full h-2.5">
+            <div className="bg-blue-600 h-2.5 rounded-full" style={{ width: `${percent}%` }}></div>
+        </div>
+    )
+}
+export default Loadingbar
