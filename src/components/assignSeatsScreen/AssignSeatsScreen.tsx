@@ -7,13 +7,17 @@ import { assignStudents, clearAssignments, } from "../../state/slices/gridSlice"
 import H2 from "../headings/H2";
 import GoBackButton from "../createClassroomScreen/buttons/GoBackButton";
 import Container from "../Container";
+import { RootState } from "../../state/store";
 
 const AssignSeatsScreen = () => {
     const dispatch = useDispatch();
     const studentIds = useSelector(selectStudentIds);
+    const shuffled = useSelector((state: RootState) => state.app.shuffled);
 
     useEffect(() => {
-        shuffleStudents();
+        if (!shuffled) {
+            shuffleStudents();
+        }
     }, [])
 
     const shuffleStudents = () => {

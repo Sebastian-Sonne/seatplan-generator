@@ -9,11 +9,13 @@ export const ProcessSteps = {
 interface Appstate {
     step: number;
     exportVisible: boolean;
+    shuffled: boolean; //variable possibly prevent shuffle on for saved layout
 }
 
 const initialState: Appstate = {
     step: ProcessSteps.STEP_ONE,
     exportVisible: false,
+    shuffled: false,
 }
 
 const appSlice = createSlice({
@@ -30,8 +32,11 @@ const appSlice = createSlice({
         setExport: (state, action: PayloadAction<boolean>) => {
             state.exportVisible = action.payload;
         },
+        setShuffled: (state, action: PayloadAction<boolean>) => {
+            state.shuffled = action.payload;
+        },
     },
 });
 
-export const { setProcessStep, setExport } = appSlice.actions;
+export const { setProcessStep, setExport, setShuffled } = appSlice.actions;
 export default appSlice.reducer;

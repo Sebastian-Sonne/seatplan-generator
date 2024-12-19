@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Container from "../Container";
 import H2 from "../headings/H2";
 import H4 from '../headings/H4';
@@ -13,7 +13,7 @@ const ExportScreen = () => {
 
     const students = useSelector(selectAllStudent);
     const deskSetup = useSelector((state: RootState) => state.grid.deskSetup);
-    const link = useMemo(() => generateLink(deskSetup, students), [deskSetup, students]);
+    const link = generateLink(deskSetup, students);
 
     const [copied, setCopied] = useState(false);
 
