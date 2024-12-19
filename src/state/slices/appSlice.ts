@@ -8,10 +8,12 @@ export const ProcessSteps = {
 
 interface Appstate {
     step: number;
+    exportVisible: boolean;
 }
 
 const initialState: Appstate = {
     step: ProcessSteps.STEP_ONE,
+    exportVisible: false,
 }
 
 const appSlice = createSlice({
@@ -25,8 +27,11 @@ const appSlice = createSlice({
             params.set('tab', action.payload.toString());
             window.history.replaceState(null, "", `${window.location.pathname}?${params.toString()}`);
         },
+        setExport: (state, action: PayloadAction<boolean>) => {
+            state.exportVisible = action.payload;
+        },
     },
 });
 
-export const { setProcessStep } = appSlice.actions;
+export const { setProcessStep, setExport } = appSlice.actions;
 export default appSlice.reducer;

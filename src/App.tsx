@@ -7,22 +7,24 @@ import { RootState } from "./state/store";
 import { ProcessSteps, setProcessStep } from "./state/slices/appSlice";
 import { Footer } from "./components/footer/Footer";
 import { useEffect } from "react";
+import ExportScreen from "./components/exportScreen/ExportScreen";
 
 const App = () => {
   const step = useSelector((state: RootState) => state.app.step);
+  const exportVisible = useSelector((state: RootState) => state.app.exportVisible);
   const dispatch = useDispatch();
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const tabParam = params.get('tab');
     const tab = parseInt(tabParam ?? '1', 10);
-  
+
     // Ensure the tab is within the valid range (1, 2, or 3)
     const validTab: 1 | 2 | 3 = [1, 2, 3].includes(tab) ? (tab as 1 | 2 | 3) : 1;
-  
+
     dispatch(setProcessStep(validTab));
   }, []);
-  
+
   return (
     <>
       <div className="w-full max-w-4xl mx-auto mb-4 p-4 bg-gray-50 mt-5 rounded-3xl shadow-md">
@@ -40,6 +42,8 @@ const App = () => {
           <AssignSeatsScreen />
         )}
       </div>
+
+      {exportVisible && <ExportScreen />}
 
       <Footer />
     </>

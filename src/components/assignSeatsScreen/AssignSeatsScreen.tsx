@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setProcessStep } from "../../state/slices/appSlice";
+import { setExport, setProcessStep } from "../../state/slices/appSlice";
 import ClassroomGrid from "../createClassroomScreen/ClassroomGrid";
 import { useEffect } from "react";
 import { selectStudentIds } from "../../state/slices/studentSlice";
@@ -24,6 +24,10 @@ const AssignSeatsScreen = () => {
     const handlePrevStep = () => {
         dispatch(setProcessStep(2));
     }
+
+    const handleExport = () => {
+        dispatch(setExport(true));
+    }
     return (
         <>
             <H2 value="Assign Students" />
@@ -44,7 +48,7 @@ const AssignSeatsScreen = () => {
                 <GoBackButton onClick={handlePrevStep} />
 
                 <button
-                    onClick={shuffleStudents}
+                    onClick={handleExport}
                     className="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition-colors shadow-md">
                     Export
                 </button>
