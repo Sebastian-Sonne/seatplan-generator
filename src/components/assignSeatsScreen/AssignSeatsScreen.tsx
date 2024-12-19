@@ -4,6 +4,7 @@ import ClassroomGrid from "../createClassroomScreen/ClassroomGrid";
 import { useEffect } from "react";
 import { selectStudentIds } from "../../state/slices/studentSlice";
 import { assignStudents, clearAssignments, } from "../../state/slices/gridSlice";
+import H2 from "../headings/H2";
 
 const AssignSeatsScreen = () => {
     const dispatch = useDispatch();
@@ -23,7 +24,7 @@ const AssignSeatsScreen = () => {
     }
     return (
         <div>
-            <h2 className="text-xl font-bold mb-4">Assign Students</h2>
+            <H2 value="Assign Students" />
 
             <div className="mb-5">
                 <button

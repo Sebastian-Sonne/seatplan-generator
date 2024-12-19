@@ -1,4 +1,4 @@
-import { ExcelIcon } from "../icons/Icons"
+import { ExcelIcon } from "../../icons/Icons"
 
 interface FileItemProps {
     file: File;
