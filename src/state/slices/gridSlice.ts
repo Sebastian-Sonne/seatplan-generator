@@ -52,6 +52,7 @@ const gridSlice = createSlice({
         },
         setDeskGrid: (state, action: PayloadAction<Desk[][]>) => {
             state.deskSetup = action.payload;
+            state.numberOfDesks = action.payload.flat().filter(desk => desk.deskState === 1).length;
         },
         resetDesks: (state) => {
             const numRows = state.deskSetup.length;
