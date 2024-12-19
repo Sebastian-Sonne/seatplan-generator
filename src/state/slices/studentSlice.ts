@@ -19,11 +19,11 @@ const studentsSlice = createSlice({
         addStudent: studentsAdapter.addOne,
         addStudents: studentsAdapter.addMany,
         removeStudent: studentsAdapter.removeOne,
-        clearStudents: studentsAdapter.removeAll
+        removeAll: studentsAdapter.removeAll
     },
 })
 
-export const { addStudent, addStudents, removeStudent, clearStudents } = studentsSlice.actions;
+export const { addStudent, addStudents, removeStudent, removeAll } = studentsSlice.actions;
 export default studentsSlice.reducer;
 
 export const {

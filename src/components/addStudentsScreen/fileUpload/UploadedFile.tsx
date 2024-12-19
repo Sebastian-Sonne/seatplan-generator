@@ -1,7 +1,6 @@
 import { nanoid } from "@reduxjs/toolkit";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { setProcessStep } from "../../../state/slices/appSlice";
 import { addStudents } from "../../../state/slices/studentSlice";
 import Loadingbar from "../../loading/LoadingScreen";
 import FileItem from "./FileItem";
@@ -25,7 +24,7 @@ const UploadedFiles: React.FC<UploadedFilesProps> = ({ file, setFile, setError }
         setError(null);
         setLoading(true);
         handleFileUpload();
-    }
+    };
 
     const handleFileUpload = () => {
         if (!file) {
@@ -63,6 +62,7 @@ const UploadedFiles: React.FC<UploadedFilesProps> = ({ file, setFile, setError }
                 } catch (error) {
                     console.error("Error processing Excel file:", error);
                     setError("There was an error processing the file.");
+                    setLoading(false);
                 }
             }
         };
@@ -71,7 +71,7 @@ const UploadedFiles: React.FC<UploadedFilesProps> = ({ file, setFile, setError }
 
     const handleLoadingComplete = () => {
         setLoading(false);
-        dispatch(setProcessStep(2));
+        setFile(null);
     }
 
     return (
@@ -79,8 +79,7 @@ const UploadedFiles: React.FC<UploadedFilesProps> = ({ file, setFile, setError }
             <FileItem file={file} setFile={setFile} />
 
             <div className="flex flex-row justify-end items-center gap-4">
-
-                {loading && <Loadingbar onComplete={handleLoadingComplete} />}
+                {loading && <Loadingbar speed={10} onComplete={handleLoadingComplete} />}
 
                 <button
                     onClick={handleSubmit}
@@ -89,6 +88,6 @@ const UploadedFiles: React.FC<UploadedFilesProps> = ({ file, setFile, setError }
                 </button>
             </div>
         </ul>
-    )
-}
-export default UploadedFiles
+    );
+};
+export default UploadedFiles;

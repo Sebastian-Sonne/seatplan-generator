@@ -2,8 +2,9 @@ import { useEffect, useState } from "react"
 
 interface LoadingbarProps {
     onComplete: () => void;
+    speed: number;
 }
-const Loadingbar: React.FC<LoadingbarProps> = ({onComplete}) => {
+const Loadingbar: React.FC<LoadingbarProps> = ({onComplete, speed}) => {
     const [percent, setPercent] = useState(0);
 
     useEffect(() => {
@@ -19,7 +20,7 @@ const Loadingbar: React.FC<LoadingbarProps> = ({onComplete}) => {
                     return 0;
                 }
             });
-        }, 50);
+        }, speed);
 
         return () => clearInterval(interval);
     }, []);
