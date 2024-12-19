@@ -23,7 +23,7 @@ const AddedStudentsArea = () => {
     }
 
     const handleNextStep = () => {
-        dispatch(setProcessStep(2))
+        dispatch(setProcessStep(2));
     }
 
     return (

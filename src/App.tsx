@@ -14,10 +14,15 @@ const App = () => {
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    //@ts-ignore
-    dispatch(setProcessStep(params.get('step') || 1))
-  }, [])
-
+    const tabParam = params.get('tab');
+    const tab = parseInt(tabParam ?? '1', 10);
+  
+    // Ensure the tab is within the valid range (1, 2, or 3)
+    const validTab: 1 | 2 | 3 = [1, 2, 3].includes(tab) ? (tab as 1 | 2 | 3) : 1;
+  
+    dispatch(setProcessStep(validTab));
+  }, []);
+  
   return (
     <>
       <div className="w-full max-w-4xl mx-auto mb-4 p-4 bg-gray-50 mt-5 rounded-3xl shadow-md">

@@ -5,6 +5,8 @@ import { useEffect } from "react";
 import { selectStudentIds } from "../../state/slices/studentSlice";
 import { assignStudents, clearAssignments, } from "../../state/slices/gridSlice";
 import H2 from "../headings/H2";
+import GoBackButton from "../createClassroomScreen/buttons/GoBackButton";
+import Container from "../Container";
 
 const AssignSeatsScreen = () => {
     const dispatch = useDispatch();
@@ -23,26 +25,31 @@ const AssignSeatsScreen = () => {
         dispatch(setProcessStep(2));
     }
     return (
-        <div>
+        <>
             <H2 value="Assign Students" />
 
-            <div className="mb-5">
+            <Container layout="flex flex-col gap-4" >
+                <ClassroomGrid disabled={true} />
+
+                <div className="flex flex-row justify-end w-full">
+                    <button
+                        onClick={shuffleStudents}
+                        className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors shadow-md">
+                        Shuffle
+                    </button>
+                </div>
+            </Container>
+
+            <Container layout="flex flex-row justify-between">
+                <GoBackButton onClick={handlePrevStep} />
+
                 <button
                     onClick={shuffleStudents}
-                    className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 shadow-md">Shuffle</button>
-            </div>
-
-            <div className="p-5 bg-white rounded-2xl shadow-md">
-                <ClassroomGrid disabled={true} />
-            </div>
-
-            <button
-                onClick={handlePrevStep}
-                className="mt-6 bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
-            >
-                Previous Step
-            </button>
-        </div>
+                    className="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition-colors shadow-md">
+                    Export
+                </button>
+            </Container>
+        </>
     )
 }
 export default AssignSeatsScreen

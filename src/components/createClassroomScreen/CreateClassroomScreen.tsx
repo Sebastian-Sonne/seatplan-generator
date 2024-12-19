@@ -10,6 +10,7 @@ import CreateButton from "./buttons/CreateButton";
 import GoBackButton from "./buttons/GoBackButton";
 import H2 from "../headings/H2";
 import H4 from "../headings/H4";
+import Container from "../Container";
 
 const CreateClassroomScreen = () => {
   const numberOfDesks = useSelector((state: RootState) => state.grid.numberOfDesks);
@@ -28,9 +29,8 @@ const CreateClassroomScreen = () => {
     <div>
       <H2 value="Create Classroom Layout" />
 
-      <div className="p-5 bg-white rounded-2xl shadow-md">
+      <Container layout="">
         <div className="flex flex-col gap-2">
-
           <div className="flex flex-row justify-end items-end gap-2">
             <H4 value="Columns" />
             <RemoveButton onClick={() => dispatch(removeCol())} />
@@ -48,20 +48,17 @@ const CreateClassroomScreen = () => {
               <ClassroomGrid />
             </div>
           </div>
-          <div className="flex flex-row justify-between items-center">
-            <div>
-              <H4 value={`Number of Tables: ${numberOfDesks}`} />
-              <H4 value={`Number of Students: ${numberOfStudents}`} />
-            </div>
-
-            <div className="flex flex-row gap-2">
-              <GoBackButton onClick={handlePrevStep} />
-              <CreateButton onClick={handleCreateClassroom} />
-            </div>
-
+          <div className="flex flex-col">
+            <H4 value={`Number of Tables: ${numberOfDesks}`} />
+            <H4 value={`Number of Students: ${numberOfStudents}`} />
           </div>
         </div>
-      </div>
+      </Container>
+
+      <Container layout="flex flex-row justify-between">
+        <GoBackButton onClick={handlePrevStep} />
+        <CreateButton onClick={handleCreateClassroom} />
+      </Container>
     </div>
   )
 }

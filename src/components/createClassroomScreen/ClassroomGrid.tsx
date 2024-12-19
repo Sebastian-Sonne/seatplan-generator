@@ -5,7 +5,6 @@ import GridElement from "./GridElement";
 interface ClassroomGridProps {
     disabled?: boolean;
 }
-
 const ClassroomGrid: React.FC<ClassroomGridProps> = ({ disabled = false }) => {
     const deskSetup = useSelector((state: RootState) => state.grid.deskSetup);
 
