@@ -13,6 +13,12 @@ const ManualUploadArea = () => {
         setContent("");
     }
 
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === "Enter") {
+            handleSubmit();
+        }
+    }
+
     return (
         <div className="w-full max-w-[600px] mx-auto p-6 bg-white rounded-xl shadow-md">
             <H3 value="Add students manually:" />
@@ -23,6 +29,7 @@ const ManualUploadArea = () => {
                     onChange={(c) => setContent(c.target.value)}
                     maxLength={20}
                     value={content}
+                    onKeyDown={handleKeyDown}
                     placeholder="John Doe"
                 />
 

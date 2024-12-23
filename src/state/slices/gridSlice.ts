@@ -89,6 +89,35 @@ const gridSlice = createSlice({
                 return row;
             });
         },
+        purgeEmptyEdges: (state) => {
+            const { deskSetup } = state;
+        
+            //top rows
+            while (deskSetup.length > 0 && deskSetup[0].every(cell => cell.deskState === -1)) {
+                deskSetup.shift();
+            }
+        
+            //bottom rows
+            while (deskSetup.length > 0 && deskSetup[deskSetup.length - 1].every(cell => cell.deskState === -1)) {
+                deskSetup.pop();
+            }
+        
+            //left cols
+            while (
+                deskSetup[0]?.length > 0 &&
+                deskSetup.every(row => row[0].deskState === -1)
+            ) {
+                deskSetup.forEach(row => row.shift());
+            }
+        
+            //right cols
+            while (
+                deskSetup[0]?.length > 0 &&
+                deskSetup.every(row => row[row.length - 1].deskState === -1)
+            ) {
+                deskSetup.forEach(row => row.pop());
+            }
+        },
         /**
          * function to shuffle and assign students
          * @param state 
@@ -124,5 +153,5 @@ const gridSlice = createSlice({
     },
 });
 
-export const { addDesk, removeDesk, setDeskGrid, resetDesks, addCol, addRow, removeCol, removeRow, assignStudents, clearAssignments } = gridSlice.actions;
+export const { addDesk, removeDesk, setDeskGrid, resetDesks, addCol, addRow, removeCol, removeRow, assignStudents, clearAssignments, purgeEmptyEdges } = gridSlice.actions;
 export default gridSlice.reducer;

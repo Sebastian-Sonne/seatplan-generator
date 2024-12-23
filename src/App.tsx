@@ -44,17 +44,9 @@ const App = () => {
       <div className="w-full max-w-4xl mx-auto mb-4 p-4 bg-gray-50 mt-5 rounded-3xl shadow-md">
         <Progressbar />
 
-        {step === ProcessSteps.STEP_ONE && (
-          <AddStudentsScreen />
-        )}
-
-        {step === ProcessSteps.STEP_TWO && (
-          <CreateClassroomScreen />
-        )}
-
-        {step === ProcessSteps.STEP_THREE && (
-          <AssignSeatsScreen />
-        )}
+        {step === ProcessSteps.STEP_ONE && <AddStudentsScreen />}
+        {step === ProcessSteps.STEP_TWO && <CreateClassroomScreen />}
+        {step === ProcessSteps.STEP_THREE && <AssignSeatsScreen />}
       </div>
 
       {exportVisible && <ExportScreen />}

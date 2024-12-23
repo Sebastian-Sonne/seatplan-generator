@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { addCol, addRow, removeCol, removeRow } from "../../state/slices/gridSlice";
+import { addCol, addRow, purgeEmptyEdges, removeCol, removeRow } from "../../state/slices/gridSlice";
 import ClassroomGrid from "./ClassroomGrid";
 import { setProcessStep } from "../../state/slices/appSlice";
 import AddButton from "./buttons/AddButton";
@@ -22,6 +22,7 @@ const CreateClassroomScreen = () => {
   }
 
   const handleCreateClassroom = () => {
+    dispatch(purgeEmptyEdges())
     dispatch(setProcessStep(3));
   }
 
