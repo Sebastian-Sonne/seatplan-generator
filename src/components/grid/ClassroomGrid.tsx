@@ -22,14 +22,14 @@ const ClassroomGrid: React.FC<ClassroomGridProps> = ({ disabled = false }) => {
             <div></div>
 
             {columnHeaders.map((header, colIndex) => (
-                <HeaderElement key={`header-col-${colIndex}`}>
+                <HeaderElement colIndex={colIndex} rowIndex={-1} key={`header-col-${colIndex}`}>
                     {header}
                 </HeaderElement>
             ))}
 
             {deskSetup.map((row, rowIndex) => (
                 <React.Fragment key={`row-${rowIndex}`}>
-                    <HeaderElement>
+                    <HeaderElement rowIndex={rowIndex} colIndex={-1}>
                         {rowIndex + 1}
                     </HeaderElement>
                     

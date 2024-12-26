@@ -10,9 +10,15 @@ export interface Desk {
     studentId: string | null;
 }
 
+export interface ActiveHeader {
+    type: "row" | "col" | null;
+    index: number;
+}
+
 interface Gridstate {
-    deskSetup: Desk[][],
-    numberOfDesks: number,
+    deskSetup: Desk[][];
+    activeHeader: ActiveHeader;
+    numberOfDesks: number;
 }
 
 const createEmptyGrid = (rows: number, cols: number): Desk[][] => {
@@ -28,6 +34,10 @@ const createEmptyGrid = (rows: number, cols: number): Desk[][] => {
 
 const initialState: Gridstate = {
     deskSetup: createEmptyGrid(5, 5),
+    activeHeader: {
+        type: null,
+        index: -1,
+    },
     numberOfDesks: 0,
 }
 
@@ -65,6 +75,10 @@ const gridSlice = createSlice({
         resetGrid: (state) => {
             state.deskSetup = createEmptyGrid(5, 5);
             state.numberOfDesks = 0;
+        },
+
+        setActiveHeader: (state, action: PayloadAction<ActiveHeader>) => {
+            state.activeHeader = action.payload;
         },
 
         add: (state, action: PayloadAction<Coordinates>) => {
@@ -164,5 +178,5 @@ const gridSlice = createSlice({
     },
 });
 
-export const { addDesk, removeDesk, setDeskGrid, resetDesks, resetGrid, add, remove, assignStudents, clearAssignments, purgeEmptyEdges } = gridSlice.actions;
+export const { addDesk, removeDesk, setActiveHeader, setDeskGrid, resetDesks, resetGrid, add, remove, assignStudents, clearAssignments, purgeEmptyEdges } = gridSlice.actions;
 export default gridSlice.reducer;
