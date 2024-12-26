@@ -1,9 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
-import { addCol, addRow, purgeEmptyEdges, removeCol, removeRow } from "../../state/slices/gridSlice";
-import ClassroomGrid from "./ClassroomGrid";
+import { purgeEmptyEdges, resetGrid } from "../../state/slices/gridSlice";
+import ClassroomGrid from "../grid/ClassroomGrid";
 import { setProcessStep } from "../../state/slices/appSlice";
-import AddButton from "./buttons/AddButton";
-import RemoveButton from "./buttons/RemoveButton";
 import { RootState } from "../../state/store";
 import { selectStudentIds } from "../../state/slices/studentSlice";
 import CreateButton from "./buttons/CreateButton";
@@ -32,26 +30,19 @@ const CreateClassroomScreen = () => {
 
       <Container layout="">
         <div className="flex flex-col gap-2">
-          <div className="flex flex-row justify-end items-end gap-2">
-            <H4 value="Columns" />
-            <RemoveButton onClick={() => dispatch(removeCol())} />
-            <AddButton onClick={() => dispatch(addCol())} />
-          </div>
 
-          <div className="flex flex-row gap-2">
-            <div className="flex flex-col justify-end gap-2 w-36">
-              <H4 value="Rows:" />
-              <RemoveButton onClick={() => dispatch(removeRow())} />
-              <AddButton onClick={() => dispatch(addRow())} />
+          <ClassroomGrid />
+
+          <div className="flex flex-row justify-between">
+            <div className="flex flex-col">
+              <H4 value={`Number of Tables: ${numberOfDesks}`} />
+              <H4 value={`Number of Students: ${numberOfStudents}`} />
             </div>
 
-            <div className="w-full">
-              <ClassroomGrid />
-            </div>
-          </div>
-          <div className="flex flex-col">
-            <H4 value={`Number of Tables: ${numberOfDesks}`} />
-            <H4 value={`Number of Students: ${numberOfStudents}`} />
+            <button onClick={() => dispatch(resetGrid())} className="text-sm font-semibold text-gray-500 hover:text-gray-700 transition-colors">
+              Reset
+            </button>
+
           </div>
         </div>
       </Container>

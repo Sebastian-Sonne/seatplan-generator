@@ -62,32 +62,43 @@ const gridSlice = createSlice({
 
             state.numberOfDesks = 0;
         },
-        addRow: (state) => {
-            const newRow = Array(state.deskSetup[0].length).fill({ deskState: -1, studentId: null });
-            state.deskSetup = [...state.deskSetup, newRow];
+        resetGrid: (state) => {
+            state.deskSetup = createEmptyGrid(5, 5);
+            state.numberOfDesks = 0;
         },
-        removeRow: (state) => {
-            if (state.deskSetup.length > 0) {
-                const desksInLastRow = state.deskSetup[state.deskSetup.length - 1].filter(
-                    (cell) => cell.deskState === 1
-                ).length;
-                state.numberOfDesks -= desksInLastRow;
-                state.deskSetup = state.deskSetup.slice(0, -1);
+
+        add: (state, action: PayloadAction<Coordinates>) => {
+            const { row, col } = action.payload;
+
+            // Add a row if row index is valid
+            if (row >= 0 && row <= state.deskSetup.length) {
+                const newRow = Array(state.deskSetup[0]?.length || 0).fill({ deskState: -1, studentId: null });
+                state.deskSetup.splice(row, 0, newRow);
+            }
+
+            // Add a column if col index is valid
+            if (col >= 0 && state.deskSetup.length > 0) {
+                state.deskSetup.forEach((deskRow) => {
+                    deskRow.splice(col, 0, { deskState: -1, studentId: null });
+                });
             }
         },
-        addCol: (state) => {
-            state.deskSetup = state.deskSetup.map((row) => [...row, { deskState: -1, studentId: null }]);
-        },
-        removeCol: (state) => {
-            state.deskSetup = state.deskSetup.map((row) => {
-                if (row.length > 0) {
-                    if (row[row.length - 1].deskState === 1) {
-                        state.numberOfDesks--;
+        remove: (state, action: PayloadAction<Coordinates>) => {
+            const { row, col } = action.payload;
+
+            // Remove a row if row index is valid
+            if (row >= 0 && row < state.deskSetup.length && state.deskSetup.length > 1) {
+                state.deskSetup.splice(row, 1);
+            }
+
+            // Remove a column if col index is valid
+            if (col >= 0 && state.deskSetup.length > 0 && state.deskSetup[0].length > 1) {
+                state.deskSetup.forEach((deskRow) => {
+                    if (col < deskRow.length) {
+                        deskRow.splice(col, 1);
                     }
-                    return row.slice(0, -1);
-                }
-                return row;
-            });
+                });
+            }
         },
         purgeEmptyEdges: (state) => {
             const { deskSetup } = state;
@@ -153,5 +164,5 @@ const gridSlice = createSlice({
     },
 });
 
-export const { addDesk, removeDesk, setDeskGrid, resetDesks, addCol, addRow, removeCol, removeRow, assignStudents, clearAssignments, purgeEmptyEdges } = gridSlice.actions;
+export const { addDesk, removeDesk, setDeskGrid, resetDesks, resetGrid, add, remove, assignStudents, clearAssignments, purgeEmptyEdges } = gridSlice.actions;
 export default gridSlice.reducer;

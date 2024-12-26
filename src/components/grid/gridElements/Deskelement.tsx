@@ -1,14 +1,13 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { removeDesk } from "../../state/slices/gridSlice";
-import { useDeskState } from "../../hooks/useDeskState";
+import { useDeskState } from "../../../hooks/useDeskState";
+import { removeDesk } from "../../../state/slices/gridSlice";
 
 interface DeskElementProps {
     row: number;
     col: number;
     disabled?: boolean;
 }
-
 const DeskElement: React.FC<DeskElementProps> = ({ row, col, disabled = false }) => {
     const dispatch = useDispatch();
     const { student } = useDeskState(row, col);
@@ -26,7 +25,6 @@ const DeskElement: React.FC<DeskElementProps> = ({ row, col, disabled = false })
                         bg-gray-50 text-gray-500 transition-all
                         ${disabled ? "" : "hover:text-white hover:bg-red-500"}`}
         >
-            {/* Dynamic button text based on isHovered */}
             <span className="font-semibold text-gray-600">
                 {!disabled ? (isHovered ? "Remove" : "Desk") : student?.name || ""}
             </span>

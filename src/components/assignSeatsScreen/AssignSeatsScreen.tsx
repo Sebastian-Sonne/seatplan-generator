@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { setExport, setProcessStep } from "../../state/slices/appSlice";
-import ClassroomGrid from "../createClassroomScreen/ClassroomGrid";
+import ClassroomGrid from "../grid/ClassroomGrid";
 import { useEffect } from "react";
 import { selectStudentIds } from "../../state/slices/studentSlice";
 import { assignStudents, clearAssignments, } from "../../state/slices/gridSlice";
