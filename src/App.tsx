@@ -10,7 +10,8 @@ import { useEffect } from "react";
 import ExportScreen from "./components/exportScreen/ExportScreen";
 import { setDeskGrid } from "./state/slices/gridSlice";
 import { addStudents } from "./state/slices/studentSlice";
-import { validateLayout, validateStudents, validateTab } from "./service/validate.service";
+import { decodeData } from "./service/link.service";
+import validate from "./service/validate.service";
 
 const App = () => {
   const step = useSelector((state: RootState) => state.app.step);
@@ -20,21 +21,21 @@ const App = () => {
   //parse params for existing layout
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const tabParam = params.get('tab');
-    const studentParam = params.get('students');
-    const layoutParam = params.get('layout');
+    const data = params.get('data');
 
-    if (!tabParam || !studentParam || !layoutParam) {
+    if (!data) {
       dispatch(setProcessStep(1));
       return;
     }
 
-    const validTab = validateTab(tabParam);
-    const students = validateStudents(studentParam);
-    const layout = validateLayout(layoutParam);
+    const { layout, students } = decodeData(data);
+    if (!validate(layout, students)) {
+      dispatch(setProcessStep(1));
+      return;
+    }
 
     dispatch(setShuffled(true)); //set true to prevent reshuffle on component mount
-    dispatch(setProcessStep(validTab));
+    dispatch(setProcessStep(3));
     dispatch(setDeskGrid(layout));
     dispatch(addStudents(students));
   }, []);

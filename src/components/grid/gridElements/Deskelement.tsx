@@ -26,7 +26,7 @@ const DeskElement: React.FC<DeskElementProps> = ({ row, col, disabled = false })
             onMouseEnter={() => setIsHovered(true)} 
             onMouseLeave={() => setIsHovered(false)}
             className={`border-2 border-gray-700 h-16 flex justify-center items-center rounded 
-                        bg-gray-50 text-gray-500 transition-all
+                        bg-gray-50 text-gray-100 transition-all
                         ${isActive && "bg-gray-600"}
                         ${disabled ? "" : "hover:text-white hover:bg-red-500"}`}
         >

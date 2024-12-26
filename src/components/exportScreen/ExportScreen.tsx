@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setExport } from '../../state/slices/appSlice';
 import { selectAllStudent } from '../../state/slices/studentSlice';
 import { RootState } from '../../state/store';
-import generateLink from '../../service/link.service';
+import { generateLink } from '../../service/link.service';
 
 const ExportScreen = () => {
     const dispatch = useDispatch();
