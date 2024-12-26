@@ -22,8 +22,8 @@ const ContextMenu: React.FC<ContextMenuProps> = ({ type, index }) => {
     }
 
     return (
-        <div className={`absolute flex bg-white rounded-lg shadow shadow-neutral-300 z-50 overflow-visible
-            ${type === "row" ? "flex-row justify-between items-center w-[calc(100%+16px)] -top-10"
+        <div className={`absolute flex bg-white rounded-lg shadow shadow-neutral-300
+            ${type === "row" ? "flex-row justify-between items-center min-w-[calc(100%+16px)] -top-10"
             : "flex-col justify-between items-center -left-10"}`}
         >
             <AddButton onClick={handleAddPrev} />

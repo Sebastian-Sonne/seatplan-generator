@@ -680,6 +680,10 @@ video {
   width: 100%;
 }
 
+.min-w-\[calc\(100\%\+16px\)\] {
+  min-width: calc(100% + 16px);
+}
+
 .max-w-4xl {
   max-width: 56rem;
 }
@@ -742,6 +746,10 @@ video {
 
 .overflow-visible {
   overflow: visible;
+}
+
+.overflow-scroll {
+  overflow: scroll;
 }
 
 .overflow-x-auto {
