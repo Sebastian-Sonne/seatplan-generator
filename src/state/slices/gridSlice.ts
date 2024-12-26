@@ -81,38 +81,33 @@ const gridSlice = createSlice({
             state.activeHeader = action.payload;
         },
 
-        add: (state, action: PayloadAction<Coordinates>) => {
-            const { row, col } = action.payload;
+        add: (state, action: PayloadAction<ActiveHeader>) => {
+            const {type, index} = action.payload;
 
-            // Add a row if row index is valid
-            if (row >= 0 && row <= state.deskSetup.length) {
+            if (type === "row") {
                 const newRow = Array(state.deskSetup[0]?.length || 0).fill({ deskState: -1, studentId: null });
-                state.deskSetup.splice(row, 0, newRow);
-            }
-
-            // Add a column if col index is valid
-            if (col >= 0 && state.deskSetup.length > 0) {
+                state.deskSetup.splice(index, 0, newRow);
+            } else {
                 state.deskSetup.forEach((deskRow) => {
-                    deskRow.splice(col, 0, { deskState: -1, studentId: null });
+                    deskRow.splice(index, 0, { deskState: -1, studentId: null });
                 });
             }
         },
-        remove: (state, action: PayloadAction<Coordinates>) => {
-            const { row, col } = action.payload;
+        remove: (state, action: PayloadAction<ActiveHeader>) => {
+            const {type, index} = action.payload;
 
-            // Remove a row if row index is valid
-            if (row >= 0 && row < state.deskSetup.length && state.deskSetup.length > 1) {
-                state.deskSetup.splice(row, 1);
+            if (type === "row") {
+                if (state.deskSetup.length > 1) state.deskSetup.splice(index, 1);
+            } else {
+                if (state.deskSetup[0].length > 1) {
+                    state.deskSetup.forEach((deskRow) => {
+                    if (index < deskRow.length) {
+                            deskRow.splice(index, 1);
+                        }
+                    });
+                }
             }
-
-            // Remove a column if col index is valid
-            if (col >= 0 && state.deskSetup.length > 0 && state.deskSetup[0].length > 1) {
-                state.deskSetup.forEach((deskRow) => {
-                    if (col < deskRow.length) {
-                        deskRow.splice(col, 1);
-                    }
-                });
-            }
+            //! num of desks
         },
         purgeEmptyEdges: (state) => {
             const { deskSetup } = state;

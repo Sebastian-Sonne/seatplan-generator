@@ -17,6 +17,9 @@ const HeaderElement: React.FC<HeaderElementProps> = ({ children, colIndex = -1, 
     const dispatch = useDispatch();
     const [contextMenuVisible, setContextMenuVisible] = useState(false);
 
+    const contextMenuType = (colIndex !== -1) ? "row" : "col";
+    const contextMenuIndex = (colIndex !== -1) ? colIndex : rowIndex;
+
     const handleMouseEnter = () => {
         setContextMenuVisible(true)
     }
@@ -54,11 +57,16 @@ const HeaderElement: React.FC<HeaderElementProps> = ({ children, colIndex = -1, 
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             onClick={handleClick}
-            className="relative flex justify-center items-center hover:bg-gray-100 text-gray-500 font-semibold py-1 px-1.5 rounded-md border cursor-pointer transition-colors"
+            className="relative flex justify-center items-center hover:bg-gray-100 text-gray-500 z-50 font-semibold py-1 px-1.5 rounded-md border cursor-pointer transition-colors overflow-visible"
         >
             <>
                 {children}
-                {(contextMenuVisible || isActive) && <ContextMenu />}
+                {(contextMenuVisible || isActive) &&
+                    <ContextMenu
+                        index={contextMenuIndex}
+                        type={contextMenuType}
+                    />
+                }
             </>
         </div>
     )

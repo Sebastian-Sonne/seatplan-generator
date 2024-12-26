@@ -15,34 +15,36 @@ const ClassroomGrid: React.FC<ClassroomGridProps> = ({ disabled = false }) => {
     ) || [];
 
     return (
-        <div className="grid gap-2"
-            style={{ gridTemplateColumns: `auto repeat(${deskSetup[0]?.length || 1}, minmax(0, 1fr))` }} >
+        <div className='overflow-x-auto'>
+            <div className="grid gap-2 relative"
+                style={{ gridTemplateColumns: `auto repeat(${deskSetup[0]?.length || 1}, minmax(85px, 1fr))` }} >
 
-            {/* Top Left Corner (Empty Cell) */}
-            <div></div>
+                {/* Top Left Corner (Empty Cell) */}
+                <div></div>
 
-            {columnHeaders.map((header, colIndex) => (
-                <HeaderElement colIndex={colIndex} rowIndex={-1} key={`header-col-${colIndex}`}>
-                    {header}
-                </HeaderElement>
-            ))}
-
-            {deskSetup.map((row, rowIndex) => (
-                <React.Fragment key={`row-${rowIndex}`}>
-                    <HeaderElement rowIndex={rowIndex} colIndex={-1}>
-                        {rowIndex + 1}
+                {columnHeaders.map((header, colIndex) => (
+                    <HeaderElement colIndex={colIndex} rowIndex={-1} key={`header-col-${colIndex}`}>
+                        {header}
                     </HeaderElement>
-                    
-                    {row.map((_, colIndex) => (
-                        <GridElement
-                            key={`${rowIndex}-${colIndex}`}
-                            row={rowIndex}
-                            col={colIndex}
-                            disabled={disabled}
-                        />
-                    ))}
-                </React.Fragment>
-            ))}
+                ))}
+
+                {deskSetup.map((row, rowIndex) => (
+                    <React.Fragment key={`row-${rowIndex}`}>
+                        <HeaderElement rowIndex={rowIndex} colIndex={-1}>
+                            {rowIndex + 1}
+                        </HeaderElement>
+
+                        {row.map((_, colIndex) => (
+                            <GridElement
+                                key={`${rowIndex}-${colIndex}`}
+                                row={rowIndex}
+                                col={colIndex}
+                                disabled={disabled}
+                            />
+                        ))}
+                    </React.Fragment>
+                ))}
+            </div>
         </div>
     );
 };
