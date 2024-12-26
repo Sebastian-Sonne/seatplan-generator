@@ -3,7 +3,7 @@ import { add, remove } from "../../../state/slices/gridSlice";
 import { AddButton, RemoveButton } from "./GridButtons";
 
 interface ContextMenuProps {
-    type: "row" | "col";
+    type: "row" | "col"; //refers to the orientation of the context menu
     index: number
 }
 const ContextMenu: React.FC<ContextMenuProps> = ({ type, index }) => {

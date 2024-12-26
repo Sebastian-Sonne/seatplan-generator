@@ -20,6 +20,10 @@ const CreateClassroomScreen = () => {
   }
 
   const handleCreateClassroom = () => {
+    if (numberOfDesks === 0) {
+      alert("Please add at least one desk in order to continue.")
+      return;
+    }
     dispatch(purgeEmptyEdges())
     dispatch(setProcessStep(3));
   }
@@ -48,7 +52,7 @@ const CreateClassroomScreen = () => {
       </Container>
 
       <Container layout="flex flex-row justify-between">
-        <GoBackButton onClick={handlePrevStep} />
+        <GoBackButton onClick={handlePrevStep}/>
         <CreateButton onClick={handleCreateClassroom} />
       </Container>
     </div>

@@ -15,9 +15,15 @@ export interface ActiveHeader {
     index: number;
 }
 
+export interface HoverState {
+    type: "row" | "col" | null;
+    index: number;
+}
+
 interface Gridstate {
     deskSetup: Desk[][];
     activeHeader: ActiveHeader;
+    hoverState: HoverState;
     numberOfDesks: number;
 }
 
@@ -35,6 +41,10 @@ const createEmptyGrid = (rows: number, cols: number): Desk[][] => {
 const initialState: Gridstate = {
     deskSetup: createEmptyGrid(5, 5),
     activeHeader: {
+        type: null,
+        index: -1,
+    },
+    hoverState: {
         type: null,
         index: -1,
     },
@@ -80,6 +90,9 @@ const gridSlice = createSlice({
         setActiveHeader: (state, action: PayloadAction<ActiveHeader>) => {
             state.activeHeader = action.payload;
         },
+        setHoverState: (state, action: PayloadAction<HoverState>) => {
+            state.hoverState = action.payload;
+        },
 
         add: (state, action: PayloadAction<ActiveHeader>) => {
             const {type, index} = action.payload;
@@ -94,21 +107,25 @@ const gridSlice = createSlice({
             }
         },
         remove: (state, action: PayloadAction<ActiveHeader>) => {
-            const {type, index} = action.payload;
-
+            const { type, index } = action.payload;
+        
             if (type === "row") {
-                if (state.deskSetup.length > 1) state.deskSetup.splice(index, 1);
+                if (state.deskSetup.length > 1) {
+                    state.deskSetup.splice(index, 1);
+                }
             } else {
                 if (state.deskSetup[0].length > 1) {
                     state.deskSetup.forEach((deskRow) => {
-                    if (index < deskRow.length) {
+                        if (index < deskRow.length) {
                             deskRow.splice(index, 1);
                         }
                     });
                 }
             }
-            //! num of desks
+    
+            state.numberOfDesks = state.deskSetup.flat().filter(desk => desk.deskState === 1).length;
         },
+        
         purgeEmptyEdges: (state) => {
             const { deskSetup } = state;
         
@@ -173,5 +190,5 @@ const gridSlice = createSlice({
     },
 });
 
-export const { addDesk, removeDesk, setActiveHeader, setDeskGrid, resetDesks, resetGrid, add, remove, assignStudents, clearAssignments, purgeEmptyEdges } = gridSlice.actions;
+export const { addDesk, removeDesk, setActiveHeader,setHoverState, setDeskGrid, resetDesks, resetGrid, add, remove, assignStudents, clearAssignments, purgeEmptyEdges } = gridSlice.actions;
 export default gridSlice.reducer;

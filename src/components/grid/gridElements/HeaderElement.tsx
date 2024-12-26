@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ContextMenu from "./ContextMenu";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../state/store";
-import { setActiveHeader } from "../../../state/slices/gridSlice";
+import { setActiveHeader, setHoverState } from "../../../state/slices/gridSlice";
 
 interface HeaderElementProps {
     children: React.ReactNode;
@@ -22,10 +22,15 @@ const HeaderElement: React.FC<HeaderElementProps> = ({ children, colIndex = -1, 
     const contextMenuIndex = (colIndex !== -1) ? colIndex : rowIndex;
 
     const handleMouseEnter = () => {
+        dispatch(setHoverState({
+            type: colIndex === -1 ? "row" : "col",
+            index: colIndex === -1 ? rowIndex : colIndex,
+        }));
         if (!disabled) setContextMenuVisible(true)
     }
 
     const handleMouseLeave = () => {
+        dispatch(setHoverState({ type: null, index: -1, }));
         if (!disabled) setContextMenuVisible(false)
     }
 
