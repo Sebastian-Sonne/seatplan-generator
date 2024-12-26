@@ -6,11 +6,22 @@ import H3 from "../../headings/H3";
 
 const ManualUploadArea = () => {
     const [content, setContent] = useState("");
+    const [error, setError] = useState(false);
     const dispatch = useDispatch();
 
     const handleSubmit = () => {
+        if (content === "") {
+            setError(true);
+            return;
+        };
+        setError(false);
         dispatch(addStudent({ name: content, id: nanoid() }));
         setContent("");
+    }
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setContent(e.target.value);
+        if (error) setError(false);
     }
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -25,8 +36,8 @@ const ManualUploadArea = () => {
 
             <div className="flex flex-row justify-between gap-2">
                 <input
-                    className="border-2 px-3 py-1 w-full rounded-lg"
-                    onChange={(c) => setContent(c.target.value)}
+                    className={`border-2 ${error && "border-red-500"} px-3 py-1 w-full rounded-lg`}
+                    onChange={(c) => handleChange(c)}
                     maxLength={20}
                     value={content}
                     onKeyDown={handleKeyDown}
