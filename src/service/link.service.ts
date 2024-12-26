@@ -2,6 +2,12 @@ import pako from "pako";
 import { Desk } from "../state/slices/gridSlice";
 import { Student } from "../state/slices/studentSlice";
 
+/**
+ * function to generate a sharable link of the current seatplan
+ * @param deskSetup current desk setup
+ * @param students all students
+ * @returns encoded and compressed link 
+ */
 export const generateLink = (deskSetup: Desk[][], students: Student[]) => {
     const url = new URL(window.location.href);
 
@@ -19,7 +25,11 @@ export const generateLink = (deskSetup: Desk[][], students: Student[]) => {
     return url.toString();
 };
 
-
+/**
+ * function to decode compressed and encoded data
+ * @param data encoded and compressed data
+ * @returns decoded data
+ */
 export const decodeData = (data: string) => {
     if (!data) {
         throw new Error('No data found in the URL');
