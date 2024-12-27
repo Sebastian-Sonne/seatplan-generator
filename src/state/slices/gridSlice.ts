@@ -95,7 +95,7 @@ const gridSlice = createSlice({
         },
 
         add: (state, action: PayloadAction<ActiveHeader>) => {
-            const {type, index} = action.payload;
+            const { type, index } = action.payload;
 
             if (type === "row") {
                 const newRow = Array(state.deskSetup[0]?.length || 0).fill({ deskState: -1, studentId: null });
@@ -108,7 +108,7 @@ const gridSlice = createSlice({
         },
         remove: (state, action: PayloadAction<ActiveHeader>) => {
             const { type, index } = action.payload;
-        
+
             if (type === "row") {
                 if (state.deskSetup.length > 1) {
                     state.deskSetup.splice(index, 1);
@@ -122,23 +122,23 @@ const gridSlice = createSlice({
                     });
                 }
             }
-    
+
             state.numberOfDesks = state.deskSetup.flat().filter(desk => desk.deskState === 1).length;
         },
-        
+
         purgeEmptyEdges: (state) => {
             const { deskSetup } = state;
-        
+
             //top rows
             while (deskSetup.length > 0 && deskSetup[0].every(cell => cell.deskState === -1)) {
                 deskSetup.shift();
             }
-        
+
             //bottom rows
             while (deskSetup.length > 0 && deskSetup[deskSetup.length - 1].every(cell => cell.deskState === -1)) {
                 deskSetup.pop();
             }
-        
+
             //left cols
             while (
                 deskSetup[0]?.length > 0 &&
@@ -146,7 +146,7 @@ const gridSlice = createSlice({
             ) {
                 deskSetup.forEach(row => row.shift());
             }
-        
+
             //right cols
             while (
                 deskSetup[0]?.length > 0 &&
@@ -155,31 +155,7 @@ const gridSlice = createSlice({
                 deskSetup.forEach(row => row.pop());
             }
         },
-        /**
-         * function to shuffle and assign students
-         * @param state 
-         * @param action students ids
-         */
-        assignStudents: (state, action: PayloadAction<string[]>) => {
-            // Collect all desks
-            const availableDesks: { row: number; col: number }[] = [];
-            state.deskSetup.forEach((row, rowIndex) => {
-              row.forEach((cell, colIndex) => {
-                if (cell.deskState === 1 && !cell.studentId) {
-                  availableDesks.push({ row: rowIndex, col: colIndex });
-                }
-              });
-            });
-      
-            // Shuffle students and assign to desks
-            const shuffledDesks = availableDesks.sort(() => Math.random() - 0.5);
-            action.payload.forEach((studentId, index) => {
-              if (shuffledDesks[index]) {
-                const { row, col } = shuffledDesks[index];
-                state.deskSetup[row][col].studentId = studentId;
-              }
-            });
-          },
+        
         clearAssignments: (state) => {
             state.deskSetup.forEach((row) =>
                 row.forEach((cell) => {
@@ -187,8 +163,28 @@ const gridSlice = createSlice({
                 })
             );
         },
+        assignRandomStudents: (state, action: PayloadAction<string[]>) => {
+            const availableDesks: { row: number; col: number }[] = [];
+            state.deskSetup.forEach((row, rowIndex) => {
+                row.forEach((desk, colIndex) => {
+                    if (desk.deskState === 1 && !desk.studentId) {
+                        availableDesks.push({ row: rowIndex, col: colIndex });
+                    }
+                });
+            });
+
+            const shuffledStudentIds = [...action.payload].sort(() => Math.random() - 0.5);
+            const shuffledDesks = availableDesks.sort(() => Math.random() - 0.5);
+
+            shuffledStudentIds.forEach((studentId, index) => {
+                if (shuffledDesks[index]) {
+                    const { row, col } = shuffledDesks[index];
+                    state.deskSetup[row][col].studentId = studentId;
+                }
+            });
+        },
     },
 });
 
-export const { addDesk, removeDesk, setActiveHeader,setHoverState, setDeskGrid, resetDesks, resetGrid, add, remove, assignStudents, clearAssignments, purgeEmptyEdges } = gridSlice.actions;
+export const { addDesk, removeDesk, setActiveHeader, setHoverState, setDeskGrid, resetDesks, resetGrid, add, remove, assignRandomStudents, clearAssignments, purgeEmptyEdges } = gridSlice.actions;
 export default gridSlice.reducer;

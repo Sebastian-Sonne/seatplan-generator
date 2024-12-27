@@ -3,7 +3,7 @@ import { setExport, setProcessStep } from "../../state/slices/appSlice";
 import ClassroomGrid from "../grid/ClassroomGrid";
 import { useEffect } from "react";
 import { selectStudentIds } from "../../state/slices/studentSlice";
-import { assignStudents, clearAssignments, } from "../../state/slices/gridSlice";
+import { assignRandomStudents, clearAssignments } from "../../state/slices/gridSlice";
 import H2 from "../headings/H2";
 import GoBackButton from "../createClassroomScreen/buttons/GoBackButton";
 import Container from "../Container";
@@ -21,8 +21,8 @@ const AssignSeatsScreen = () => {
     }, [])
 
     const shuffleStudents = () => {
-        dispatch(clearAssignments())
-        dispatch(assignStudents(studentIds));
+        dispatch(clearAssignments())   
+        dispatch(assignRandomStudents(studentIds));
     }
 
     const handlePrevStep = () => {

@@ -27,7 +27,6 @@ const DragAndDropArea: React.FC<DragAndDropAreaProps> = ({ setError, setFile }) 
         onDrop,
         accept: {
             "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": ['.xlsx'],
-            "application/vnd.ms-excel": ['xls']
         },
         maxSize: 50 * 1024 * 1024,
         maxFiles: 1,

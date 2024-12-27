@@ -24,6 +24,11 @@ const CreateClassroomScreen = () => {
       alert("Please add at least one desk in order to continue.")
       return;
     }
+    const notEnoughDesksString = "There are not enough desks for all students. Are you sure you want to continue? Some students will not have a desk assigned to them.";
+    if (numberOfDesks < numberOfStudents && !confirm(notEnoughDesksString)) {
+      return;
+    }
+
     dispatch(purgeEmptyEdges())
     dispatch(setProcessStep(3));
   }
