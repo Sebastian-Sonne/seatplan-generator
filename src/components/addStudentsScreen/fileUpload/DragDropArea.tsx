@@ -48,7 +48,7 @@ const DragAndDropArea: React.FC<DragAndDropAreaProps> = ({ setError, setFile }) 
                 ) : (
                     <>
                         <p className="text-gray-600 font-semibold text-lg">Choose a file or drag & drop it here</p>
-                        <p className="text-gray-400 font-normal text-md">.xlsx and .xls formats, max 50MB</p>
+                        <p className="text-gray-400 font-normal text-md">.xlsx formats, max 50MB</p>
                     </>
                 )}
             </div>

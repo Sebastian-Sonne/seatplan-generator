@@ -6,22 +6,26 @@ import H3 from "../../headings/H3";
 
 const ManualUploadArea = () => {
     const [content, setContent] = useState("");
-    const [error, setError] = useState(false);
+    const [error, setError] = useState<string | null>(null);
     const dispatch = useDispatch();
 
     const handleSubmit = () => {
         if (content === "") {
-            setError(true);
+            setError("Student name must not be of type empty string.");
             return;
         };
-        setError(false);
+        setError(null);
         dispatch(addStudent({ name: content, id: nanoid() }));
         setContent("");
     }
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setContent(e.target.value);
-        if (error) setError(false);
+        if (e.target.value.length > 20) {
+            setError("Student name must not exceed 20 characters.");
+        } else {
+            if (error) setError(null);
+            setContent(e.target.value);
+        }
     }
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -38,7 +42,6 @@ const ManualUploadArea = () => {
                 <input
                     className={`border-2 ${error && "border-red-500"} px-3 py-1 w-full rounded-lg`}
                     onChange={(c) => handleChange(c)}
-                    maxLength={20}
                     value={content}
                     onKeyDown={handleKeyDown}
                     placeholder="John Doe"
@@ -51,6 +54,8 @@ const ManualUploadArea = () => {
                     <span className="flex justify-center items-center text-white font-bold text-2xl">+</span>
                 </button>
             </div>
+
+            {error && <p className="text-red-500 text-sm mt-3">{error}</p>}
         </div>
     );
 };
