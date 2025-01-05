@@ -4,11 +4,9 @@ import ClassroomGrid from "../grid/ClassroomGrid";
 import { useEffect } from "react";
 import { selectStudentIds } from "../../state/slices/studentSlice";
 import { assignRandomStudents, clearAssignments } from "../../state/slices/gridSlice";
-import H2 from "../headings/H2";
 import GoBackButton from "../createClassroomScreen/buttons/GoBackButton";
 import Container from "../Container";
 import { RootState } from "../../state/store";
-import ThemeSwitcher from "../ThemeSwitcher";
 
 const AssignSeatsScreen = () => {
     const dispatch = useDispatch();
@@ -35,18 +33,13 @@ const AssignSeatsScreen = () => {
     }
     return (
         <>
-            <div className="flex flex-row justify-between items-center">
-                <H2 value="Assign Students" />
-                <ThemeSwitcher />
-            </div>
-
             <Container layout="flex flex-col gap-4" >
                 <ClassroomGrid disabled={true} />
 
                 <div className="flex flex-row justify-end w-full">
                     <button
                         onClick={shuffleStudents}
-                        className="bg-primary text-text-900 font-semibold px-4 py-2 rounded-lg shadow-md hover:bg-secondary transition-colors">
+                        className="bg-default hover:bg-hover active:bg-active text-text font-semibold px-4 py-2 rounded-lg shadow-md transition-colors">
                         Shuffle
                     </button>
                 </div>
@@ -57,7 +50,7 @@ const AssignSeatsScreen = () => {
 
                 <button
                     onClick={handleExport}
-                    className="bg-primary text-text-900 font-semibold px-4 py-2 rounded-lg shadow-md hover:bg-secondary transition-colors">
+                    className="bg-default text-text font-semibold px-4 py-2 rounded-lg shadow-md hover:bg-hover active:bg-active transition-colors">
                     Export
                 </button>
             </Container>

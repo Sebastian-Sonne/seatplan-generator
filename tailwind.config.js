@@ -14,6 +14,8 @@ export default {
         'element': 'var(--element)',
         'element-hover': 'var(--element-hover)',
 
+        'border': 'var(--border)',
+
         'default': 'var(--default)',
         'hover': 'var(--hover)',
         'active': 'var(--active)',

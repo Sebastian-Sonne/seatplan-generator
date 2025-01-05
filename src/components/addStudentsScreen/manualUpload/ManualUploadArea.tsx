@@ -49,7 +49,7 @@ const ManualUploadArea = () => {
 
                 <button
                     onClick={handleSubmit}
-                    className="px-5 py-1 bg-default hover:bg-hover transition-colors rounded-lg"
+                    className="px-5 py-1 bg-default hover:bg-hover active:bg-active transition-colors rounded-lg"
                 >
                     <span className="flex justify-center items-center text-text font-bold text-2xl">+</span>
                 </button>

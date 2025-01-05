@@ -63,7 +63,7 @@ const HeaderElement: React.FC<HeaderElementProps> = ({ children, colIndex = -1, 
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             onClick={handleClick}
-            className="relative flex justify-center items-center bg-card hover:bg-background text-text-500 font-semibold py-1 px-1.5 rounded-md cursor-pointer transition-colors"
+            className="relative flex justify-center items-center bg-element hover:bg-element-hover text-text-muted font-semibold py-1 px-1.5 rounded-md cursor-pointer transition-colors"
         >
             <>
                 {children}

@@ -57,7 +57,7 @@ const App = () => {
 
   return (
     <div className="bg-background min-h-screen pt-5">
-      <div className="w-full max-w-4xl mx-auto mb-4 p-4">
+      <div className="w-full max-w-4xl mx-auto px-4"> 
         <Container layout="flex flex-col gap-4">
           <Progressbar />
           <div className="flex flex-row justify-between items-center">

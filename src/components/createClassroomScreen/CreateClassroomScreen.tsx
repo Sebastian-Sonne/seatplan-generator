@@ -6,10 +6,8 @@ import { RootState } from "../../state/store";
 import { selectStudentIds } from "../../state/slices/studentSlice";
 import CreateButton from "./buttons/CreateButton";
 import GoBackButton from "./buttons/GoBackButton";
-import H2 from "../headings/H2";
 import H4 from "../headings/H4";
 import Container from "../Container";
-import ThemeSwitcher from "../ThemeSwitcher";
 
 const CreateClassroomScreen = () => {
   const numberOfDesks = useSelector((state: RootState) => state.grid.numberOfDesks);
@@ -36,11 +34,6 @@ const CreateClassroomScreen = () => {
 
   return (
     <>
-      <div className="flex flex-row justify-between items-center">
-        <H2 value="Create Classroom Layout" />
-        <ThemeSwitcher />
-      </div>
-
       <Container layout="">
         <div className="flex flex-col gap-2">
 
@@ -52,7 +45,7 @@ const CreateClassroomScreen = () => {
               <H4 value={`Number of Students: ${numberOfStudents}`} />
             </div>
 
-            <button onClick={() => dispatch(resetGrid())} className="text-sm font-semibold text-text-400 hover:text-text-500 transition-colors">
+            <button onClick={() => dispatch(resetGrid())} className="font-semibold text-text-muted px-4 rounded-lg border border-transparent hover:border-default active:bg-default transition-colors">
               Reset
             </button>
 

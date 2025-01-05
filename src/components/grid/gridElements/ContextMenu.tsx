@@ -22,7 +22,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({ type, index }) => {
     }
 
     return (
-        <div className={`absolute flex bg-card rounded-lg shadow-lg
+        <div className={`absolute flex bg-element hover:bg-element-hover rounded-lg shadow-lg
             ${type === "row" ? "flex-row justify-between items-center min-w-[calc(100%+16px)] -top-10"
             : "flex-col justify-between items-center -left-10"}`}
         >

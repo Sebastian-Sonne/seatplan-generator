@@ -37,7 +37,7 @@ const AddedStudentsArea = () => {
 
                         <button
                             onClick={handleNextStep}
-                            className="bg-default hover:bg-hover text-text font-semibold px-4 py-2 rounded-lg transition-colors">
+                            className="bg-default hover:bg-hover active:bg-active text-text font-semibold px-4 py-2 rounded-lg transition-colors">
                             Continue to next Step
                         </button>
                     </div>

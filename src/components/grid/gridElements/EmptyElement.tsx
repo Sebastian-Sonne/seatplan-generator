@@ -18,9 +18,9 @@ const EmptyElement: React.FC<EmptyElementProps> = ({ disabled, row, col }) => {
         <button
             onClick={handleAddDesk}
             disabled={disabled}
-            className={`h-16 flex justify-center items-center rounded-md border border-text-300 transition-all relative bg-card text-text-300 
-                ${isActive && "!bg-background"}
-                ${!disabled && "hover:bg-primary"}`}>
+            className={`h-16 flex justify-center items-center rounded-md border-2 border-border transition-all relative bg-element text-text-muted-extra 
+                ${isActive && "!bg-element-hover"}
+                ${!disabled && "hover:bg-element-hover hover:text-default hover:border-default"}`}>
             {disabled ? "" : "+"}
         </button>
     )

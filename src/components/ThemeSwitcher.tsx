@@ -8,7 +8,7 @@ const ThemeSwitcher = () => {
     const dispatch = useDispatch();
 
     return (
-        <button onClick={() => dispatch(toggleTheme())} className="p-2 shadow-md rounded-full bg-background border border-default hover:bg-card h-10 aspect-square transition-colors">
+        <button onClick={() => dispatch(toggleTheme())} className="p-2 shadow-md rounded-full border-2 border-default hover:bg-card h-10 aspect-square transition-colors">
             {theme === 'dark' ? (
                 <MoonIcon />
 
