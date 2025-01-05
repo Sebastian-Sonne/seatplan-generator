@@ -11,8 +11,8 @@ const Progressbar = () => {
                     <div
                         key={index}
                         className={`flex-1 text-center py-2 border-b-4 ${currentStep == index + 1
-                            ? "text-primary"
-                            : "text-text-200"
+                            ? "text-primary font-semibold"
+                            : "text-text-400"
                             } ${currentStep > index
                                 ? "border-primary"
                                 : "border-background"

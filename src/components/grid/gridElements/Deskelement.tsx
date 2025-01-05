@@ -25,15 +25,14 @@ const DeskElement: React.FC<DeskElementProps> = ({ row, col, disabled = false })
             disabled={disabled}
             onMouseEnter={() => setIsHovered(true)} 
             onMouseLeave={() => setIsHovered(false)}
-            className={`h-16 flex justify-center items-center rounded-md transition-all relative bg-card border-2 border-primary 
+            className={`h-16 flex justify-center items-center rounded-md transition-all relative bg-card border-2 border-primary shadow-md 
                 ${isActive && "!bg-background"}
                 ${!disabled && "hover:text-text-100 hover:bg-error"}`}
         >
-            <span className="font-semibold text-primary">
+            <span className="font-semibold text-primary break-words overflow-hidden leading-none">
                 {!disabled ? (isHovered ? "Remove" : "Desk") : student?.name || ""}
             </span>
         </button>
     );
 };
-
 export default DeskElement;

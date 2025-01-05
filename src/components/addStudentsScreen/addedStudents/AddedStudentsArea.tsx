@@ -27,7 +27,7 @@ const AddedStudentsArea = () => {
     }
 
     return (
-        <div className="w-full max-w-[600px] md:max-w-none mx-auto p-6 bg-card rounded-xl">
+        <div className="w-full max-w-[600px] md:max-w-none mx-auto p-6 bg-card rounded-xl shadow-md">
             <H3 value="Added Students" />
 
             {studentIds.length !== 0 ? (
@@ -49,13 +49,13 @@ const AddedStudentsArea = () => {
                         {studentIds.length > INITIAL_STUDENT_COUNT && !showAll ? (
                             <li
                                 onClick={() => setShowAll(true)}
-                                className="flex items-center justify-between px-3 py-2 cursor-pointer rounded-lg bg-surface hover:bg-primary transition-colors">
+                                className="flex items-center justify-between px-3 py-2 shadow-md cursor-pointer rounded-lg bg-surface hover:bg-primary transition-colors">
                                 <H4 value="Show all students" />
                             </li>
                         ) : (
                             <li
                                 onClick={handleRemoveAll}
-                                className="flex items-center justify-end px-3 py-2 cursor-pointer bg-surface rounded-lg hover:bg-error hover:text-text-100 text-error transition duration-200">
+                                className="flex items-center justify-end px-3 py-2 shadow-md cursor-pointer bg-surface rounded-lg hover:bg-error hover:text-text-100 text-error transition duration-200">
 
                                 <button className="text-sm font-medium transition duration-200">
                                     Remove all

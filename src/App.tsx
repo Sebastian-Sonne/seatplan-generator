@@ -35,20 +35,26 @@ const App = () => {
       return;
     }
 
+
     dispatch(setShuffled(true)); //set true to prevent reshuffle on component mount
     dispatch(setProcessStep(3));
     dispatch(setDeskGrid(layout));
     dispatch(addStudents(students));
+
+    params.delete('data');
+    const newUrl = `${window.location.pathname}?${params.toString()}`;
+    setTimeout(() => {
+      window.history.replaceState({}, '', newUrl);
+    }, 0); //use a small delay to avoid interfering with React updates
   }, []);
 
-  //theme
   useEffect(() => {
     (theme === "dark") ? document.documentElement.classList.add("dark") : document.documentElement.classList.remove("dark");
   }, [theme]);
 
   return (
     <div className="bg-background min-h-screen pt-5">
-      <div className="w-full max-w-4xl mx-auto mb-4 p-4 bg-surface rounded-3xl">
+      <div className="w-full max-w-4xl mx-auto mb-4 p-4 bg-surface rounded-3xl shadow-md">
         <Progressbar />
 
         {step === ProcessSteps.STEP_ONE && <AddStudentsScreen />}
