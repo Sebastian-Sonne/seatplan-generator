@@ -27,7 +27,7 @@ const Loadingbar: React.FC<LoadingbarProps> = ({onComplete, speed}) => {
 
     return (
         <div className="w-full bg-background rounded-full h-2.5">
-            <div className="bg-primary h-2.5 rounded-full" style={{ width: `${percent}%` }}></div>
+            <div className="bg-default h-2.5 rounded-full" style={{ width: `${percent}%` }}></div>
         </div>
     )
 }

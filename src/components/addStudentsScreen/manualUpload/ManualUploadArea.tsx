@@ -40,7 +40,7 @@ const ManualUploadArea = () => {
 
             <div className="flex flex-row justify-between gap-2">
                 <input
-                    className={`border ${error && "!border-error"} px-3 py-1 w-full rounded-lg bg-surface border-primary text-text-800`}
+                    className={`border ${error && "!border-error"} px-3 py-1 w-full rounded-lg bg-background border-default text-text`}
                     onChange={(c) => handleChange(c)}
                     value={content}
                     onKeyDown={handleKeyDown}
@@ -49,9 +49,9 @@ const ManualUploadArea = () => {
 
                 <button
                     onClick={handleSubmit}
-                    className="px-5 py-1 bg-primary hover:bg-secondary transition-colors rounded-lg"
+                    className="px-5 py-1 bg-default hover:bg-hover transition-colors rounded-lg"
                 >
-                    <span className="flex justify-center items-center text-text-900 font-bold text-2xl">+</span>
+                    <span className="flex justify-center items-center text-text font-bold text-2xl">+</span>
                 </button>
             </div>
 

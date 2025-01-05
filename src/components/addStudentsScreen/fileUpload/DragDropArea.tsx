@@ -37,13 +37,13 @@ const DragAndDropArea: React.FC<DragAndDropAreaProps> = ({ setError, setFile }) 
     return (
         <div
             {...getRootProps()}
-            className={`border-2 border-dashed rounded-xl p-6 cursor-pointer transition-colors ease-in-out 
-            ${isDragActive ? 'border-primary' : 'border-primary'}`}
+            className={`bg-background border-2 border-dashed rounded-xl p-6 cursor-pointer transition-colors ease-in-out 
+            ${isDragActive ? 'border-hover' : 'border-default'}`}
         >
             <input {...getInputProps()} />
             <div className="text-center">
                 <div className="flex justify-center mb-2 w-full h-16">
-                    <UploadIcon color="#4d8f9d" />
+                    <UploadIcon color="#419eaf" />
                 </div>
                 {isDragActive ? (
                     <p className="text-text-800">Drop the file here...</p>

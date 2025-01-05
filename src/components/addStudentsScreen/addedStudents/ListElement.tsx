@@ -12,12 +12,12 @@ const ListElement = ({ id: studentId }: { id: string }) => {
     };
 
     return (
-        <li 
-        onClick={handleRemoveStudent}
-        className="flex items-center justify-between px-3 py-2 shadow-md cursor-pointer rounded-lg bg-surface hover:bg-primary transition-colors">
+        <li
+            onClick={handleRemoveStudent}
+            className="flex items-center justify-between active:bg-error px-3 py-2 shadow-md cursor-pointer rounded-lg bg-element hover:bg-element-hover transition-colors">
             <H5 value={student.name} />
 
-            <button className="text-error hover:text-red-700 text-sm font-medium transition duration-200">
+            <button className="text-error text-sm font-medium transition duration-200">
                 Remove
             </button>
         </li>

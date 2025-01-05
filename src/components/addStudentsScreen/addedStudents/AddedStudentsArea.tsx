@@ -37,7 +37,7 @@ const AddedStudentsArea = () => {
 
                         <button
                             onClick={handleNextStep}
-                            className="bg-primary hover:bg-secondary text-text-900 font-bold px-4 py-2 rounded-lg transition-colors">
+                            className="bg-default hover:bg-hover text-text font-semibold px-4 py-2 rounded-lg transition-colors">
                             Continue to next Step
                         </button>
                     </div>
@@ -49,15 +49,15 @@ const AddedStudentsArea = () => {
                         {studentIds.length > INITIAL_STUDENT_COUNT && !showAll ? (
                             <li
                                 onClick={() => setShowAll(true)}
-                                className="flex items-center justify-between px-3 py-2 shadow-md cursor-pointer rounded-lg bg-surface hover:bg-primary transition-colors">
+                                className="flex items-center justify-between px-3 py-2 shadow-md cursor-pointer rounded-lg bg-element hover:bg-element-hover transition-colors">
                                 <H4 value="Show all students" />
                             </li>
                         ) : (
                             <li
                                 onClick={handleRemoveAll}
-                                className="flex items-center justify-end px-3 py-2 shadow-md cursor-pointer bg-surface rounded-lg hover:bg-error hover:text-text-100 text-error transition duration-200">
+                                className="flex items-center justify-end px-3 py-2 shadow-md cursor-pointer bg-element rounded-lg hover:bg-error hover:text-text-100 text-error transition duration-200">
 
-                                <button className="text-sm font-medium transition duration-200">
+                                <button className="text-sm font-medium transition-colors">
                                     Remove all
                                 </button>
                             </li>

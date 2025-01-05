@@ -4,48 +4,68 @@
 
 @layer base {
     :root {
-        --text-50: 240 245 245;
-        --text-100: 224 235 235;
-        --text-200: 194 214 214;
-        --text-300: 163 194 194;
-        --text-400: 133 173 173;
-        --text-500: 102 153 153;
-        --text-600: 82 122 122;
-        --text-700: 61 92 92;
-        --text-800: 41 61 61;
-        --text-900: 20 31 31;
-        --text-950: 10 15 15;
+        --text-50: 241 244 240;
+        --text-100: 228 233 226;
+        --text-200: 201 211 197;
+        --text-300: 174 189 168;
+        --text-400: 147 167 139;
+        --text-500: 120 145 110;
+        --text-600: 96 116 88;
+        --text-700: 72 87 66;
+        --text-800: 48 58 44;
+        --text-900: 24 29 22;
+        --text-950: 12 15 11;
 
         --background: 245 249 250;
         --surface: 237 241 242;
         --card: 233 237 238;
         --error: 255 0 0;
 
-        --primary: 98 163 178;
-        --secondary: 149 207 214;
-        --accent: 114 196 213;
+        --primary: 71 87 66;
+        --secondary: 168 189 189;
+        --accent: 103 126 137;
+
+
+        --text: #f4f4f5;
+        --text-muted: #d4d4d8;
+
+        --background: 14 14 17;
+        --card: 24 24 27;
+
+        --default: #419eaf;
+        --hover: #419eaf;
+        --active: #2f606f;
+        --disabled:#172c35;
+
+        --eastern-blue-50: #f1fafa;
+        --eastern-blue-100: #dbf0f2;
+        --eastern-blue-200: #bbe1e6;
+        --eastern-blue-300: #8dcad3;
+        --eastern-blue-400: #57abb9;
+        --eastern-blue-500: #419eaf;
+        --eastern-blue-600: #347586;
+        --eastern-blue-700: #2f606f;
+        --eastern-blue-800: #2e515c;
+        --eastern-blue-900: #2a454f;
+        --eastern-blue-950: #172c35;
     }
 
     .dark {
-        --text-50: 10 15 15;
-        --text-100: 20 31 31;
-        --text-200: 41 61 61;
-        --text-300: 61 92 92;
-        --text-400: 82 122 122;
-        --text-500: 102 153 153;
-        --text-600: 133 173 173;
-        --text-700: 163 194 194;
-        --text-800: 194 214 214;
-        --text-900: 224 235 235;
-        --text-950: 240 245 245;
+        --text: #f4f4f5;
+        --text-muted: #d4d4d8;
+        --text-muted-extra: #a4a4a8;
 
-        --background: 5 9 10;
-        --surface: 13 17 18;
-        --card: 17 21 22;
-        --error: 255 0 0;
+        --background: #0e0e11;
+        --card: #18181b;
+        --element: #1f1f23;
+        --element-hover: #2f2f33;
 
-        --primary: 77 143 157;
-        --secondary: 41 100 106;
-        --accent: 42 125 141;
+        --border: #27272a;
+
+        --default: #419eaf;
+        --hover: #347586;
+        --active: #2f606f;
+        --disabled:#172c35;
+        --error: #aa0000;
     }
 }

@@ -12,6 +12,9 @@ import { setDeskGrid } from "./state/slices/gridSlice";
 import { addStudents } from "./state/slices/studentSlice";
 import { decodeData } from "./service/link.service";
 import validate from "./service/validate.service";
+import Container from "./components/Container";
+import ThemeSwitcher from "./components/ThemeSwitcher";
+import H1 from "./components/headings/H1";
 
 const App = () => {
   const step = useSelector((state: RootState) => state.app.step);
@@ -54,8 +57,17 @@ const App = () => {
 
   return (
     <div className="bg-background min-h-screen pt-5">
-      <div className="w-full max-w-4xl mx-auto mb-4 p-4 bg-surface rounded-3xl shadow-md">
-        <Progressbar />
+      <div className="w-full max-w-4xl mx-auto mb-4 p-4">
+        <Container layout="flex flex-col gap-4">
+          <Progressbar />
+          <div className="flex flex-row justify-between items-center">
+            {step === ProcessSteps.STEP_ONE && <H1 value="Upload File or add Students manually" />}
+            {step === ProcessSteps.STEP_TWO && <H1 value="Create Classroom Layout" />}
+            {step === ProcessSteps.STEP_THREE && <H1 value="Assign Students" />}
+
+            <ThemeSwitcher />
+          </div>
+        </Container>
 
         {step === ProcessSteps.STEP_ONE && <AddStudentsScreen />}
         {step === ProcessSteps.STEP_TWO && <CreateClassroomScreen />}
