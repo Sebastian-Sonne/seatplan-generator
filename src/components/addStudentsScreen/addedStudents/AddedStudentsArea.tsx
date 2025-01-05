@@ -1,27 +1,15 @@
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../state/store";
-import { removeAll, selectStudentIds } from "../../../state/slices/studentSlice";
+import { selectStudentIds } from "../../../state/slices/studentSlice";
 import H4 from "../../headings/H4";
 import H3 from "../../headings/H3";
-import ListElement from "./ListElement";
 import { setProcessStep } from "../../../state/slices/appSlice";
 import PrimaryButton from "../../buttons/PrimaryButton";
+import StudentList from "./StudentList";
 
 const AddedStudentsArea = () => {
-    const INITIAL_STUDENT_COUNT = 10;
     const studentIds = useSelector((state: RootState) => selectStudentIds(state));
-    const [showAll, setShowAll] = useState(false); // Control whether all students are shown
     const dispatch = useDispatch();
-
-    const displayedStudentIds = showAll ? studentIds : studentIds.slice(0, INITIAL_STUDENT_COUNT);
-
-    const handleRemoveAll = () => {
-        if (confirm("Do you really want to remove all students? This action cannot be undone.")) {
-            dispatch(removeAll())
-            setShowAll(false)
-        }
-    }
 
     const handleNextStep = () => {
         dispatch(setProcessStep(2));
@@ -40,28 +28,8 @@ const AddedStudentsArea = () => {
                             Continue to next Step
                         </PrimaryButton>
                     </div>
-                    <ul className="space-y-2 mt-4">
-                        {displayedStudentIds.map((studentId) => (
-                            <ListElement key={studentId} id={studentId} />
-                        ))}
-
-                        {studentIds.length > INITIAL_STUDENT_COUNT && !showAll ? (
-                            <li
-                                onClick={() => setShowAll(true)}
-                                className="flex items-center justify-between px-3 py-2 shadow-md cursor-pointer rounded-lg bg-element hover:bg-element-hover transition-colors">
-                                <H4 value="Show all students" />
-                            </li>
-                        ) : (
-                            <li
-                                onClick={handleRemoveAll}
-                                className="flex items-center justify-end px-3 py-2 shadow-md cursor-pointer bg-element rounded-lg hover:bg-error hover:text-text-100 text-error transition duration-200">
-
-                                <button className="text-sm font-medium transition-colors">
-                                    Remove all
-                                </button>
-                            </li>
-                        )}
-                    </ul>
+                    
+                    <StudentList />
                 </>
             ) : (
                 <H4 value="There are currently no students added." />
