@@ -25,11 +25,11 @@ const DeskElement: React.FC<DeskElementProps> = ({ row, col, disabled = false })
             disabled={disabled}
             onMouseEnter={() => setIsHovered(true)} 
             onMouseLeave={() => setIsHovered(false)}
-            className={`h-16 flex justify-center items-center rounded-md transition-all relative bg-gray-50 border-2 border-gray-700 text-gray-100 
-                ${isActive && "!bg-gray-200"}
-                ${!disabled && "hover:text-white hover:bg-red-500"}`}
+            className={`h-16 flex justify-center items-center rounded-md transition-all relative bg-card border-2 border-primary 
+                ${isActive && "!bg-background"}
+                ${!disabled && "hover:text-text-100 hover:bg-error"}`}
         >
-            <span className="font-semibold text-gray-600">
+            <span className="font-semibold text-primary">
                 {!disabled ? (isHovered ? "Remove" : "Desk") : student?.name || ""}
             </span>
         </button>

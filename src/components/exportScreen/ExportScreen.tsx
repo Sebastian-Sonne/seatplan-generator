@@ -35,12 +35,12 @@ const ExportScreen = () => {
             <Container layout="max-w-[600px]">
                 <div className='flex flex-row justify-between items-center pr-2'>
                     <H2 value="Export" />
-                    <button onClick={() => dispatch(setExport(false))} className='px-4 aspect-square mb-2 hover:bg-red-600 transition-colors rounded-lg'>X</button>
+                    <button onClick={() => dispatch(setExport(false))} className='px-4 aspect-square mb-2 hover:bg-error font-bold transition-colors rounded-lg'>X</button>
                 </div>
 
                 <div className="flex items-center">
                     <input
-                        className='w-60 border-y-2 border-l-2 rounded-l-lg py-2 pl-2 font-medium'
+                        className='w-60 bg-card text-text-700 border-primary border-y-2 border-l-2 rounded-l-lg py-2 pl-2 font-medium'
                         value={link}
                         disabled
                     />
@@ -69,7 +69,7 @@ const CopyButton: React.FC<CopyButtonProps> = ({ link, copied, setCopied }) => {
     return (
         <button
             onClick={handleCopyClick}
-            className={`pl-4 py-2 pr-4 border-2 rounded-r-lg hover:bg-orange-500 ${copied && "border-green-500 hover:bg-green-500"} transition-colors`}
+            className={`pl-4 py-2 pr-4 border-primary border-2 rounded-r-lg hover:bg-primary ${copied && "border-green-500 hover:bg-green-500"} transition-colors`}
             aria-label="Copy link to clipboard"
         >
             <H4 value='Copy' />

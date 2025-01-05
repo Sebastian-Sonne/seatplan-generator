@@ -8,12 +8,12 @@ const FileUploadArea = () => {
   const [error, setError] = useState<string | null>(null);
 
   return (
-    <div className="w-full max-w-[600px] mx-auto p-6 bg-white rounded-xl shadow-md">
+    <div className="w-full max-w-[600px] mx-auto p-6 bg-card rounded-xl">
       <H3 value="Upload file:" />
 
       <DragAndDropArea setError={setError} setFile={setFile} />
 
-      {error && <p className="text-red-500 text-sm mt-3">{error}</p>}
+      {error && <p className="text-error text-sm mt-3">{error}</p>}
 
       {file && <UploadedFiles file={file} setFile={setFile} setError={setError} />}
     </div>

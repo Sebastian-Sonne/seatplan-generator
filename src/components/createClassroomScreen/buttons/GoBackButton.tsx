@@ -7,7 +7,7 @@ const GoBackButton: React.FC<GoBackButtonProps> = ({ onClick }) => {
     return (
         <button
             onClick={onClick}
-            className="bg-gray-400 text-white px-4 py-2 rounded-lg hover:bg-gray-500">
+            className="text-text-900 font-semibold px-4 py-2 rounded-lg border-2 border-primary hover:bg-primary transition-colors">
             Go Back
         </button>
     )

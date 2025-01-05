@@ -5,7 +5,7 @@ interface ContainerProps {
 }
 const Container: React.FC<ContainerProps> = ({children, layout}) => {
     return (
-        <div className={`${layout} p-5 mb-4 bg-white rounded-2xl shadow-md`}>
+        <div className={`${layout} p-5 mb-4 bg-card rounded-2xl`}>
             {children}
         </div>
     )

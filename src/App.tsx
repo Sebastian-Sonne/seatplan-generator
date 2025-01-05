@@ -16,9 +16,10 @@ import validate from "./service/validate.service";
 const App = () => {
   const step = useSelector((state: RootState) => state.app.step);
   const exportVisible = useSelector((state: RootState) => state.app.exportVisible);
+  const theme = useSelector((state: RootState) => state.app.theme);
   const dispatch = useDispatch();
 
-  //parse params for existing layout
+  //parse url params for existing layout
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const data = params.get('data');
@@ -40,9 +41,14 @@ const App = () => {
     dispatch(addStudents(students));
   }, []);
 
+  //theme
+  useEffect(() => {
+    (theme === "dark") ? document.documentElement.classList.add("dark") : document.documentElement.classList.remove("dark");
+  }, [theme]);
+
   return (
-    <>
-      <div className="w-full max-w-4xl mx-auto mb-4 p-4 bg-gray-50 mt-5 rounded-3xl shadow-md">
+    <div className="bg-background min-h-screen pt-5">
+      <div className="w-full max-w-4xl mx-auto mb-4 p-4 bg-surface rounded-3xl">
         <Progressbar />
 
         {step === ProcessSteps.STEP_ONE && <AddStudentsScreen />}
@@ -53,7 +59,7 @@ const App = () => {
       {exportVisible && <ExportScreen />}
 
       <Footer />
-    </>
+    </div>
   );
 };
 export default App;

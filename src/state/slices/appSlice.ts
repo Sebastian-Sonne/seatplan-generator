@@ -1,4 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { getTheme, setTheme } from "../../service/storage.service";
 
 export const ProcessSteps = {
     STEP_ONE: 1,
@@ -6,16 +7,20 @@ export const ProcessSteps = {
     STEP_THREE: 3,
 };
 
+export const getUserPreferedTheme = (): 'dark' | 'light' => window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+
 interface Appstate {
     step: number;
     exportVisible: boolean;
-    shuffled: boolean; //variable possibly prevent shuffle on for saved layout
+    shuffled: boolean; //variable to possibly prevent reshuffle on load for url-shared layout
+    theme: string;
 }
 
 const initialState: Appstate = {
     step: ProcessSteps.STEP_ONE,
     exportVisible: false,
     shuffled: false,
+    theme: ('theme' in localStorage) ? getTheme() : getUserPreferedTheme(),
 }
 
 const appSlice = createSlice({
@@ -34,6 +39,11 @@ const appSlice = createSlice({
         },
         setShuffled: (state, action: PayloadAction<boolean>) => {
             state.shuffled = action.payload;
+        },
+        toggleTheme: (state) => {
+            const newTheme = (state.theme === 'dark') ? 'light' : 'dark';
+            setTheme(newTheme);
+            state.theme = newTheme;
         },
     },
 });

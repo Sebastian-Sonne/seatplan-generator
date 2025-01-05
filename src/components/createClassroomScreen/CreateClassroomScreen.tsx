@@ -48,7 +48,7 @@ const CreateClassroomScreen = () => {
               <H4 value={`Number of Students: ${numberOfStudents}`} />
             </div>
 
-            <button onClick={() => dispatch(resetGrid())} className="text-sm font-semibold text-gray-500 hover:text-gray-700 transition-colors">
+            <button onClick={() => dispatch(resetGrid())} className="text-sm font-semibold text-text-400 hover:text-text-500 transition-colors">
               Reset
             </button>
 

@@ -42,7 +42,7 @@ const AssignSeatsScreen = () => {
                 <div className="flex flex-row justify-end w-full">
                     <button
                         onClick={shuffleStudents}
-                        className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors shadow-md">
+                        className="bg-primary text-text-900 font-semibold px-4 py-2 rounded-lg hover:bg-secondary transition-colors">
                         Shuffle
                     </button>
                 </div>
@@ -53,7 +53,7 @@ const AssignSeatsScreen = () => {
 
                 <button
                     onClick={handleExport}
-                    className="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition-colors shadow-md">
+                    className="bg-primary text-text-900 font-semibold px-4 py-2 rounded-lg hover:bg-secondary transition-colors">
                     Export
                 </button>
             </Container>

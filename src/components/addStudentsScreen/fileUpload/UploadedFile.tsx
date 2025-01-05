@@ -83,7 +83,7 @@ const UploadedFiles: React.FC<UploadedFilesProps> = ({ file, setFile, setError }
 
                 <button
                     onClick={handleSubmit}
-                    className="text-white font-semibold bg-green-500 hover:bg-green-600 px-4 py-2 rounded-lg transition-colors">
+                    className="text-white font-semibold bg-primary px-4 py-2 rounded-lg transition-colors">
                     Submit
                 </button>
             </div>

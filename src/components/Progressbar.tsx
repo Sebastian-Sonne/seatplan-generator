@@ -10,9 +10,12 @@ const Progressbar = () => {
                 (label, index) => (
                     <div
                         key={index}
-                        className={`flex-1 text-center py-2 border-b-4 ${currentStep > index
-                                ? "border-green-500 text-green-500"
-                                : "border-gray-300 text-gray-500"
+                        className={`flex-1 text-center py-2 border-b-4 ${currentStep == index + 1
+                            ? "text-primary"
+                            : "text-text-200"
+                            } ${currentStep > index
+                                ? "border-primary"
+                                : "border-background"
                             }`}
                     >
                         {label}

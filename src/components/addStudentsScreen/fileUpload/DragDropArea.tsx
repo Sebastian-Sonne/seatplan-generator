@@ -1,6 +1,8 @@
 import { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import { UploadIcon } from "../../icons/Icons";
+import H4 from "../../headings/H4";
+import H5 from "../../headings/H5";
 
 interface DragAndDropAreaProps {
     setError: React.Dispatch<React.SetStateAction<string | null>>;
@@ -35,20 +37,20 @@ const DragAndDropArea: React.FC<DragAndDropAreaProps> = ({ setError, setFile }) 
     return (
         <div
             {...getRootProps()}
-            className={`border-2 border-dashed rounded-xl p-6 cursor-pointer transition duration-200 ease-in-out 
-            ${isDragActive ? 'border-blue-500 bg-blue-50' : 'border-gray-300 bg-gray-50'}`}
+            className={`border-2 border-dashed rounded-xl p-6 cursor-pointer transition-colors ease-in-out 
+            ${isDragActive ? 'border-primary' : 'border-primary'}`}
         >
             <input {...getInputProps()} />
             <div className="text-center">
                 <div className="flex justify-center mb-2 w-full h-16">
-                    <UploadIcon />
+                    <UploadIcon color="#4d8f9d" />
                 </div>
                 {isDragActive ? (
-                    <p className="text-blue-600">Drop the files here...</p>
+                    <p className="text-text-800">Drop the file here...</p>
                 ) : (
                     <>
-                        <p className="text-gray-600 font-semibold text-lg">Choose a file or drag & drop it here</p>
-                        <p className="text-gray-400 font-normal text-md">.xlsx formats, max 50MB</p>
+                        <H4 value="Choose a file or drag & drop it here" />
+                        <H5 value=".xlsx formats, max 50MB" />
                     </>
                 )}
             </div>

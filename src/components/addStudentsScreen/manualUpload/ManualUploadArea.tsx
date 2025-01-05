@@ -35,12 +35,12 @@ const ManualUploadArea = () => {
     }
 
     return (
-        <div className="w-full max-w-[600px] mx-auto p-6 bg-white rounded-xl shadow-md">
+        <div className="w-full max-w-[600px] mx-auto p-6 bg-card rounded-xl">
             <H3 value="Add students manually:" />
 
             <div className="flex flex-row justify-between gap-2">
                 <input
-                    className={`border-2 ${error && "border-red-500"} px-3 py-1 w-full rounded-lg`}
+                    className={`border ${error && "!border-error"} px-3 py-1 w-full rounded-lg bg-surface border-primary text-text-800`}
                     onChange={(c) => handleChange(c)}
                     value={content}
                     onKeyDown={handleKeyDown}
@@ -49,13 +49,13 @@ const ManualUploadArea = () => {
 
                 <button
                     onClick={handleSubmit}
-                    className="px-5 py-1 bg-green-500 hover:bg-green-600 transition-colors rounded-lg"
+                    className="px-5 py-1 bg-primary hover:bg-secondary transition-colors rounded-lg"
                 >
-                    <span className="flex justify-center items-center text-white font-bold text-2xl">+</span>
+                    <span className="flex justify-center items-center text-text-900 font-bold text-2xl">+</span>
                 </button>
             </div>
 
-            {error && <p className="text-red-500 text-sm mt-3">{error}</p>}
+            {error && <p className="text-error text-sm mt-3">{error}</p>}
         </div>
     );
 };

@@ -12,3 +12,11 @@ export const getStudents = (): Student[] => {
         return []
     }
 }
+
+export const setTheme = (theme: string) => {
+    localStorage.setItem('theme', theme);
+}
+
+export const getTheme = (): string => {
+    return localStorage.getItem('theme') || 'light';
+}
