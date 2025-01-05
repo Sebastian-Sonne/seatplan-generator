@@ -6,6 +6,7 @@ import H4 from "../../headings/H4";
 import H3 from "../../headings/H3";
 import ListElement from "./ListElement";
 import { setProcessStep } from "../../../state/slices/appSlice";
+import PrimaryButton from "../../buttons/PrimaryButton";
 
 const AddedStudentsArea = () => {
     const INITIAL_STUDENT_COUNT = 10;
@@ -35,11 +36,9 @@ const AddedStudentsArea = () => {
                     <div className="flex flex-row justify-between items-center">
                         <H4 value={`Total number of Students: ${studentIds.length}`} />
 
-                        <button
-                            onClick={handleNextStep}
-                            className="bg-default hover:bg-hover active:bg-active text-text font-semibold px-4 py-2 rounded-lg transition-colors">
+                        <PrimaryButton onClick={handleNextStep}>
                             Continue to next Step
-                        </button>
+                        </PrimaryButton>
                     </div>
                     <ul className="space-y-2 mt-4">
                         {displayedStudentIds.map((studentId) => (

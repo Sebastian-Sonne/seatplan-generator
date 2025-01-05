@@ -4,50 +4,23 @@
 
 @layer base {
     :root {
-        --text-50: 241 244 240;
-        --text-100: 228 233 226;
-        --text-200: 201 211 197;
-        --text-300: 174 189 168;
-        --text-400: 147 167 139;
-        --text-500: 120 145 110;
-        --text-600: 96 116 88;
-        --text-700: 72 87 66;
-        --text-800: 48 58 44;
-        --text-900: 24 29 22;
-        --text-950: 12 15 11;
 
-        --background: 245 249 250;
-        --surface: 237 241 242;
-        --card: 233 237 238;
-        --error: 255 0 0;
+        --text: #091010;
+        --text-muted: #131f20;
+        --text-muted-extra: #253e41;
 
-        --primary: 71 87 66;
-        --secondary: 168 189 189;
-        --accent: 103 126 137;
+        --background: #ffffff;
+        --card: #f8f8f9;
+        --element: #f1f1f2;
+        --element-hover: #e4e4e5;
 
-
-        --text: #f4f4f5;
-        --text-muted: #d4d4d8;
-
-        --background: 14 14 17;
-        --card: 24 24 27;
+        --border: #d4d4d8;
 
         --default: #419eaf;
-        --hover: #419eaf;
+        --hover: #347586;
         --active: #2f606f;
-        --disabled:#172c35;
-
-        --eastern-blue-50: #f1fafa;
-        --eastern-blue-100: #dbf0f2;
-        --eastern-blue-200: #bbe1e6;
-        --eastern-blue-300: #8dcad3;
-        --eastern-blue-400: #57abb9;
-        --eastern-blue-500: #419eaf;
-        --eastern-blue-600: #347586;
-        --eastern-blue-700: #2f606f;
-        --eastern-blue-800: #2e515c;
-        --eastern-blue-900: #2a454f;
-        --eastern-blue-950: #172c35;
+        --disabled:#dbf0f2;
+        --error: #aa0000;
     }
 
     .dark {

@@ -4,9 +4,10 @@ import ClassroomGrid from "../grid/ClassroomGrid";
 import { useEffect } from "react";
 import { selectStudentIds } from "../../state/slices/studentSlice";
 import { assignRandomStudents, clearAssignments } from "../../state/slices/gridSlice";
-import GoBackButton from "../createClassroomScreen/buttons/GoBackButton";
 import Container from "../Container";
 import { RootState } from "../../state/store";
+import SecondaryButton from "../buttons/SecondaryButton";
+import PrimaryButton from "../buttons/PrimaryButton";
 
 const AssignSeatsScreen = () => {
     const dispatch = useDispatch();
@@ -37,22 +38,20 @@ const AssignSeatsScreen = () => {
                 <ClassroomGrid disabled={true} />
 
                 <div className="flex flex-row justify-end w-full">
-                    <button
-                        onClick={shuffleStudents}
-                        className="bg-default hover:bg-hover active:bg-active text-text font-semibold px-4 py-2 rounded-lg shadow-md transition-colors">
+                    <PrimaryButton onClick={shuffleStudents} >
                         Shuffle
-                    </button>
+                    </PrimaryButton>
                 </div>
             </Container>
 
             <Container layout="flex flex-row justify-between">
-                <GoBackButton onClick={handlePrevStep} />
+                <SecondaryButton onClick={handlePrevStep} >
+                    Go Back
+                </SecondaryButton>
 
-                <button
-                    onClick={handleExport}
-                    className="bg-default text-text font-semibold px-4 py-2 rounded-lg shadow-md hover:bg-hover active:bg-active transition-colors">
+                <PrimaryButton onClick={handleExport} >
                     Export
-                </button>
+                </PrimaryButton>
             </Container>
         </>
     )

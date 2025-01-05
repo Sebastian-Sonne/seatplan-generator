@@ -4,10 +4,10 @@ import ClassroomGrid from "../grid/ClassroomGrid";
 import { setProcessStep } from "../../state/slices/appSlice";
 import { RootState } from "../../state/store";
 import { selectStudentIds } from "../../state/slices/studentSlice";
-import CreateButton from "./buttons/CreateButton";
-import GoBackButton from "./buttons/GoBackButton";
 import H4 from "../headings/H4";
 import Container from "../Container";
+import PrimaryButton from "../buttons/PrimaryButton";
+import SecondaryButton from "../buttons/SecondaryButton";
 
 const CreateClassroomScreen = () => {
   const numberOfDesks = useSelector((state: RootState) => state.grid.numberOfDesks);
@@ -54,8 +54,12 @@ const CreateClassroomScreen = () => {
       </Container>
 
       <Container layout="flex flex-row justify-between">
-        <GoBackButton onClick={handlePrevStep} />
-        <CreateButton onClick={handleCreateClassroom} />
+        <SecondaryButton onClick={handlePrevStep} >
+          Go Back
+        </SecondaryButton>
+        <PrimaryButton onClick={handleCreateClassroom} >
+          Create Classroom
+        </PrimaryButton>
       </Container>
     </>
   )

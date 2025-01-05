@@ -37,7 +37,7 @@ const DragAndDropArea: React.FC<DragAndDropAreaProps> = ({ setError, setFile }) 
     return (
         <div
             {...getRootProps()}
-            className={`bg-background border-2 border-dashed rounded-xl p-6 cursor-pointer transition-colors ease-in-out 
+            className={`bg-background border-2 border-dashed rounded-xl p-6 cursor-pointer transition-colors ease-in-out
             ${isDragActive ? 'border-hover' : 'border-default'}`}
         >
             <input {...getInputProps()} />

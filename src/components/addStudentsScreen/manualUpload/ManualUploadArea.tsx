@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { addStudent } from "../../../state/slices/studentSlice";
 import { nanoid } from "@reduxjs/toolkit";
 import H3 from "../../headings/H3";
+import PrimaryButton from "../../buttons/PrimaryButton";
 
 const ManualUploadArea = () => {
     const [content, setContent] = useState("");
@@ -47,12 +48,11 @@ const ManualUploadArea = () => {
                     placeholder="John Doe"
                 />
 
-                <button
-                    onClick={handleSubmit}
-                    className="px-5 py-1 bg-default hover:bg-hover active:bg-active transition-colors rounded-lg"
-                >
-                    <span className="flex justify-center items-center text-text font-bold text-2xl">+</span>
-                </button>
+
+
+                <PrimaryButton onClick={handleSubmit} className="!px-5 !py-1">
+                    <span className="flex justify-center items-center font-bold text-2xl">+</span>
+                </PrimaryButton>
             </div>
 
             {error && <p className="text-error text-sm mt-3">{error}</p>}

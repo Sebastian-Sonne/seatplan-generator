@@ -5,6 +5,7 @@ import { addStudents } from "../../../state/slices/studentSlice";
 import Loadingbar from "../../loading/LoadingScreen";
 import FileItem from "./FileItem";
 import * as XLSX from "xlsx";
+import PrimaryButton from "../../buttons/PrimaryButton";
 
 interface UploadedFilesProps {
     file: File;
@@ -81,11 +82,9 @@ const UploadedFiles: React.FC<UploadedFilesProps> = ({ file, setFile, setError }
             <div className="flex flex-row justify-end items-center gap-4">
                 {loading && <Loadingbar speed={10} onComplete={handleLoadingComplete} />}
 
-                <button
-                    onClick={handleSubmit}
-                    className="text-text font-semibold bg-default hover:bg-hover active:bg-active px-4 py-2 rounded-lg transition-colors">
+                <PrimaryButton onClick={handleSubmit}>
                     Submit
-                </button>
+                </PrimaryButton>
             </div>
         </ul>
     );
