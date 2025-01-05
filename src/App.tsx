@@ -49,10 +49,14 @@ const App = () => {
     setTimeout(() => {
       window.history.replaceState({}, '', newUrl);
     }, 0); //use a small delay to avoid interfering with React updates
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
-    (theme === "dark") ? document.documentElement.classList.add("dark") : document.documentElement.classList.remove("dark");
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
   }, [theme]);
 
   return (

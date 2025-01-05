@@ -23,7 +23,7 @@ const Loadingbar: React.FC<LoadingbarProps> = ({onComplete, speed}) => {
         }, speed);
 
         return () => clearInterval(interval);
-    }, []);
+    }, [onComplete, speed]);
 
     return (
         <div className="w-full bg-background rounded-full h-2.5">

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setExport, setProcessStep } from "../../state/slices/appSlice";
+import { setExport, setProcessStep, setShuffled } from "../../state/slices/appSlice";
 import ClassroomGrid from "../grid/ClassroomGrid";
 import { useEffect } from "react";
 import { selectStudentIds } from "../../state/slices/studentSlice";
@@ -19,11 +19,12 @@ const AssignSeatsScreen = () => {
         if (!shuffled) {
             shuffleStudents();
         }
-    }, [])
+    }, []);
 
     const shuffleStudents = () => {
         dispatch(clearAssignments())
         dispatch(assignRandomStudents(studentIds));
+        if (!shuffled) dispatch(setShuffled(true));
     }
 
     const handlePrevStep = () => {

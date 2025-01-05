@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useDropzone } from "react-dropzone";
+import { FileRejection, useDropzone } from "react-dropzone";
 import { UploadIcon } from "../../icons/Icons";
 import H4 from "../../headings/H4";
 import H5 from "../../headings/H5";
@@ -11,7 +11,7 @@ interface DragAndDropAreaProps {
 const DragAndDropArea: React.FC<DragAndDropAreaProps> = ({ setError, setFile }) => {
 
     const onDrop = useCallback(
-        (acceptedFile: File[], fileRejections: any[]) => {
+        (acceptedFile: File[], fileRejections: FileRejection[]) => {
             setError(null);
 
             // Validate files
