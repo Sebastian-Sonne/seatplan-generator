@@ -35,12 +35,12 @@ const ExportScreen = () => {
             <Container layout="max-w-[600px]">
                 <div className='flex flex-row justify-between items-center pr-2'>
                     <H2 value="Export" />
-                    <button onClick={() => dispatch(setExport(false))} className='px-4 aspect-square mb-2 hover:bg-error font-bold transition-colors rounded-lg'>X</button>
+                    <button onClick={() => dispatch(setExport(false))} className='px-4 aspect-square mb-2 hover:bg-error text-text font-bold transition-colors rounded-lg'>X</button>
                 </div>
 
                 <div className="flex items-center">
                     <input
-                        className='w-60 bg-card text-text-700 border-primary border-y-2 border-l-2 rounded-l-lg py-2 pl-2 font-medium'
+                        className='w-60 bg-card text-text border-element border-y-2 border-l-2 rounded-l-lg py-2 pl-2 font-medium'
                         value={link}
                         disabled
                     />
@@ -48,7 +48,7 @@ const ExportScreen = () => {
                     <CopyButton link={link} copied={copied} setCopied={setCopied} />
 
                 </div>
-                {copied && <h6 className='font-semibold text-sm text-gray-600 pl-2'>Copied to clipboard</h6>}
+                {copied && <h6 className='font-semibold text-sm text-text-muted pl-2'>Copied to clipboard</h6>}
             </Container>
         </div>
     );

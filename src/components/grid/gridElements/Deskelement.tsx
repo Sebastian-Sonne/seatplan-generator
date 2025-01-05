@@ -29,7 +29,7 @@ const DeskElement: React.FC<DeskElementProps> = ({ row, col, disabled = false })
                 ${isActive && "!bg-background"}
                 ${!disabled && "hover:text-text hover:bg-error hover:border-error"}`}
         >
-            <span className="font-semibold break-words overflow-hidden leading-none">
+            <span className="font-semibold break-words overflow-hidden leading-tight">
                 {!disabled ? (isHovered ? "Remove" : "Desk") : student?.name || ""}
             </span>
         </button>

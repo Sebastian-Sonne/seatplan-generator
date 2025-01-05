@@ -7,6 +7,7 @@ import { selectStudentIds } from "../../state/slices/studentSlice";
 import H4 from "../headings/H4";
 import Container from "../Container";
 import PrimaryButton from "../buttons/PrimaryButton";
+import TertiaryButton from "../buttons/TertiaryButton";
 import SecondaryButton from "../buttons/SecondaryButton";
 
 const CreateClassroomScreen = () => {
@@ -39,24 +40,23 @@ const CreateClassroomScreen = () => {
 
           <ClassroomGrid />
 
-          <div className="flex flex-row justify-between">
+          <div className="flex flex-row justify-between mt-2">
             <div className="flex flex-col">
               <H4 value={`Number of Tables: ${numberOfDesks}`} />
               <H4 value={`Number of Students: ${numberOfStudents}`} />
             </div>
 
-            <button onClick={() => dispatch(resetGrid())} className="font-semibold text-text-muted px-4 rounded-lg border border-transparent hover:border-default active:bg-default transition-colors">
+            <SecondaryButton onClick={() => dispatch(resetGrid())} >
               Reset
-            </button>
-
+            </SecondaryButton>
           </div>
         </div>
       </Container>
 
       <Container layout="flex flex-row justify-between">
-        <SecondaryButton onClick={handlePrevStep} >
+        <TertiaryButton onClick={handlePrevStep} >
           Go Back
-        </SecondaryButton>
+        </TertiaryButton>
         <PrimaryButton onClick={handleCreateClassroom} >
           Create Classroom
         </PrimaryButton>

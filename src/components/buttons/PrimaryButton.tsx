@@ -1,5 +1,13 @@
 
-const PrimaryButton = ({ onClick, children, className = "" }: { onClick: () => void, children: React.ReactNode, className?: string }) => {
+const PrimaryButton = ({
+    onClick,
+    children,
+    className = ""
+}: {
+    onClick: () => void,
+    children: React.ReactNode,
+    className?: string
+}) => {
 
     return (
         <button

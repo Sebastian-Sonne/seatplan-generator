@@ -1,6 +1,6 @@
 import PrimaryButton from "./PrimaryButton"
 
-const SecondaryButton = ({
+const TertiaryButton = ({
     onClick,
     children,
     className = ""
@@ -11,9 +11,13 @@ const SecondaryButton = ({
 }) => {
 
     return (
-        <PrimaryButton onClick={onClick} className={`bg-disabled hover:bg-active active:bg-hover ${className}`}>
+        <PrimaryButton
+            onClick={onClick}
+            className={`border-2 border-default bg-transparent ${className}`}
+        >
             {children}
         </PrimaryButton>
     )
 }
-export default SecondaryButton
+export default TertiaryButton
+

@@ -8,6 +8,7 @@ import Container from "../Container";
 import { RootState } from "../../state/store";
 import SecondaryButton from "../buttons/SecondaryButton";
 import PrimaryButton from "../buttons/PrimaryButton";
+import TertiaryButton from "../buttons/TertiaryButton";
 
 const AssignSeatsScreen = () => {
     const dispatch = useDispatch();
@@ -45,13 +46,13 @@ const AssignSeatsScreen = () => {
             </Container>
 
             <Container layout="flex flex-row justify-between">
-                <SecondaryButton onClick={handlePrevStep} >
+                <TertiaryButton onClick={handlePrevStep} >
                     Go Back
-                </SecondaryButton>
+                </TertiaryButton>
 
-                <PrimaryButton onClick={handleExport} >
+                <SecondaryButton onClick={handleExport} >
                     Export
-                </PrimaryButton>
+                </SecondaryButton>
             </Container>
         </>
     )
