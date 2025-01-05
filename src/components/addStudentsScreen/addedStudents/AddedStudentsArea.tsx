@@ -49,15 +49,15 @@ const AddedStudentsArea = () => {
                         {studentIds.length > INITIAL_STUDENT_COUNT && !showAll ? (
                             <li
                                 onClick={() => setShowAll(true)}
-                                className="flex items-center justify-between px-3 py-2 cursor-pointer rounded-lg bg-surface hover:bg-error transition-colors">
+                                className="flex items-center justify-between px-3 py-2 cursor-pointer rounded-lg bg-surface hover:bg-primary transition-colors">
                                 <H4 value="Show all students" />
                             </li>
                         ) : (
                             <li
                                 onClick={handleRemoveAll}
-                                className="flex items-center justify-end px-3 py-2 cursor-pointer bg-light-surface dark:bg-dark-surface rounded-lg shadow-sm dark:shadow-black hover:bg-red-50 transition duration-200">
+                                className="flex items-center justify-end px-3 py-2 cursor-pointer bg-surface rounded-lg hover:bg-error hover:text-text-100 text-error transition duration-200">
 
-                                <button className="text-red-500 hover:text-red-700 text-sm font-medium transition duration-200">
+                                <button className="text-sm font-medium transition duration-200">
                                     Remove all
                                 </button>
                             </li>

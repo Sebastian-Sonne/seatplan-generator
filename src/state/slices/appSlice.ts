@@ -48,5 +48,5 @@ const appSlice = createSlice({
     },
 });
 
-export const { setProcessStep, setExport, setShuffled } = appSlice.actions;
+export const { setProcessStep, setExport, setShuffled, toggleTheme } = appSlice.actions;
 export default appSlice.reducer;

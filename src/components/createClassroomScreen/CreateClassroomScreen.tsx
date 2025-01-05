@@ -9,6 +9,7 @@ import GoBackButton from "./buttons/GoBackButton";
 import H2 from "../headings/H2";
 import H4 from "../headings/H4";
 import Container from "../Container";
+import ThemeSwitcher from "../ThemeSwitcher";
 
 const CreateClassroomScreen = () => {
   const numberOfDesks = useSelector((state: RootState) => state.grid.numberOfDesks);
@@ -34,8 +35,11 @@ const CreateClassroomScreen = () => {
   }
 
   return (
-    <div>
-      <H2 value="Create Classroom Layout" />
+    <>
+      <div className="flex flex-row justify-between items-center">
+        <H2 value="Create Classroom Layout" />
+        <ThemeSwitcher />
+      </div>
 
       <Container layout="">
         <div className="flex flex-col gap-2">
@@ -57,10 +61,10 @@ const CreateClassroomScreen = () => {
       </Container>
 
       <Container layout="flex flex-row justify-between">
-        <GoBackButton onClick={handlePrevStep}/>
+        <GoBackButton onClick={handlePrevStep} />
         <CreateButton onClick={handleCreateClassroom} />
       </Container>
-    </div>
+    </>
   )
 }
 export default CreateClassroomScreen

@@ -8,6 +8,7 @@ import H2 from "../headings/H2";
 import GoBackButton from "../createClassroomScreen/buttons/GoBackButton";
 import Container from "../Container";
 import { RootState } from "../../state/store";
+import ThemeSwitcher from "../ThemeSwitcher";
 
 const AssignSeatsScreen = () => {
     const dispatch = useDispatch();
@@ -21,7 +22,7 @@ const AssignSeatsScreen = () => {
     }, [])
 
     const shuffleStudents = () => {
-        dispatch(clearAssignments())   
+        dispatch(clearAssignments())
         dispatch(assignRandomStudents(studentIds));
     }
 
@@ -34,7 +35,10 @@ const AssignSeatsScreen = () => {
     }
     return (
         <>
-            <H2 value="Assign Students" />
+            <div className="flex flex-row justify-between items-center">
+                <H2 value="Assign Students" />
+                <ThemeSwitcher />
+            </div>
 
             <Container layout="flex flex-col gap-4" >
                 <ClassroomGrid disabled={true} />

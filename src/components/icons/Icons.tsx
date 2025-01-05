@@ -1,4 +1,6 @@
 export const ExcelIcon = () => <img src="/icons/excel.svg" alt="excel Icon" />;
+export const SunIcon = () => <img src="/icons/sun.svg" alt="switch theme" />;
+export const MoonIcon = () => <img src="/icons/moon.svg" alt="switch theme" />;
 
 export const AddIcon = ({ color = "#22c55e" }: { color?: string }) => (
     <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
