@@ -5,25 +5,20 @@ export interface Coordinates {
     col: number
 }
 
+export interface RowColCoordinates {
+    type: "row" | "col" | null;
+    index: number;
+}
+
 export interface Desk {
     deskState: -1 | 1; // -1 = no desk, 1 = desk
     studentId: string | null;
 }
 
-export interface ActiveHeader {
-    type: "row" | "col" | null;
-    index: number;
-}
-
-export interface HoverState {
-    type: "row" | "col" | null;
-    index: number;
-}
-
 interface Gridstate {
     deskSetup: Desk[][];
-    activeHeader: ActiveHeader;
-    hoverState: HoverState;
+    activeHeader: RowColCoordinates;
+    hoverState: RowColCoordinates;
     numberOfDesks: number;
 }
 
@@ -87,14 +82,14 @@ const gridSlice = createSlice({
             state.numberOfDesks = 0;
         },
 
-        setActiveHeader: (state, action: PayloadAction<ActiveHeader>) => {
+        setActiveHeader: (state, action: PayloadAction<RowColCoordinates>) => {
             state.activeHeader = action.payload;
         },
-        setHoverState: (state, action: PayloadAction<HoverState>) => {
+        setHoverState: (state, action: PayloadAction<RowColCoordinates>) => {
             state.hoverState = action.payload;
         },
 
-        add: (state, action: PayloadAction<ActiveHeader>) => {
+        add: (state, action: PayloadAction<RowColCoordinates>) => {
             const { type, index } = action.payload;
 
             if (type === "row") {
@@ -106,7 +101,7 @@ const gridSlice = createSlice({
                 });
             }
         },
-        remove: (state, action: PayloadAction<ActiveHeader>) => {
+        remove: (state, action: PayloadAction<RowColCoordinates>) => {
             const { type, index } = action.payload;
 
             if (type === "row") {
@@ -125,6 +120,38 @@ const gridSlice = createSlice({
 
             state.numberOfDesks = state.deskSetup.flat().filter(desk => desk.deskState === 1).length;
         },
+        set: (state, action: PayloadAction<RowColCoordinates>) => {
+            const { type, index } = action.payload;
+
+            if (type === "row") {
+                //determine the majority of the column, in order to set all desks in the row opposite to the majority
+                const row = state.deskSetup[index];
+                const deskCount = row.filter(desk => desk.deskState === 1).length;
+                const noDeskCount = row.length - deskCount;
+                const majority = deskCount > noDeskCount ? -1 : 1;
+
+                state.deskSetup[index] = row.map(desk => ({
+                    ...desk,
+                    deskState: majority
+                }));
+            } else if (type === "col") {
+                //determine the majority of the column, in order to set all desks in the column opposite to the majority
+                const col = state.deskSetup.map(row => row[index]);
+                const deskCount = col.filter(desk => desk.deskState === 1).length;
+                const noDeskCount = col.length - deskCount;
+                const majority = deskCount > noDeskCount ? -1 : 1;
+
+                state.deskSetup.forEach(row => {
+                    row[index] = {
+                        ...row[index],
+                        deskState: majority
+                    };
+                });
+            }
+
+            state.numberOfDesks = state.deskSetup.flat().filter(desk => desk.deskState === 1).length;
+        },
+
 
         purgeEmptyEdges: (state) => {
             const { deskSetup } = state;
@@ -155,7 +182,7 @@ const gridSlice = createSlice({
                 deskSetup.forEach(row => row.pop());
             }
         },
-        
+
         clearAssignments: (state) => {
             state.deskSetup.forEach((row) =>
                 row.forEach((cell) => {
@@ -186,5 +213,16 @@ const gridSlice = createSlice({
     },
 });
 
-export const { addDesk, removeDesk, setActiveHeader, setHoverState, setDeskGrid, resetDesks, resetGrid, add, remove, assignRandomStudents, clearAssignments, purgeEmptyEdges } = gridSlice.actions;
+export const { addDesk,
+    removeDesk,
+    setActiveHeader,
+    setHoverState, setDeskGrid,
+    resetDesks,
+    resetGrid,
+    add,
+    remove,
+    set,
+    assignRandomStudents,
+    clearAssignments,
+    purgeEmptyEdges } = gridSlice.actions;
 export default gridSlice.reducer;
