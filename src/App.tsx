@@ -60,8 +60,8 @@ const App = () => {
   }, [theme]);
 
   return (
-    <div className="bg-background min-h-screen pt-5">
-      <div className="w-full max-w-4xl mx-auto px-4"> 
+    <div className="lg:px-[8%] flex flex-col items-center bg-background min-h-screen pt-5">
+      <div className="w-full max-w-[2000px] px-4"> 
         <Container layout="flex flex-col gap-4">
           <Progressbar />
           <div className="flex flex-row justify-between items-center">

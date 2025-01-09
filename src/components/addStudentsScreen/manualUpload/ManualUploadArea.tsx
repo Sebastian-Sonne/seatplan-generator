@@ -36,7 +36,7 @@ const ManualUploadArea = () => {
     }
 
     return (
-        <div className="w-full max-w-[600px] mx-auto p-6 bg-card rounded-xl shadow-md">
+        <div className="w-full mx-auto p-6 bg-card rounded-xl shadow-md">
             <H3 value="Add students manually:" />
 
             <div className="flex flex-row justify-between gap-2">

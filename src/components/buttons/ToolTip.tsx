@@ -33,5 +33,4 @@ const Tooltip = ({ text, children }: { text: string, children: React.ReactNode }
         </>
     );
 };
-
 export default Tooltip;
