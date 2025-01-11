@@ -11,15 +11,12 @@ export const swapStudents = createAsyncThunk(
 
         const oldId = grid[row][col]?.studentId;
 
-        // Dispatch assignStudent to update the grid
         dispatch(assignStudent({ row, col, id }));
 
         if (oldId) {
-            // Update flag for the old student
             dispatch(setIsAssigned({ id: oldId, val: false }));
         }
 
-        // Update flag for the new student
         dispatch(setIsAssigned({ id, val: true }));
     }
 );

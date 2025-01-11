@@ -23,11 +23,17 @@ const studentsSlice = createSlice({
         removeAll: studentsAdapter.removeAll,
         setIsAssigned: (state, action: PayloadAction<{id: string, val: boolean}>) => {
             state.entities[action.payload.id].isAssigned = action.payload.val;
-        }
+        },
+        clearStudentAssignemnts: (state) => {
+            const students = Object.values(state.entities);
+            students.forEach((student, _) => {
+                state.entities[student.id].isAssigned = false;
+            })
+        },
     },
 })
 
-export const { addStudent, addStudents, removeStudent, removeAll, setIsAssigned } = studentsSlice.actions;
+export const { addStudent, addStudents, removeStudent, removeAll, setIsAssigned, clearStudentAssignemnts } = studentsSlice.actions;
 export default studentsSlice.reducer;
 
 export const {

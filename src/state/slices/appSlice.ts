@@ -12,14 +12,12 @@ export const getUserPreferedTheme = (): 'dark' | 'light' => window.matchMedia('(
 interface Appstate {
     step: number;
     exportVisible: boolean;
-    shuffled: boolean; //variable to possibly prevent reshuffle on load for url-shared layout
     theme: string;
 }
 
 const initialState: Appstate = {
     step: ProcessSteps.STEP_ONE,
     exportVisible: false,
-    shuffled: false,
     theme: ('theme' in localStorage) ? getTheme() : getUserPreferedTheme(),
 }
 
@@ -37,9 +35,6 @@ const appSlice = createSlice({
         setExport: (state, action: PayloadAction<boolean>) => {
             state.exportVisible = action.payload;
         },
-        setShuffled: (state, action: PayloadAction<boolean>) => {
-            state.shuffled = action.payload;
-        },
         toggleTheme: (state) => {
             const newTheme = (state.theme === 'dark') ? 'light' : 'dark';
             setTheme(newTheme);
@@ -48,5 +43,5 @@ const appSlice = createSlice({
     },
 });
 
-export const { setProcessStep, setExport, setShuffled, toggleTheme } = appSlice.actions;
+export const { setProcessStep, setExport, toggleTheme } = appSlice.actions;
 export default appSlice.reducer;

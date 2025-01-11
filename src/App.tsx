@@ -4,7 +4,7 @@ import AssignSeatsScreen from "./components/assignSeatsScreen/AssignSeatsScreen"
 import Progressbar from "./components/Progressbar";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./state/store";
-import { ProcessSteps, setProcessStep, setShuffled } from "./state/slices/appSlice";
+import { ProcessSteps, setProcessStep } from "./state/slices/appSlice";
 import { Footer } from "./components/footer/Footer";
 import { useEffect } from "react";
 import ExportScreen from "./components/exportScreen/ExportScreen";
@@ -40,8 +40,6 @@ const App = () => {
       return;
     }
 
-
-    dispatch(setShuffled(true)); //set true to prevent reshuffle on component mount
     dispatch(setProcessStep(3));
     dispatch(setDeskGrid(layout));
     dispatch(addStudents(students));

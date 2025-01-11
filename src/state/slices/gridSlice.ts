@@ -183,32 +183,12 @@ const gridSlice = createSlice({
             }
         },
 
-        clearAssignments: (state) => {
+        clearDeskAssignments: (state) => {
             state.deskSetup.forEach((row) =>
                 row.forEach((cell) => {
                     if (cell.deskState === 1) cell.studentId = null;
                 })
             );
-        },
-        assignRandomStudents: (state, action: PayloadAction<string[]>) => {
-            const availableDesks: { row: number; col: number }[] = [];
-            state.deskSetup.forEach((row, rowIndex) => {
-                row.forEach((desk, colIndex) => {
-                    if (desk.deskState === 1 && !desk.studentId) {
-                        availableDesks.push({ row: rowIndex, col: colIndex });
-                    }
-                });
-            });
-
-            const shuffledStudentIds = [...action.payload].sort(() => Math.random() - 0.5);
-            const shuffledDesks = availableDesks.sort(() => Math.random() - 0.5);
-
-            shuffledStudentIds.forEach((studentId, index) => {
-                if (shuffledDesks[index]) {
-                    const { row, col } = shuffledDesks[index];
-                    state.deskSetup[row][col].studentId = studentId;
-                }
-            });
         },
         assignStudent: (state, action: PayloadAction<{row: number, col: number, id: string}>) => {
             const {row, col, id} = action.payload;
@@ -226,8 +206,7 @@ export const { addDesk,
     add,
     remove,
     set,
-    assignRandomStudents,
     assignStudent,
-    clearAssignments,
+    clearDeskAssignments,
     purgeEmptyEdges } = gridSlice.actions;
 export default gridSlice.reducer;
