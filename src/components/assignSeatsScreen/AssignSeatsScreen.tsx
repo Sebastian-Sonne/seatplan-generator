@@ -6,9 +6,11 @@ import SecondaryButton from "../buttons/SecondaryButton";
 import PrimaryButton from "../buttons/PrimaryButton";
 import TertiaryButton from "../buttons/TertiaryButton";
 import StudentList from "./StudentList";
+import { AppDispatch } from "../../state/store";
+import { shuffleAssignedStudents } from "../../state/thunks/shuffleAssignedStudents.thunk";
 
 const AssignSeatsScreen = () => {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
 
     const handlePrevStep = () => {
         dispatch(setProcessStep(2));
@@ -17,7 +19,7 @@ const AssignSeatsScreen = () => {
     const handleExport = () => {
         dispatch(setExport(true));
     }
-    
+
     return (
         <>
             <Container className="relative">
@@ -28,7 +30,7 @@ const AssignSeatsScreen = () => {
                 <ClassroomGrid disabled={true} />
 
                 <div className="flex flex-row justify-end w-full">
-                    <PrimaryButton onClick={() => console.log("not implmenetd")} >
+                    <PrimaryButton onClick={() => dispatch(shuffleAssignedStudents())} >
                         Shuffle
                     </PrimaryButton>
                 </div>

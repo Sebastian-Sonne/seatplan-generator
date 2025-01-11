@@ -7,7 +7,7 @@ import PrimaryButton from "../buttons/PrimaryButton";
 import { randAssignStudents } from "../../state/thunks/randAssignStudents.thunk";
 import { AppDispatch } from "../../state/store";
 import TertiaryButton from "../buttons/TertiaryButton";
-import { clearAssignemnts } from "../../state/thunks/clearAssignments.thunk";
+import { clearAssignments } from "../../state/thunks/clearAssignments.thunk";
 import H4 from "../headings/H4";
 
 const StudentList = () => {
@@ -69,7 +69,7 @@ const StudentList = () => {
                     Auto Assign
                 </PrimaryButton>
 
-                <TertiaryButton onClick={() => dispatch(clearAssignemnts())} >
+                <TertiaryButton onClick={() => dispatch(clearAssignments())} >
                     Clear Assignments
                 </TertiaryButton>
             </div>
