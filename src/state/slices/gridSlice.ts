@@ -210,6 +210,10 @@ const gridSlice = createSlice({
                 }
             });
         },
+        assignStudent: (state, action: PayloadAction<{row: number, col: number, id: string}>) => {
+            const {row, col, id} = action.payload;
+            state.deskSetup[row][col].studentId = id;
+        },
     },
 });
 
@@ -223,6 +227,7 @@ export const { addDesk,
     remove,
     set,
     assignRandomStudents,
+    assignStudent,
     clearAssignments,
     purgeEmptyEdges } = gridSlice.actions;
 export default gridSlice.reducer;

@@ -35,7 +35,7 @@ const CreateClassroomScreen = () => {
 
   return (
     <>
-      <Container layout="">
+      <Container className="">
         <div className="flex flex-col gap-2">
 
           <ClassroomGrid />
@@ -53,7 +53,7 @@ const CreateClassroomScreen = () => {
         </div>
       </Container>
 
-      <Container layout="flex flex-row justify-between">
+      <Container className="flex flex-row justify-between">
         <TertiaryButton onClick={handlePrevStep} >
           Go Back
         </TertiaryButton>

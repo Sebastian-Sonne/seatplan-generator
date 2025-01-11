@@ -32,7 +32,7 @@ const ExportScreen = () => {
 
     return (
         <div className="fixed top-0 left-0 inset-0 bg-black bg-opacity-10 flex items-center justify-center z-50 backdrop-blur-sm">
-            <Container layout="max-w-[600px]">
+            <Container className="max-w-[600px]">
                 <div className='flex flex-row justify-between items-center pr-2'>
                     <H2 value="Export" />
                     <button onClick={() => dispatch(setExport(false))} className='px-4 aspect-square mb-2 hover:bg-error text-text font-bold transition-colors rounded-lg'>X</button>

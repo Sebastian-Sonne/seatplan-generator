@@ -1,9 +1,10 @@
-import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
+import { createEntityAdapter, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 
 export interface Student {
     name: string;
     id: string;
+    isAssigned: boolean;
 }
 
 const studentsAdapter = createEntityAdapter<Student>({
@@ -19,11 +20,14 @@ const studentsSlice = createSlice({
         addStudent: studentsAdapter.addOne,
         addStudents: studentsAdapter.addMany,
         removeStudent: studentsAdapter.removeOne,
-        removeAll: studentsAdapter.removeAll
+        removeAll: studentsAdapter.removeAll,
+        setIsAssigned: (state, action: PayloadAction<{id: string, val: boolean}>) => {
+            state.entities[action.payload.id].isAssigned = action.payload.val;
+        }
     },
 })
 
-export const { addStudent, addStudents, removeStudent, removeAll } = studentsSlice.actions;
+export const { addStudent, addStudents, removeStudent, removeAll, setIsAssigned } = studentsSlice.actions;
 export default studentsSlice.reducer;
 
 export const {

@@ -1,11 +1,11 @@
 
 interface ContainerProps {
     children: React.ReactNode
-    layout: string
+    className: string
 }
-const Container: React.FC<ContainerProps> = ({children, layout}) => {
+const Container: React.FC<ContainerProps> = ({children, className}) => {
     return (
-        <div className={`${layout} p-5 mb-4 bg-card rounded-2xl shadow-md`}>
+        <div className={`${className} p-5 mb-4 bg-card rounded-2xl shadow-md`}>
             {children}
         </div>
     )

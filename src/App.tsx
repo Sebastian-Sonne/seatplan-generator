@@ -15,6 +15,8 @@ import validate from "./service/validate.service";
 import Container from "./components/Container";
 import ThemeSwitcher from "./components/ThemeSwitcher";
 import H1 from "./components/headings/H1";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 const App = () => {
   const step = useSelector((state: RootState) => state.app.step);
@@ -61,8 +63,8 @@ const App = () => {
 
   return (
     <div className="lg:px-[8%] flex flex-col items-center gap-2 bg-background min-h-screen pt-5">
-      <div className="w-full max-w-[2000px] px-4"> 
-        <Container layout="flex flex-col gap-4">
+      <div className="w-full max-w-[2000px] px-4">
+        <Container className="flex flex-col gap-4">
           <Progressbar />
           <div className="flex flex-row justify-between items-center">
             {step === ProcessSteps.STEP_ONE && <H1 value="Upload File or add Students manually" />}
@@ -75,7 +77,11 @@ const App = () => {
 
         {step === ProcessSteps.STEP_ONE && <AddStudentsScreen />}
         {step === ProcessSteps.STEP_TWO && <CreateClassroomScreen />}
-        {step === ProcessSteps.STEP_THREE && <AssignSeatsScreen />}
+        {step === ProcessSteps.STEP_THREE && (
+          <DndProvider backend={HTML5Backend}>
+            <AssignSeatsScreen />
+          </DndProvider>
+        )}
       </div>
 
       {exportVisible && <ExportScreen />}
