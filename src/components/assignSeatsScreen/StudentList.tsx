@@ -59,13 +59,13 @@ const StudentList = () => {
                 </div>
 
                 {/*overflow shadow if applicable*/}
-                {isOverflowing && (
-                    <div className="absolute top-0 right-0 h-full w-6 bg-gradient-to-l from-background rounded-lg to-transparent pointer-events-none"></div>
+                {(isOverflowing && !allAssigned) && (
+                    <div className="absolute top-0 right-0 h-full w-6 bg-gradient-to-l from-background rounded-r-lg to-transparent pointer-events-none"></div>
                 )}
             </div>
 
             <div className="flex flex-row justify-between">
-                <PrimaryButton onClick={() => dispatch(randAssignStudents())} >
+                <PrimaryButton onClick={() => dispatch(randAssignStudents())} disabled={allAssigned} >
                     Auto Assign
                 </PrimaryButton>
 
