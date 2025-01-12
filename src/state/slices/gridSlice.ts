@@ -15,11 +15,17 @@ export interface Desk {
     studentId: string | null;
 }
 
+export interface DndState {
+    isDragging: boolean;
+    isOver: boolean;
+}
+
 interface Gridstate {
     deskSetup: Desk[][];
     activeHeader: RowColCoordinates;
     hoverState: RowColCoordinates;
     numberOfDesks: number;
+    dndState: DndState;
 }
 
 const createEmptyGrid = (rows: number, cols: number): Desk[][] => {
@@ -44,6 +50,10 @@ const initialState: Gridstate = {
         index: -1,
     },
     numberOfDesks: 0,
+    dndState: {
+        isDragging: false,
+        isOver: false,
+    }
 }
 
 const gridSlice = createSlice({
@@ -190,9 +200,16 @@ const gridSlice = createSlice({
                 })
             );
         },
-        assignStudent: (state, action: PayloadAction<{row: number, col: number, id: string}>) => {
-            const {row, col, id} = action.payload;
+        assignStudent: (state, action: PayloadAction<{ row: number, col: number, id: string }>) => {
+            const { row, col, id } = action.payload;
             state.deskSetup[row][col].studentId = id;
+        },
+
+        setIsDragging: (state, action: PayloadAction<boolean>) => {
+            state.dndState.isDragging = action.payload;
+        },
+        setIsOver: (state, action: PayloadAction<boolean>) => {
+            state.dndState.isOver = action.payload;
         },
     },
 });
@@ -208,5 +225,7 @@ export const { addDesk,
     set,
     assignStudent,
     clearDeskAssignments,
-    purgeEmptyEdges } = gridSlice.actions;
+    purgeEmptyEdges,
+    setIsDragging,
+    setIsOver } = gridSlice.actions;
 export default gridSlice.reducer;

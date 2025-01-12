@@ -1,7 +1,7 @@
 import { nanoid } from "@reduxjs/toolkit";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addStudents } from "../../../state/slices/studentSlice";
+import { addStudents, Student } from "../../../state/slices/studentSlice";
 import Loadingbar from "../../loading/LoadingScreen";
 import FileItem from "./FileItem";
 import * as XLSX from "xlsx";
@@ -55,9 +55,10 @@ const UploadedFiles: React.FC<UploadedFilesProps> = ({ file, setFile, setError }
                         .map((row) => row[0])
                         .filter((name) => name);
 
-                    const studentEntities = extractedNames.map((name) => ({
+                    const studentEntities: Student[] = extractedNames.map((name) => ({
                         id: nanoid(),
                         name,
+                        isAssigned: false,
                     }));
                     dispatch(addStudents(studentEntities));
                 } catch (error) {

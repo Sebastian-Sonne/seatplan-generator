@@ -566,7 +566,9 @@ video {
   --default: #419eaf;
   --hover: #347586;
   --active: #2f606f;
-  --disabled:#dbf0f2;
+  --disabled: #dbf0f2;
+  --success: #28a745;
+  --warning: #ffc107;
   --error: #aa0000;
 }
 
@@ -582,7 +584,9 @@ video {
   --default: #419eaf;
   --hover: #347586;
   --active: #2f606f;
-  --disabled:#172c35;
+  --disabled: #172c35;
+  --success: #28a745;
+  --warning: #ffc107;
   --error: #aa0000;
 }
 
@@ -925,6 +929,11 @@ video {
   border-color: var(--element);
 }
 
+.border-green-500 {
+  --tw-border-opacity: 1;
+  border-color: rgb(34 197 94 / var(--tw-border-opacity, 1));
+}
+
 .border-hover {
   border-color: var(--hover);
 }
@@ -933,12 +942,25 @@ video {
   border-color: transparent;
 }
 
+.border-yellow-500 {
+  --tw-border-opacity: 1;
+  border-color: rgb(234 179 8 / var(--tw-border-opacity, 1));
+}
+
+.border-success {
+  border-color: var(--success);
+}
+
+.border-warning {
+  border-color: var(--warning);
+}
+
 .\!bg-background {
   background-color: var(--background) !important;
 }
 
-.\!bg-element-hover {
-  background-color: var(--element-hover) !important;
+.\!bg-transparent {
+  background-color: transparent !important;
 }
 
 .bg-background {
@@ -964,6 +986,10 @@ video {
 
 .bg-element {
   background-color: var(--element);
+}
+
+.bg-element-hover {
+  background-color: var(--element-hover);
 }
 
 .bg-transparent {
@@ -1117,6 +1143,10 @@ video {
   color: var(--default);
 }
 
+.text-element {
+  color: var(--element);
+}
+
 .text-element-hover {
   color: var(--element-hover);
 }
@@ -1147,6 +1177,31 @@ video {
   --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.shadow-default {
+  --tw-shadow-color: var(--default);
+  --tw-shadow: var(--tw-shadow-colored);
+}
+
+.shadow-green-500 {
+  --tw-shadow-color: #22c55e;
+  --tw-shadow: var(--tw-shadow-colored);
+}
+
+.shadow-yellow-500 {
+  --tw-shadow-color: #eab308;
+  --tw-shadow: var(--tw-shadow-colored);
+}
+
+.shadow-success {
+  --tw-shadow-color: var(--success);
+  --tw-shadow: var(--tw-shadow-colored);
+}
+
+.shadow-warning {
+  --tw-shadow-color: var(--warning);
+  --tw-shadow: var(--tw-shadow-colored);
 }
 
 .filter {
@@ -1222,6 +1277,10 @@ video {
 
 .hover\:bg-hover:hover {
   background-color: var(--hover);
+}
+
+.hover\:bg-success:hover {
+  background-color: var(--success);
 }
 
 .hover\:text-default:hover {

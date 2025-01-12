@@ -47,8 +47,8 @@ const StudentList = () => {
                     ref={scrollContainerRef}
                     className="flex flex-row overflow-x-scroll gap-2"
                 >
-                    {studentIds.map((studendId, _) => (
-                        <StudentCard key={studendId} id={studendId} />
+                    {studentIds.map((studendId, index) => (
+                        <StudentCard key={`${studendId}-${index}`} id={studendId} />
                     ))}
 
                     {allAssigned && (

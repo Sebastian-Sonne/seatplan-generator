@@ -20,6 +20,9 @@ export default {
         'hover': 'var(--hover)',
         'active': 'var(--active)',
         'disabled': 'var(--disabled)',
+
+        'success': 'var(--success)',
+        'warning': 'var(--warning)',
         'error': 'var(--error)',
       },
 

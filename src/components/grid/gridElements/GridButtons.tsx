@@ -6,7 +6,7 @@ export const AddButton = ({ onClick, toolTipText = "" }: { onClick: () => void, 
     return (
         <Tooltip text={toolTipText} >
             <button onClick={onClick}
-                className="w-10 aspect-square p-2 hover:bg-green-600 transition-colors rounded-lg">
+                className="w-10 aspect-square p-2 hover:bg-success transition-colors rounded-lg">
                 <AddIcon />
             </button>
         </Tooltip>

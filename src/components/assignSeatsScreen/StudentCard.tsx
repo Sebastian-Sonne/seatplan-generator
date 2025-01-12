@@ -1,11 +1,14 @@
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { selectStudentById } from "../../state/slices/studentSlice"
 import { RootState } from "../../state/store"
 import H4 from "../headings/H4"
 import { useDrag } from "react-dnd"
+import { useEffect } from "react"
+import { setIsDragging } from "../../state/slices/gridSlice"
 
 const StudentCard = ({ id }: { id: string }) => {
     const student = useSelector((state: RootState) => selectStudentById(state, id));
+    const dispatch = useDispatch();
 
     const [{ isDragging }, drag] = useDrag(() => ({
         type: "STUDENT",
@@ -13,7 +16,11 @@ const StudentCard = ({ id }: { id: string }) => {
         collect: (monitor) => ({
             isDragging: !!monitor.isDragging(),
         })
-    }))
+    }));
+
+    useEffect(() => {
+        dispatch(setIsDragging(isDragging));
+    }, [isDragging])
 
     return (
         <>
