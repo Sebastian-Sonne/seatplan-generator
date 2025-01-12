@@ -17,12 +17,16 @@ export const shuffleAssignedStudents = createAsyncThunk(
 
         dispatch(clearDeskAssignments());
 
-        const availableDesks = desks
-            .flatMap((row, rowIndex) =>
-                row
-                    .filter(desk => desk.deskState === 1)
-                    .map((_, colIndex) => ({ row: rowIndex, col: colIndex }))
-            );
+        const availableDesks = [];
+        for (let rowIndex = 0; rowIndex < desks.length; rowIndex++) {
+            const row = desks[rowIndex];
+            for (let colIndex = 0; colIndex < row.length; colIndex++) {
+                const desk = row[colIndex];
+                if (desk.deskState === 1) {
+                    availableDesks.push({ row: rowIndex, col: colIndex });
+                }
+            }
+        }
 
         const shuffledStudentIds = availableStudentIds.sort(() => Math.random() - 0.5);
         const shuffledDesks = availableDesks.sort(() => Math.random() - 0.5);

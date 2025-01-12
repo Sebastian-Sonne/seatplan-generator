@@ -20,7 +20,7 @@ const StudentDeskelement = ({ row, col }: { row: number, col: number }) => {
     }))
 
     const handleDrop = ({ id }: { id: string }) => {
-        dispatch(swapStudents({ row: row, col: col, id: id }))
+        dispatch(swapStudents({ row: row, col: col, id: id }));
     };
 
     return (
