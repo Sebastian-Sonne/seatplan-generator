@@ -1,7 +1,8 @@
-import { useDeskState } from "../../hooks/useDeskState";
+import { useSelector } from "react-redux";
 import DeskElement from "./gridElements/Deskelement";
 import EmptyElement, { DisabledEmptyElement } from "./gridElements/EmptyElement";
 import StudentDeskelement from "./gridElements/StudentDeskelement";
+import { RootState } from "../../state/store";
 
 interface GridElementProps {
     row: number;
@@ -9,8 +10,8 @@ interface GridElementProps {
     disabled?: boolean;
 }
 const GridElement: React.FC<GridElementProps> = ({ row, col, disabled = false }) => {
-    const { deskState } = useDeskState(row, col);
-
+    const deskState = useSelector((state: RootState) => state.grid.deskSetup[row][col]);
+    
     return disabled ? (
         <>
             {deskState.deskState === -1 ? (

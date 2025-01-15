@@ -12,7 +12,7 @@ const StudentCard = ({ id }: { id: string }) => {
 
     const [{ isDragging }, drag] = useDrag(() => ({
         type: "STUDENT",
-        item: { id: id },
+        item: { id, fromCoords: { row: null, col: null }, action: "set" },
         collect: (monitor) => ({
             isDragging: !!monitor.isDragging(),
         })

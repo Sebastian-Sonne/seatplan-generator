@@ -1,22 +1,19 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { assignStudent } from "../slices/gridSlice";
-import { setIsAssigned } from "../slices/studentSlice";
+import { Coordinates, setDeskGrid } from "../slices/gridSlice";
 import { RootState } from "../store";
 
 export const swapStudents = createAsyncThunk(
     'students/swapStudents',
-    async ({ row, col, id }: { row: number; col: number; id: string }, { getState, dispatch }) => {
+    async ({ fromCoords, toCoords }: {fromCoords: Coordinates, toCoords: Coordinates}, { getState, dispatch }) => {
         const state = getState() as RootState;
-        const grid = state.grid.deskSetup;
+        const deskSetup = state.grid.deskSetup.map(row => row.map(desk => ({ ...desk })));
 
-        const oldId = grid[row][col]?.studentId;
+        const fromStudentId = deskSetup[fromCoords.row][fromCoords.col].studentId;
+        const toStudentId = deskSetup[toCoords.row][toCoords.col].studentId;
 
-        dispatch(assignStudent({ row, col, id }));
+        deskSetup[fromCoords.row][fromCoords.col].studentId = toStudentId;
+        deskSetup[toCoords.row][toCoords.col].studentId = fromStudentId;
 
-        if (oldId) {
-            dispatch(setIsAssigned({ id: oldId, val: false }));
-        }
-
-        dispatch(setIsAssigned({ id, val: true }));
+        dispatch(setDeskGrid(deskSetup));
     }
 );
