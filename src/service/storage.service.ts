@@ -17,6 +17,6 @@ export const setTheme = (theme: string) => {
     localStorage.setItem('theme', theme);
 }
 
-export const getTheme = (): string => {
-    return localStorage.getItem('theme') || 'light';
+export const getTheme = (): "dark" | "light" => {
+    return localStorage.getItem('theme') === "dark" ? "dark" : 'light';
 }

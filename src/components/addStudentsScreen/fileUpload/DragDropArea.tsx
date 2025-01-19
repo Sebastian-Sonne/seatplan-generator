@@ -3,12 +3,14 @@ import { FileRejection, useDropzone } from "react-dropzone";
 import { UploadIcon } from "../../icons/Icons";
 import H4 from "../../headings/H4";
 import H5 from "../../headings/H5";
+import { useI18n } from "../../../hooks/useI18n";
 
 interface DragAndDropAreaProps {
     setError: React.Dispatch<React.SetStateAction<string | null>>;
     setFile: React.Dispatch<React.SetStateAction<File | null>>;
 }
 const DragAndDropArea: React.FC<DragAndDropAreaProps> = ({ setError, setFile }) => {
+    const t = useI18n();
 
     const onDrop = useCallback(
         (acceptedFile: File[], fileRejections: FileRejection[]) => {
@@ -46,11 +48,11 @@ const DragAndDropArea: React.FC<DragAndDropAreaProps> = ({ setError, setFile }) 
                     <UploadIcon color="#419eaf" />
                 </div>
                 {isDragActive ? (
-                    <p className="text-text-800">Drop the file here...</p>
+                    <p className="text-text-800">{t("screens.addStudents.upload.dndArea.onDrag")}</p>
                 ) : (
                     <>
-                        <H4 value="Choose a file or drag & drop it here" />
-                        <H5 value=".xlsx formats, max 50MB" />
+                        <H4 value={t("screens.addStudents.upload.dndArea.instruction")} />
+                        <H5 value={t("screens.addStudents.upload.dndArea.format")} />
                     </>
                 )}
             </div>

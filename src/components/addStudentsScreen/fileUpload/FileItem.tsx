@@ -1,3 +1,4 @@
+import { useI18n } from "../../../hooks/useI18n";
 import { ExcelIcon } from "../../icons/Icons"
 
 interface FileItemProps {
@@ -5,7 +6,8 @@ interface FileItemProps {
     setFile: React.Dispatch<React.SetStateAction<File | null>>;
 }
 const FileItem: React.FC<FileItemProps> = ({file, setFile}) => {
-
+    const t = useI18n();
+    
     return (
         <li className="flex items-center justify-between mt-4 bg-element hover:bg-element-hover transition-colors rounded-lg">
             <div className="flex flex-row items-center gap-x-4 my-3 ml-3">
@@ -19,7 +21,7 @@ const FileItem: React.FC<FileItemProps> = ({file, setFile}) => {
                 className="text-error hover:bg-error hover:text-text p-5 rounded-lg text-sm transition-colors"
                 onClick={() => setFile(null)}
             >
-                Remove
+                {t("screens.addStudents.upload.file.remove")}
             </button>
         </li>
     )

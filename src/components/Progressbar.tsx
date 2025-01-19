@@ -1,10 +1,12 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../state/store";
+import { useI18n } from "../hooks/useI18n";
 
 const Progressbar = () => {
     const currentStep = useSelector((state: RootState) => state.app.step);
+    const t = useI18n();
 
-    const steps = ["Upload Students", "Create Classroom", "Assign Seats"];
+    const steps = [t("screens.addStudents.title"), t("screens.create.title"), t("screens.assign.title")];
     const progressPercentage = ((currentStep) / (steps.length)) * 100;
 
     return (

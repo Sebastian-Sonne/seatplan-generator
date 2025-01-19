@@ -2,10 +2,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectStudentById, removeStudent } from "../../../state/slices/studentSlice";
 import H5 from "../../headings/H5";
 import { RootState } from "../../../state/store";
+import { useI18n } from "../../../hooks/useI18n";
 
 export const StudentElement = ({ id }: { id: string }) => {
     const student = useSelector((state: RootState) => selectStudentById(state, id));
     const dispatch = useDispatch();
+    const t = useI18n();
 
     const handleRemoveStudent = () => {
         dispatch(removeStudent(id));
@@ -16,7 +18,7 @@ export const StudentElement = ({ id }: { id: string }) => {
             <H5 value={student.name} />
 
             <button className="text-error text-sm font-medium transition duration-200">
-                Remove
+                {t("screens.addStudents.added.remove")}
             </button>
         </ListElement>
     );

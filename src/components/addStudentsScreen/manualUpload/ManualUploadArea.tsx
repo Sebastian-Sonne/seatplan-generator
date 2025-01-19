@@ -4,10 +4,12 @@ import { addStudent } from "../../../state/slices/studentSlice";
 import { nanoid } from "@reduxjs/toolkit";
 import H3 from "../../headings/H3";
 import PrimaryButton from "../../buttons/PrimaryButton";
+import { useI18n } from "../../../hooks/useI18n";
 
 const ManualUploadArea = () => {
     const [content, setContent] = useState("");
     const [error, setError] = useState<string | null>(null);
+    const t = useI18n();
     const dispatch = useDispatch();
 
     const handleSubmit = () => {
@@ -16,7 +18,7 @@ const ManualUploadArea = () => {
             return;
         };
         setError(null);
-        dispatch(addStudent({ name: content, id: nanoid() }));
+        dispatch(addStudent({ name: content, id: nanoid(), isAssigned: false }));
         setContent("");
     }
 
@@ -37,7 +39,7 @@ const ManualUploadArea = () => {
 
     return (
         <div className="w-full mx-auto p-6 bg-card rounded-xl shadow-md">
-            <H3 value="Add students manually:" />
+            <H3 value={t("screens.addStudents.manual.heading")} />
 
             <div className="flex flex-row justify-between gap-2">
                 <input
@@ -45,7 +47,7 @@ const ManualUploadArea = () => {
                     onChange={(c) => handleChange(c)}
                     value={content}
                     onKeyDown={handleKeyDown}
-                    placeholder="John Doe"
+                    placeholder={t("screens.addStudents.manual.placeholder")}
                 />
 
 

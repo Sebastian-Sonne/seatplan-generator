@@ -4,17 +4,20 @@ import { useState } from "react";
 import { selectStudentIds, removeAll } from "../../../state/slices/studentSlice";
 import H4 from "../../headings/H4";
 import ListElement, { StudentElement } from "./ListElements";
+import { useI18n } from "../../../hooks/useI18n";
 
 const StudentList = () => {
-    const INITIAL_STUDENT_COUNT = 10;
+    const [showAll, setShowAll] = useState(false);
     const studentIds = useSelector((state: RootState) => selectStudentIds(state));
-    const [showAll, setShowAll] = useState(false); // Control whether all students are shown
-    const dispatch = useDispatch();
 
+    const INITIAL_STUDENT_COUNT = 10;//num of students show initially
     const displayedStudentIds = showAll ? studentIds : studentIds.slice(0, INITIAL_STUDENT_COUNT);
 
+    const dispatch = useDispatch();
+    const t = useI18n();
+
     const handleRemoveAll = () => {
-        if (confirm("Do you really want to remove all students? This action cannot be undone.")) {
+        if (confirm(t("screens.addStudents.added.removeAllError"))) {
             dispatch(removeAll())
             setShowAll(false)
         }
@@ -28,12 +31,12 @@ const StudentList = () => {
 
             {studentIds.length > INITIAL_STUDENT_COUNT && !showAll ? (
                 <ListElement onClick={() => setShowAll(true)}>
-                    <H4 value="Show all students" />
+                    <H4 value={t("screens.addStudents.added.showAll")} />
                 </ListElement>
             ) : (
                 <ListElement onClick={handleRemoveAll} className="hover:bg-error hover:text-text text-error !justify-end">
                     <button className="text-sm font-medium transition-colors">
-                        Remove all
+                        {t("screens.addStudents.added.removeAll")}
                     </button>
                 </ListElement>
             )}

@@ -17,11 +17,14 @@ import ThemeSwitcher from "./components/ThemeSwitcher";
 import H1 from "./components/headings/H1";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import LanguageSwitcher from "./components/LanguageSwitcher";
+import { useI18n } from "./hooks/useI18n";
 
 const App = () => {
   const step = useSelector((state: RootState) => state.app.step);
   const exportVisible = useSelector((state: RootState) => state.app.exportVisible);
   const theme = useSelector((state: RootState) => state.app.theme);
+  const t = useI18n();
   const dispatch = useDispatch();
 
   //parse url params for existing layout
@@ -65,9 +68,9 @@ const App = () => {
         <Container className="flex flex-col gap-4">
           <Progressbar />
           <div className="flex flex-row justify-between items-center">
-            {step === ProcessSteps.STEP_ONE && <H1 value="Upload File or add Students manually" />}
-            {step === ProcessSteps.STEP_TWO && <H1 value="Create Classroom Layout" />}
-            {step === ProcessSteps.STEP_THREE && <H1 value="Assign Students" />}
+            {step === ProcessSteps.STEP_ONE && <H1 value={t("screens.addStudents.heading")} />}
+            {step === ProcessSteps.STEP_TWO && <H1 value={t("screens.create.heading")} />}
+            {step === ProcessSteps.STEP_THREE && <H1 value={t("screens.assign.heading")} />}
 
             <ThemeSwitcher />
           </div>
@@ -81,6 +84,8 @@ const App = () => {
           </DndProvider>
         )}
       </div>
+
+      <LanguageSwitcher />
 
       {exportVisible && <ExportScreen />}
 

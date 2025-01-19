@@ -6,6 +6,7 @@ import Loadingbar from "../../loading/LoadingScreen";
 import FileItem from "./FileItem";
 import * as XLSX from "xlsx";
 import PrimaryButton from "../../buttons/PrimaryButton";
+import { useI18n } from "../../../hooks/useI18n";
 
 interface UploadedFilesProps {
     file: File;
@@ -15,6 +16,8 @@ interface UploadedFilesProps {
 const UploadedFiles: React.FC<UploadedFilesProps> = ({ file, setFile, setError }) => {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
+
+    const t = useI18n();
 
     const handleSubmit = () => {
         if (!file) {
@@ -84,7 +87,7 @@ const UploadedFiles: React.FC<UploadedFilesProps> = ({ file, setFile, setError }
                 {loading && <Loadingbar speed={10} onComplete={handleLoadingComplete} />}
 
                 <PrimaryButton onClick={handleSubmit}>
-                    Submit
+                    {t("screens.addStudents.upload.file.submit")}
                 </PrimaryButton>
             </div>
         </ul>

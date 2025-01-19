@@ -1,0 +1,85 @@
+{
+  "siteTitle": "Sitzplan-Generator",
+  "screens": {
+    "addStudents": {
+      "title": "Studenten hochladen",
+      "heading": "Datei hochladen oder Studenten manuell hinzufügen",
+      "upload": {
+        "heading": "Datei hochladen:",
+        "dndArea": {
+          "instruction": "Wählen Sie eine Datei aus oder ziehen Sie eine hierher",
+          "format": ".xlsx Format, max. 50 MB",
+          "onDrag": "Datei hier ablegen..."
+        },
+        "file": {
+          "remove": "Entfernen",
+          "submit": "Absenden",
+          "error": "NICHT IMPLEMENTIERT"
+        }
+      },
+      "manual": {
+        "heading": "Studenten manuell hinzufügen:",
+        "placeholder": "John Doe",
+        "error": "NICHT IMPLEMENTIERT"
+      },
+      "added": {
+        "heading": "Hinzugefügte Studenten:",
+        "noStudentsAddedMessage": "Derzeit wurden keine Studenten hinzugefügt.",
+        "totalStudents": "Anzahl der Studenten:",
+        "showAll": "Alle Studenten anzeigen",
+        "continue": "Weiter zum nächsten Schritt",
+        "remove": "Entfernen",
+        "removeAll": "Alle entfernen",
+        "removeAllError": "NICHT IMPLEMENTIERT"
+      }
+    },
+    "create": {
+      "title": "Klassenzimmer erstellen",
+      "heading": "Klassenzimmerlayout erstellen",
+      "numberOfTables": "Anzahl der Tische:",
+      "numberOfStudents": "Anzahl der Studenten:",
+      "create": "Klassenzimmer erstellen"
+    },
+    "assign": {
+      "title": "Plätze zuweisen",
+      "heading": "Studenten zuweisen",
+      "dnd": {
+        "heading": "Studenten zu Tischen ziehen und ablegen",
+        "autoAssign": "Automatische Zuweisung",
+        "clearAssign": "Zuweisung löschen",
+        "allAssigned": "Alle Studenten sind zugewiesen",
+        "dropHere": "Hier ablegen"
+      },
+      "shuffle": "Mischen"
+    }
+  },
+  "errors": {
+    "notEnoughDesks": "Es sind nicht genug Tische für alle Studenten vorhanden. Möchten Sie fortfahren? Einige Studenten werden keinen Tisch zugewiesen bekommen.",
+    "noDesk": "Bitte fügen Sie mindestens einen Tisch hinzu, um fortzufahren."
+  },
+  "components": {
+    "grid": {
+      "desk": "Tisch",
+      "row": "Reihe",
+      "col": "Spalte",
+      "toolTips": {
+        "remove": "Entfernen",
+        "insert": "Neuen hinzufügen",
+        "select": "Auswählen"
+      }
+    },
+    "export": {
+      "title": "Exportieren",
+      "copiedToClipboard": "In die Zwischenablage kopiert"
+    }
+  },
+  "common": {
+    "add": "Hinzufügen",
+    "remove": "Entfernen",
+    "goBack": "Zurück",
+    "reset": "Zurücksetzen",
+    "export": "Exportieren",
+    "na": "N/A",
+    "copy": "Kopieren"
+  }
+}

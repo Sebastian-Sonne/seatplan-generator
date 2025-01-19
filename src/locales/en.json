@@ -1,0 +1,85 @@
+{
+  "siteTitle": "Seatplan Generator",
+  "screens": {
+    "addStudents": {
+      "title": "Upload Students",
+      "heading": "Upload file or add students manually",
+      "upload": {
+        "heading": "Upload file:",
+        "dndArea": {
+          "instruction": "Choose a file or drag & drop one here",
+          "format": ".xlsx format, max 50MB",
+          "onDrag": "Drop file here..."
+        },
+        "file": {
+          "remove": "Remove",
+          "submit": "Submit",
+          "error": "NOT IMPLEMENTED"
+        }
+      },
+      "manual": {
+        "heading": "Add students manually:",
+        "placeholder": "John Doe",
+        "error": "NOT IMPLEMENTED"
+      },
+      "added": {
+        "heading": "Added students:",
+        "noStudentsAddedMessage": "There are currently no students added.",
+        "totalStudents": "Number of students:",
+        "showAll": "Show all students",
+        "continue": "Continue to next step",
+        "remove": "Remove",
+        "removeAll": "Remove all",
+        "removeAllError": "NOT IMPLEMENTED"
+      }
+    },
+    "create": {
+      "title": "Create Classroom",
+      "heading": "Create classroom layout",
+      "numberOfTables": "Number of tables:",
+      "numberOfStudents": "Number of students:",
+      "create": "Create Classroom"
+    },
+    "assign": {
+      "title": "Assign Seats",
+      "heading": "Assign students",
+      "dnd": {
+        "heading": "Drag and drop students to desks",
+        "autoAssign": "Auto Assign",
+        "clearAssign": "Clear Assignment",
+        "allAssigned": "All students are assigned",
+        "dropHere": "Drop here"
+      },
+      "shuffle": "Shuffle"
+    }
+  },
+  "errors": {
+    "notEnoughDesks": "There are not enough desks for all students. Are you sure you want to continue? Some students will not have a desk assigned to them.",
+    "noDesk": "Please add at least one desk in order to continue."
+  },
+  "components": {
+    "grid": {
+      "desk": "Desk",
+      "row": "Row",
+      "col": "Column",
+      "toolTips": {
+        "remove": "Remove this",
+        "insert": "Insert a new",
+        "select": "Select this"
+      }
+    },
+    "export": {
+      "title": "Export",
+      "copiedToClipboard": "Copied to clipboard"
+    }
+  },
+  "common": {
+    "add": "Add",
+    "remove": "Remove",
+    "goBack": "Go Back",
+    "reset": "Reset",
+    "export": "Export",
+    "na": "N/A",
+    "copy": "Copy"
+  }
+}
