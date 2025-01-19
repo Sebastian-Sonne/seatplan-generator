@@ -45,7 +45,9 @@ const StudentDeskelement = ({ row, col }: { row: number, col: number }) => {
     }));
 
     const dragDropRef = (node: HTMLDivElement | null) => {
-        drag(node);
+        if (deskState.studentId) {
+            drag(node);
+        }
         drop(node);
     }
 
@@ -61,11 +63,12 @@ const StudentDeskelement = ({ row, col }: { row: number, col: number }) => {
     return (
         <div
             ref={dragDropRef}
-            className={`h-16 flex justify-center items-center rounded-md transition-all relative text-default bg-element border-2 border-default cursor-pointer shadow-md 
+            className={`h-16 flex justify-center items-center rounded-md transition-all relative text-default bg-element border-2 border-default shadow-md 
                 ${isActive && "!bg-background"}
                 ${isOver && "shadow-success border-success bg-element-hover"}
                 ${dndState.isDragging && !dndState.isOver && "bg-element-hover shadow-md shadow-default"}
-                ${deskState.studentId && isOver && "shadow-warning border-warning"}`}
+                ${deskState.studentId && isOver && "shadow-warning border-warning"}
+                ${deskState.studentId ? "cursor-pointer": "cursor-default"}`}
         >
             <StudentElement id={deskState.studentId} dndState={dndState} />
         </div>
@@ -78,7 +81,7 @@ const StudentElement = ({ id, dndState }: { id: string | null, dndState: DndStat
     const t = useI18n();
 
     return (
-        <span className="font-semibold break-words overflow-hidden leading-tight">
+        <span className="font-semibold break-words overflow-hidden leading-tight select-none">
             {student?.name ||
                 <span className={`font-semibold text-element-hover transition-colors ${dndState.isDragging && "text-text-muted-extra"}`}>
                     {t(dndState.isDragging ? "screens.assign.dnd.dropHere" : "common.na")}

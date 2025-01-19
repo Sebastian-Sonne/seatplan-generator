@@ -27,7 +27,7 @@ const StudentCard = ({ id }: { id: string }) => {
             {!student.isAssigned && (
                 <div
                     ref={drag}
-                    className={`flex justify-center items-center px-4 py-2 my-2 bg-element hover:bg-element-hover transition-colors border border-border rounded-lg cursor-pointer
+                    className={`flex justify-center items-center px-4 py-2 my-2 bg-element hover:bg-element-hover transition-colors border border-border rounded-lg cursor-pointer select-none
                      ${isDragging && "border-default"}`}>
                     <H4 value={student.name} />
                 </div>
