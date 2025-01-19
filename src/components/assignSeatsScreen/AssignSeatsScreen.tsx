@@ -8,9 +8,11 @@ import TertiaryButton from "../buttons/TertiaryButton";
 import StudentList from "./StudentList";
 import { AppDispatch } from "../../state/store";
 import { shuffleAssignedStudents } from "../../state/thunks/shuffleAssignedStudents.thunk";
+import { useI18n } from "../../hooks/useI18n";
 
 const AssignSeatsScreen = () => {
     const dispatch = useDispatch<AppDispatch>();
+    const t = useI18n();
 
     const handlePrevStep = () => {
         dispatch(setProcessStep(2));
@@ -31,18 +33,18 @@ const AssignSeatsScreen = () => {
 
                 <div className="flex flex-row justify-end w-full">
                     <PrimaryButton onClick={() => dispatch(shuffleAssignedStudents())} >
-                        Shuffle
+                        {t("screens.assign.shuffle")}
                     </PrimaryButton>
                 </div>
             </Container>
 
             <Container className="flex flex-row justify-between">
                 <TertiaryButton onClick={handlePrevStep} >
-                    Go Back
+                    {t("common.goBack")}
                 </TertiaryButton>
 
                 <SecondaryButton onClick={handleExport} >
-                    Export
+                    {t("common.export")}
                 </SecondaryButton>
             </Container>
         </>

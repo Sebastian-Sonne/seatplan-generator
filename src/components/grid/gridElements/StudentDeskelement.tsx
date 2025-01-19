@@ -6,6 +6,7 @@ import { swapStudents } from "../../../state/thunks/swapStudents.thunk";
 import { useEffect } from "react";
 import { Coordinates, DndState, setIsDragging, setIsOver } from "../../../state/slices/gridSlice";
 import { assignStudent } from "../../../state/thunks/assingStudent.thunk";
+import { useI18n } from "../../../hooks/useI18n";
 
 const StudentDeskelement = ({ row, col }: { row: number, col: number }) => {
     const dispatch = useDispatch<AppDispatch>();
@@ -73,11 +74,15 @@ const StudentDeskelement = ({ row, col }: { row: number, col: number }) => {
 export default StudentDeskelement;
 
 const StudentElement = ({ id, dndState }: { id: string | null, dndState: DndState }) => {
-    const student = useSelector((state: RootState) => id ? selectStudentById(state, id) : null)
+    const student = useSelector((state: RootState) => id ? selectStudentById(state, id) : null);
+    const t = useI18n();
 
     return (
         <span className="font-semibold break-words overflow-hidden leading-tight">
-            {student?.name || <span className={`font-semibold text-element-hover transition-colors ${dndState.isDragging && "text-text-muted-extra"}`}>{dndState.isDragging ? "Drop Here" : "NA"}</span>}
+            {student?.name ||
+                <span className={`font-semibold text-element-hover transition-colors ${dndState.isDragging && "text-text-muted-extra"}`}>
+                    {t(dndState.isDragging ? "screens.assign.dnd.dropHere" : "common.na")}
+                </span>}
         </span>
     );
 };

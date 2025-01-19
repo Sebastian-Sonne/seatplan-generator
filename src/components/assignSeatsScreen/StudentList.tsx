@@ -9,6 +9,7 @@ import { AppDispatch } from "../../state/store";
 import TertiaryButton from "../buttons/TertiaryButton";
 import { clearAssignments } from "../../state/thunks/clearAssignments.thunk";
 import H4 from "../headings/H4";
+import { useI18n } from "../../hooks/useI18n";
 
 const StudentList = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -19,6 +20,8 @@ const StudentList = () => {
 
     const scrollContainerRef = useRef<HTMLDivElement>(null);
     const [isOverflowing, setIsOverflowing] = useState(false);
+
+    const t = useI18n();
 
     //overflow shadow if applicable
     useEffect(() => {
@@ -41,7 +44,7 @@ const StudentList = () => {
 
     return (
         <>
-            <H2 value="Drag and drop students to a desks" />
+            <H2 value={t("screens.assign.dnd.heading")} />
             <div className="relative px-2 mb-2 -mt-2 rounded-lg border border-transparent hover:border-border transition-colors">
                 <div
                     ref={scrollContainerRef}
@@ -53,7 +56,7 @@ const StudentList = () => {
 
                     {allAssigned && (
                         <div className="">
-                            <H4 value="All students are assigned." />
+                            <H4 value={t("screens.assign.dnd.allAssigned")} />
                         </div>
                     )}
                 </div>
@@ -66,11 +69,11 @@ const StudentList = () => {
 
             <div className="flex flex-row justify-between">
                 <PrimaryButton onClick={() => dispatch(randAssignStudents())} disabled={allAssigned} >
-                    Auto Assign
+                    {t("screens.assign.dnd.autoAssign")}
                 </PrimaryButton>
 
                 <TertiaryButton onClick={() => dispatch(clearAssignments())} >
-                    Clear Assignments
+                    {t("screens.assign.dnd.clearAssign")}
                 </TertiaryButton>
             </div>
         </>

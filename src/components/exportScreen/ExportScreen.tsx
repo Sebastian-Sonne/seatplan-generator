@@ -7,9 +7,11 @@ import { setExport } from '../../state/slices/appSlice';
 import { selectAllStudent } from '../../state/slices/studentSlice';
 import { RootState } from '../../state/store';
 import { generateLink } from '../../service/link.service';
+import { useI18n } from '../../hooks/useI18n';
 
 const ExportScreen = () => {
     const dispatch = useDispatch();
+    const t = useI18n();
 
     const students = useSelector(selectAllStudent);
     const deskSetup = useSelector((state: RootState) => state.grid.deskSetup);
@@ -34,7 +36,7 @@ const ExportScreen = () => {
         <div className="fixed top-0 left-0 inset-0 bg-black bg-opacity-10 flex items-center justify-center z-50 backdrop-blur-sm">
             <Container className="max-w-[600px]">
                 <div className='flex flex-row justify-between items-center pr-2'>
-                    <H2 value="Export" />
+                    <H2 value={t("components.export.title")} />
                     <button onClick={() => dispatch(setExport(false))} className='px-4 aspect-square mb-2 hover:bg-error text-text font-bold transition-colors rounded-lg'>X</button>
                 </div>
 
@@ -48,7 +50,7 @@ const ExportScreen = () => {
                     <CopyButton link={link} copied={copied} setCopied={setCopied} />
 
                 </div>
-                {copied && <h6 className='font-semibold text-sm text-text-muted pl-2'>Copied to clipboard</h6>}
+                {copied && <h6 className='font-semibold text-sm text-text-muted pl-2'>{t("components.export.copiedToClipboard")}</h6>}
             </Container>
         </div>
     );
@@ -61,6 +63,8 @@ interface CopyButtonProps {
     setCopied: React.Dispatch<React.SetStateAction<boolean>>;
 }
 const CopyButton: React.FC<CopyButtonProps> = ({ link, copied, setCopied }) => {
+    const t = useI18n();
+
     const handleCopyClick = () => {
         navigator.clipboard.writeText(link);
         setCopied(true);
@@ -72,7 +76,7 @@ const CopyButton: React.FC<CopyButtonProps> = ({ link, copied, setCopied }) => {
             className={`pl-4 py-2 pr-4 border-default border-2 rounded-r-lg hover:bg-hover ${copied && "border-hover"} transition-colors`}
             aria-label="Copy link to clipboard"
         >
-            <H4 value='Copy' />
+            <H4 value={t("common.copy")} />
         </button>
     );
 };
