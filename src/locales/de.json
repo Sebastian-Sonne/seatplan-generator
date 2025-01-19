@@ -10,11 +10,6 @@
           "instruction": "Wählen Sie eine Datei aus oder ziehen Sie eine hierher",
           "format": ".xlsx Format, max. 50 MB",
           "onDrag": "Datei hier ablegen..."
-        },
-        "file": {
-          "remove": "Entfernen",
-          "submit": "Absenden",
-          "error": "NICHT IMPLEMENTIERT"
         }
       },
       "manual": {
@@ -76,6 +71,7 @@
   "common": {
     "add": "Hinzufügen",
     "remove": "Entfernen",
+    "submit": "Absenden",
     "goBack": "Zurück",
     "reset": "Zurücksetzen",
     "export": "Exportieren",

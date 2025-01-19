@@ -21,7 +21,7 @@ const FileItem: React.FC<FileItemProps> = ({file, setFile}) => {
                 className="text-error hover:bg-error hover:text-text p-5 rounded-lg text-sm transition-colors"
                 onClick={() => setFile(null)}
             >
-                {t("screens.addStudents.upload.file.remove")}
+                {t("common.remove")}
             </button>
         </li>
     )

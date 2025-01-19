@@ -10,11 +10,6 @@
           "instruction": "Choose a file or drag & drop one here",
           "format": ".xlsx format, max 50MB",
           "onDrag": "Drop file here..."
-        },
-        "file": {
-          "remove": "Remove",
-          "submit": "Submit",
-          "error": "NOT IMPLEMENTED"
         }
       },
       "manual": {
@@ -76,6 +71,7 @@
   "common": {
     "add": "Add",
     "remove": "Remove",
+    "submit": "Submit",
     "goBack": "Go Back",
     "reset": "Reset",
     "export": "Export",

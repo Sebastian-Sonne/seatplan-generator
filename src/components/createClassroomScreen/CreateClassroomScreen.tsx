@@ -9,11 +9,13 @@ import Container from "../Container";
 import PrimaryButton from "../buttons/PrimaryButton";
 import TertiaryButton from "../buttons/TertiaryButton";
 import SecondaryButton from "../buttons/SecondaryButton";
+import { useI18n } from "../../hooks/useI18n";
 
 const CreateClassroomScreen = () => {
   const numberOfDesks = useSelector((state: RootState) => state.grid.numberOfDesks);
   const numberOfStudents = useSelector(selectStudentIds).length;
   const dispatch = useDispatch();
+  const t = useI18n();
 
   const handlePrevStep = () => {
     dispatch(setProcessStep(1));
@@ -21,11 +23,10 @@ const CreateClassroomScreen = () => {
 
   const handleCreateClassroom = () => {
     if (numberOfDesks === 0) {
-      alert("Please add at least one desk in order to continue.")
+      alert(t("errors.noDesk"))
       return;
     }
-    const notEnoughDesksString = "There are not enough desks for all students. Are you sure you want to continue? Some students will not have a desk assigned to them.";
-    if (numberOfDesks < numberOfStudents && !confirm(notEnoughDesksString)) {
+    if (numberOfDesks < numberOfStudents && !confirm(t("errors.notEnoughDesks"))) {
       return;
     }
 
@@ -42,12 +43,12 @@ const CreateClassroomScreen = () => {
 
           <div className="flex flex-row justify-between mt-2">
             <div className="flex flex-col">
-              <H4 value={`Number of Tables: ${numberOfDesks}`} />
-              <H4 value={`Number of Students: ${numberOfStudents}`} />
+              <H4 value={`${t("screens.create.numberOfTables")} ${numberOfDesks}`} />
+              <H4 value={`${t("screens.create.numberOfStudents")} ${numberOfStudents}`} />
             </div>
 
             <SecondaryButton onClick={() => dispatch(resetGrid())} >
-              Reset
+              {t("common.reset")}
             </SecondaryButton>
           </div>
         </div>
@@ -55,10 +56,10 @@ const CreateClassroomScreen = () => {
 
       <Container className="flex flex-row justify-between">
         <TertiaryButton onClick={handlePrevStep} >
-          Go Back
+          {t("common.goBack")}
         </TertiaryButton>
         <PrimaryButton onClick={handleCreateClassroom} >
-          Create Classroom
+          {t("screens.create.create")}
         </PrimaryButton>
       </Container>
     </>

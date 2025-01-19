@@ -87,7 +87,7 @@ const UploadedFiles: React.FC<UploadedFilesProps> = ({ file, setFile, setError }
                 {loading && <Loadingbar speed={10} onComplete={handleLoadingComplete} />}
 
                 <PrimaryButton onClick={handleSubmit}>
-                    {t("screens.addStudents.upload.file.submit")}
+                    {t("common.submit")}
                 </PrimaryButton>
             </div>
         </ul>

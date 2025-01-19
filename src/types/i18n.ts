@@ -11,16 +11,10 @@ export type I18nKeys = {
           format: string;
           onDrag: string;
         };
-        file: {
-          remove: string;
-          submit: string;
-          error: string;
-        };
       };
       manual: {
         heading: string;
-        placeholder: string;
-        error: string;
+        placeholder: string
       };
       added: {
         heading: string;
@@ -76,6 +70,7 @@ export type I18nKeys = {
   common: {
     add: string;
     remove: string;
+    submit: string;
     goBack: string;
     reset: string;
     export: string;
