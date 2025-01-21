@@ -19,18 +19,35 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import LanguageSwitcher from "./components/LanguageSwitcher";
 import { useI18n } from "./hooks/useI18n";
+import { useModal } from "./context/ModalContext";
 
 const App = () => {
   const step = useSelector((state: RootState) => state.app.step);
   const exportVisible = useSelector((state: RootState) => state.app.exportVisible);
   const theme = useSelector((state: RootState) => state.app.theme);
   const t = useI18n();
+  const { showModal } = useModal();
   const dispatch = useDispatch();
 
   //parse url params for existing layout
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const data = params.get('data');
+    const redirect = params.get('redirect');
+
+    if (redirect === "true") {
+      showModal("We've moved to SeatPlan.xyz!", (
+        <div className="mb-2">
+          You’ve been redirected from our old domain. We’re now at <span className="font-bold text-default">SeatPlan.xyz</span> with some great new features! Make sure to update your bookmarks. 🎉
+        </div>
+      ));
+      params.delete('redirect');
+
+      const newUrl = `${window.location.pathname}?${params.toString()}`;
+      setTimeout(() => {
+        window.history.replaceState({}, '', newUrl);
+      }, 0); //use a small delay to avoid interfering with React updates
+    }
 
     if (!data) {
       dispatch(setProcessStep(1));
