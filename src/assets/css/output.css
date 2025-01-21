@@ -701,10 +701,6 @@ video {
   margin-top: 1rem;
 }
 
-.\!mb-0 {
-  margin-bottom: 0px !important;
-}
-
 .inline-block {
   display: inline-block;
 }
