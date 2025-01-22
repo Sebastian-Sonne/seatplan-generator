@@ -10,12 +10,14 @@ import PrimaryButton from "../buttons/PrimaryButton";
 import TertiaryButton from "../buttons/TertiaryButton";
 import SecondaryButton from "../buttons/SecondaryButton";
 import { useI18n } from "../../hooks/useI18n";
+import { useModal } from "../../context/ModalContext";
 
 const CreateClassroomScreen = () => {
   const numberOfDesks = useSelector((state: RootState) => state.grid.numberOfDesks);
   const numberOfStudents = useSelector(selectStudentIds).length;
   const dispatch = useDispatch();
   const t = useI18n();
+  const { showModal, hideModal } = useModal();
 
   const handlePrevStep = () => {
     dispatch(setProcessStep(1));
@@ -23,10 +25,35 @@ const CreateClassroomScreen = () => {
 
   const handleCreateClassroom = () => {
     if (numberOfDesks === 0) {
-      alert(t("errors.noDesk"))
+      showModal({
+        title: "Error",
+        component: (
+          <div className="mb-2 text-text-muted">
+            {t("errors.noDesk")}
+          </div>
+        )
+      })
+
+
       return;
     }
-    if (numberOfDesks < numberOfStudents && !confirm(t("errors.notEnoughDesks"))) {
+    if (numberOfDesks < numberOfStudents) {
+      showModal({
+        title: "Warning",
+        component: (
+          <div className="mb-2 text-text-muted">
+            {t("errors.notEnoughDesks")}
+          </div>
+        ),
+        cancelText: "Cancel",
+        confirmText: "Continue anyways",
+        onConfirm: () => {
+          hideModal();
+          dispatch(purgeEmptyEdges());
+          dispatch(setProcessStep(3));
+        },
+        onCancel: hideModal
+      });
       return;
     }
 

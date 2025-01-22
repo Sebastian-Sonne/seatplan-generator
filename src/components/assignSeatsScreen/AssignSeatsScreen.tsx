@@ -1,5 +1,5 @@
-import { useDispatch, } from "react-redux";
-import { setExport, setProcessStep } from "../../state/slices/appSlice";
+import { useDispatch } from "react-redux";
+import { setProcessStep } from "../../state/slices/appSlice";
 import ClassroomGrid from "../grid/ClassroomGrid";
 import Container from "../Container";
 import SecondaryButton from "../buttons/SecondaryButton";
@@ -9,9 +9,11 @@ import StudentList from "./StudentList";
 import { AppDispatch } from "../../state/store";
 import { shuffleAssignedStudents } from "../../state/thunks/shuffleAssignedStudents.thunk";
 import { useI18n } from "../../hooks/useI18n";
+import { useShareLinkModal } from "../../modals/ShareLinkModal";
 
 const AssignSeatsScreen = () => {
     const dispatch = useDispatch<AppDispatch>();
+    const showShareModal = useShareLinkModal();
     const t = useI18n();
 
     const handlePrevStep = () => {
@@ -19,7 +21,7 @@ const AssignSeatsScreen = () => {
     }
 
     const handleExport = () => {
-        dispatch(setExport(true));
+        showShareModal();
     }
 
     return (

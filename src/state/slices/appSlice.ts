@@ -12,14 +12,12 @@ export const getUserPreferedTheme = (): 'dark' | 'light' => window.matchMedia('(
 
 interface Appstate {
     step: number;
-    exportVisible: boolean;
     theme: "dark" | "light";
     language: string;
 }
 
 const initialState: Appstate = {
     step: ProcessSteps.STEP_ONE,
-    exportVisible: false,
     theme: ('theme' in localStorage) ? getTheme() : getUserPreferedTheme(),
     language: i18n.language || "en",
 }
@@ -35,9 +33,6 @@ const appSlice = createSlice({
             params.set('tab', action.payload.toString());
             window.history.replaceState(null, "", `${window.location.pathname}?${params.toString()}`);
         },
-        setExport: (state, action: PayloadAction<boolean>) => {
-            state.exportVisible = action.payload;
-        },
         toggleTheme: (state) => {
             const newTheme = (state.theme === 'dark') ? 'light' : 'dark';
             setTheme(newTheme);
@@ -50,5 +45,5 @@ const appSlice = createSlice({
     },
 });
 
-export const { setProcessStep, setExport, toggleTheme, setLanguage } = appSlice.actions;
+export const { setProcessStep, toggleTheme, setLanguage } = appSlice.actions;
 export default appSlice.reducer;

@@ -7,7 +7,6 @@ import { RootState } from "./state/store";
 import { ProcessSteps, setProcessStep } from "./state/slices/appSlice";
 import { Footer } from "./components/footer/Footer";
 import { useEffect } from "react";
-import ExportScreen from "./components/exportScreen/ExportScreen";
 import { setDeskGrid } from "./state/slices/gridSlice";
 import { addStudents } from "./state/slices/studentSlice";
 import { decodeData } from "./service/link.service";
@@ -23,7 +22,6 @@ import { useModal } from "./context/ModalContext";
 
 const App = () => {
   const step = useSelector((state: RootState) => state.app.step);
-  const exportVisible = useSelector((state: RootState) => state.app.exportVisible);
   const theme = useSelector((state: RootState) => state.app.theme);
   const t = useI18n();
   const { showModal } = useModal();
@@ -36,12 +34,15 @@ const App = () => {
     const redirect = params.get('redirect');
 
     if (redirect === "true") {
-      showModal("We've moved to SeatPlan.xyz!", (
-        <div className="mb-2">
-          You’ve been redirected from our old domain. We’re now at <span className="font-bold text-default">SeatPlan.xyz</span> with some great new features! Make sure to update your bookmarks. 🎉
-        </div>
-      ));
-      params.delete('redirect');
+      showModal({
+        title: "We've moved to Seatplan.xyz!",
+        component: (
+          <div className="mb-2 text-text-muted">
+            You’ve been redirected from our old domain. We’re now at <span className="font-bold text-default">SeatPlan.xyz</span> with some great new features! Make sure to update your bookmarks. 🎉
+          </div>
+        )
+      })
+      //params.delete('redirect');
 
       const newUrl = `${window.location.pathname}?${params.toString()}`;
       setTimeout(() => {
@@ -103,8 +104,6 @@ const App = () => {
       </div>
 
       <LanguageSwitcher />
-
-      {exportVisible && <ExportScreen />}
 
       <Footer />
     </div>

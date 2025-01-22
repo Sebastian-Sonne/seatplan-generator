@@ -1,13 +1,22 @@
 import React, { createContext, useContext, useState, ReactNode } from "react";
 import Modal from "./Modal";
 
+interface ModalOptions {
+    title: string;
+    component?: React.ReactNode;
+    confirmText?: string;
+    cancelText?: string;
+    onConfirm?: () => void;
+    onCancel?: () => void;
+}
+
 interface ModalContextType {
-    showModal: (title: string, message: React.ReactNode, onConfirm?: () => void) => void;
+    showModal: (options: ModalOptions) => void;
+    hideModal: () => void;
 }
 
 const ModalContext = createContext<ModalContextType | undefined>(undefined);
 
-// Custom hook to use modal
 export const useModal = (): ModalContextType => {
     const context = useContext(ModalContext);
     if (!context) {
@@ -16,29 +25,16 @@ export const useModal = (): ModalContextType => {
     return context;
 };
 
-// Provider component
 export const ModalProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-    const [modalMessage, setModalMessage] = useState<React.ReactNode | null>(null);
-    const [modalTitle, setModalTitle] = useState<string | null>(null);
-    const [onConfirm, setOnConfirm] = useState<(() => void) | undefined>();
+    const [modalOptions, setModalOptions] = useState<ModalOptions | null>(null);
 
-    // Show modal function
-    const showModal = (title: string, message: React.ReactNode, onConfirmCallback?: () => void) => {
-        setModalMessage(message);
-        setModalTitle(title)
-        setOnConfirm(() => onConfirmCallback);
-    };
-
-    // Hide modal function
-    const hideModal = () => {
-        setModalMessage(null);
-        if (onConfirm) onConfirm(); // Call callback if exists
-    };
+    const showModal = (options: ModalOptions) => setModalOptions(options);
+    const hideModal = () => setModalOptions(null);
 
     return (
-        <ModalContext.Provider value={{ showModal }}>
+        <ModalContext.Provider value={{ showModal, hideModal }}>
             {children}
-            {modalMessage && modalTitle && <Modal title={modalTitle} message={modalMessage} onClose={hideModal} />}
+            {modalOptions && <Modal {...modalOptions} onClose={hideModal} />}
         </ModalContext.Provider>
     );
 };
