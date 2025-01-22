@@ -7,7 +7,6 @@ import lang_de from "./locales/de.json";
 
 i18n.use(Backend).use(LanguageDetector).use(initReactI18next).init({
     fallbackLng: "en",
-    debug: true,
     interpolation: {
         escapeValue: false,
     },

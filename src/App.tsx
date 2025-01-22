@@ -12,13 +12,12 @@ import { addStudents } from "./state/slices/studentSlice";
 import { decodeData } from "./service/link.service";
 import validate from "./service/validate.service";
 import Container from "./components/Container";
-import ThemeSwitcher from "./components/ThemeSwitcher";
 import H1 from "./components/headings/H1";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import LanguageSwitcher from "./components/LanguageSwitcher";
 import { useI18n } from "./hooks/useI18n";
 import { useModal } from "./context/ModalContext";
+import SettingsButton from "./components/buttons/SettingsButton";
 
 const App = () => {
   const step = useSelector((state: RootState) => state.app.step);
@@ -27,49 +26,61 @@ const App = () => {
   const { showModal } = useModal();
   const dispatch = useDispatch();
 
-  //parse url params for existing layout
+  //parse and handle url params
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const data = params.get('data');
-    const redirect = params.get('redirect');
+    let shouldUpdateUrl = false;
 
-    if (redirect === "true") {
-      showModal({
-        title: "We've moved to Seatplan.xyz!",
-        component: (
-          <div className="mb-2 text-text-muted">
-            You’ve been redirected from our old domain. We’re now at <span className="font-bold text-default">SeatPlan.xyz</span> with some great new features! Make sure to update your bookmarks. 🎉
-          </div>
-        )
-      })
-      //params.delete('redirect');
+    const actions: { [key: string]: (value: string) => void } = {
+      redirect: (value: string) => {
+        if (value === "true") {
+          showModal({
+            title: "We've moved to Seatplan.xyz!",
+            component: (
+              <div className="mb-2 text-text-muted">
+                You’ve been redirected from our old domain. We’re now at <span className="font-bold text-default">SeatPlan.xyz</span> with some great new features! Make sure to update your bookmarks. 🎉
+              </div>
+            ),
+          });
+          shouldUpdateUrl = true;
+        }
+      },
+      data: (value: string) => {
+        if (!value) {
+          dispatch(setProcessStep(1));
+          shouldUpdateUrl = true;
+          return;
+        }
 
-      const newUrl = `${window.location.pathname}?${params.toString()}`;
+        try {
+          const { layout, students } = decodeData(value);
+          if (!validate(layout, students)) throw new Error("Invalid data");
+
+          dispatch(setProcessStep(3));
+          dispatch(setDeskGrid(layout));
+          dispatch(addStudents(students));
+        } catch {
+          dispatch(setProcessStep(1));
+        }
+
+        shouldUpdateUrl = true;
+      }
+    };
+
+    //proccess url params dynamically -> for new params, add new action
+    for (const [key, value] of params.entries()) {
+      if (actions[key]) {
+        actions[key](value);
+        params.delete(key);
+      }
+    }
+
+    if (shouldUpdateUrl) {
+      //ensure url update runs after react update
       setTimeout(() => {
-        window.history.replaceState({}, '', newUrl);
-      }, 0); //use a small delay to avoid interfering with React updates
+        window.history.replaceState({}, '', `${window.location.pathname}?${params.toString()}`);
+      }, 0);
     }
-
-    if (!data) {
-      dispatch(setProcessStep(1));
-      return;
-    }
-
-    const { layout, students } = decodeData(data);
-    if (!validate(layout, students)) {
-      dispatch(setProcessStep(1));
-      return;
-    }
-
-    dispatch(setProcessStep(3));
-    dispatch(setDeskGrid(layout));
-    dispatch(addStudents(students));
-
-    params.delete('data');
-    const newUrl = `${window.location.pathname}?${params.toString()}`;
-    setTimeout(() => {
-      window.history.replaceState({}, '', newUrl);
-    }, 0); //use a small delay to avoid interfering with React updates
   }, [dispatch]);
 
   useEffect(() => {
@@ -90,7 +101,7 @@ const App = () => {
             {step === ProcessSteps.STEP_TWO && <H1 value={t("screens.create.heading")} />}
             {step === ProcessSteps.STEP_THREE && <H1 value={t("screens.assign.heading")} />}
 
-            <ThemeSwitcher />
+            <SettingsButton />
           </div>
         </Container>
 
@@ -102,8 +113,6 @@ const App = () => {
           </DndProvider>
         )}
       </div>
-
-      <LanguageSwitcher />
 
       <Footer />
     </div>

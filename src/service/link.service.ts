@@ -45,7 +45,5 @@ export const decodeData = (data: string) => {
     //parse json
     const params = JSON.parse(jsonData);
 
-    console.log(params);
-
     return params;
 };

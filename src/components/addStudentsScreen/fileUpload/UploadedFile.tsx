@@ -32,7 +32,6 @@ const UploadedFiles: React.FC<UploadedFilesProps> = ({ file, setFile, setError }
 
     const handleFileUpload = () => {
         if (!file) {
-            console.log("No file selected");
             setError("Please upload a file to continue.");
             setLoading(false);
             return;
