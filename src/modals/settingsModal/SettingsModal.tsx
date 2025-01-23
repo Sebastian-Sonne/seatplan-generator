@@ -3,12 +3,13 @@ import LanguageSwitcher from "../components/LanguageSwitcher";
 import ThemeSwitcher from "../components/ThemeSwitcher";
 
 const SettingsModal = () => {
-    
+
     return (
-        <>
-            <LanguageSwitcher />
-            <ThemeSwitcher />
-        </>
+            <div className="flex flex-col">
+
+                <LanguageSwitcher />
+                <ThemeSwitcher />
+            </div>
     )
 };
 
