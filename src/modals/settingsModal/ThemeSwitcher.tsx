@@ -1,42 +1,49 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../state/store";
-import { toggleTheme } from "../state/slices/appSlice";
-import { MoonIcon, SunIcon } from "./icons/Icons";
-import TertiaryButton from "./buttons/TertiaryButton";
-import PrimaryButton from "./buttons/PrimaryButton";
+import PrimaryButton from "../../components/buttons/PrimaryButton";
+import TertiaryButton from "../../components/buttons/TertiaryButton";
+import { MoonIcon, SunIcon } from "../../components/icons/Icons";
+import { toggleTheme } from "../../state/slices/appSlice";
+import { RootState } from "../../state/store";
+import H4 from "../../components/headings/H4";
 
 const ThemeSwitcher = () => {
     const theme = useSelector((state: RootState) => state.app.theme);
     const dispatch = useDispatch();
 
     return (
-        <TertiaryButton onClick={() => dispatch(toggleTheme())} className="h-10 aspect-square !p-2 !rounded-full">
+        <>
+            <H4 value="Toggle site theme:" />
             {theme === 'dark' ? (
-                <MoonIcon />
+                <ThemeButton disabled={false}>
+                    <MoonIcon />
+                </ThemeButton>
             ) : (
-                <SunIcon />
+                <ThemeButton disabled={false}>
+                    <SunIcon />
+                </ThemeButton>
             )}
-        </TertiaryButton>
+        </>
     )
 }
 export default ThemeSwitcher
 
-const ThemeButton = ({ disabled, component }: { disabled: boolean, component: React.ReactNode }) => {
+const ThemeButton = ({ disabled, children }: { disabled: boolean, children: React.ReactNode }) => {
+    const dispatch = useDispatch();
 
     const handleClick = () => {
-
+        dispatch(toggleTheme())
     }
 
     return (
         <>
             {disabled ? (
-                <TertiaryButton onClick={handleClick}>
-                    {component}
+                <TertiaryButton className="w-20" onClick={handleClick}>
+                    {children}
                 </TertiaryButton>
             ) : (
-                <PrimaryButton onClick={handleClick}>
-                    {component}
+                <PrimaryButton className="w-20" onClick={handleClick}>
+                    {children}
                 </PrimaryButton >
             )}
         </>

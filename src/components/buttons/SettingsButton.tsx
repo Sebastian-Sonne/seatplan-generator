@@ -1,6 +1,6 @@
+import { useSettingsModal } from "../../modals/settingsModal/SettingsModal";
 import { SunIcon } from "../icons/Icons";
 import TertiaryButton from "./TertiaryButton";
-import { useSettingsModal } from "../../modals/SettingsModal";
 
 const SettingsButton = () => {
     

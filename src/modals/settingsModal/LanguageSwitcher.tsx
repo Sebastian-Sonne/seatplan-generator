@@ -1,8 +1,8 @@
-import { useDispatch, useSelector } from "react-redux"
-import PrimaryButton from "./buttons/PrimaryButton"
-import Container from "./Container"
-import { RootState } from "../state/store";
-import { setLanguage } from "../state/slices/appSlice";
+import { useDispatch, useSelector } from "react-redux";
+import PrimaryButton from "../../components/buttons/PrimaryButton";
+import Container from "../../components/Container";
+import { setLanguage } from "../../state/slices/appSlice";
+import { RootState } from "../../state/store";
 
 const LanguageSwitcher = () => {
     const dispatch = useDispatch();
