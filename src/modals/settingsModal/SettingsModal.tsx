@@ -1,14 +1,15 @@
 import { useModal } from "../../context/ModalContext";
+import LanguageSettings from "./LanguageSettings";
 import ThemeSettings from "./ThemeSettings";
 
 const SettingsModal = () => {
-    
+
     return (
         <div className="flex flex-col pl-1">
 
             <ThemeSettings />
 
-            {/** //! Language Settings */}
+            <LanguageSettings />
         </div>
     )
 };
@@ -19,8 +20,8 @@ export const useSettingsModal = () => {
     return () => showModal({
         title: "Settings",
         component: <SettingsModal />,
-        confirmText: "Save",
-        cancelText: "Cancel",
+        confirmText: "Done",
+        cancelText: "Escape",
         onCancel: hideModal
     });
 };

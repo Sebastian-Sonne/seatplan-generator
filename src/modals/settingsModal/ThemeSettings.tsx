@@ -6,16 +6,16 @@ import { setThemeSetting, ThemeSettingType } from "../../state/slices/themeSlice
 
 const ThemeSettings = () => {
     return (
-        <>
+        <div className="mb-6">
             <H3 value="Theme Preferences" />
-            <p className="text-text-muted-extra -mt-2 mb-2">Choose your prefered color theme or use your system default.</p>
+            <p className="text-text-muted-extra -mt-3 mb-2">Choose your prefered color theme or use your system default.</p>
 
             <div className="flex flex-row gap-4">
                 <ThemeSettingsCard theme="light" />
                 <ThemeSettingsCard theme="dark" />
                 <ThemeSettingsCard theme="system" />
             </div>
-        </>
+        </div>
     )
 }
 export default ThemeSettings

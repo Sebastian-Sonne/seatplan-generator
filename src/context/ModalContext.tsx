@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, ReactNode } from "react";
-import Modal from "./Modal";
+import Modal from "../modals/Modal";
+import { AnimatePresence } from "motion/react";
 
 interface ModalOptions {
     title: string;
@@ -32,9 +33,11 @@ export const ModalProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     const hideModal = () => setModalOptions(null);
 
     return (
-        <ModalContext.Provider value={{ showModal, hideModal }}>
+        <ModalContext.Provider value={{ showModal, hideModal }} >
             {children}
-            {modalOptions && <Modal {...modalOptions} onClose={hideModal} />}
+            <AnimatePresence>
+                {modalOptions && <Modal {...modalOptions} onClose={hideModal} />}
+            </AnimatePresence>
         </ModalContext.Provider>
     );
 };

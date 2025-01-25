@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import PrimaryButton from "../components/buttons/PrimaryButton";
 import SecondaryButton from "../components/buttons/SecondaryButton";
 import H1 from "../components/headings/H1";
@@ -23,18 +23,30 @@ const Modal: React.FC<ModalProps> = ({ title, component, confirmText = "OK", can
         }
     };
 
+    const handleKeyDown = (event: KeyboardEvent) => {
+        if (event.key === "Escape") {
+            onClose();
+        }
+    }
+
     useEffect(() => {
         document.addEventListener("mousedown", handleClickOutside);
+        document.addEventListener("keydown", handleKeyDown);
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
+            document.removeEventListener("keydown", handleKeyDown);
         };
     }, []);
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
             <motion.div
                 ref={modalRef}
-                initial={{ scale: 0.8, opacity: 0 }}
+                initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.8, opacity: 0 }}
                 className="bg-card m-4 p-6 rounded-2xl shadow-lg flex flex-col w-full lg:max-w-2xl"
@@ -46,7 +58,7 @@ const Modal: React.FC<ModalProps> = ({ title, component, confirmText = "OK", can
                     <PrimaryButton onClick={onConfirm || onClose}>{confirmText}</PrimaryButton>
                 </div>
             </motion.div>
-        </div>
+        </motion.div>
     );
 };
 
