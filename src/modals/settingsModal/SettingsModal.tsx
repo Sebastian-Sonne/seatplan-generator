@@ -1,4 +1,5 @@
 import { useModal } from "../../context/ModalContext";
+import { useI18n } from "../../hooks/useI18n";
 import LanguageSettings from "./LanguageSettings";
 import ThemeSettings from "./ThemeSettings";
 
@@ -16,12 +17,13 @@ const SettingsModal = () => {
 
 export const useSettingsModal = () => {
     const { showModal, hideModal } = useModal();
+    const t = useI18n();
 
     return () => showModal({
-        title: "Settings",
+        title: t("modals.settings.heading"),
         component: <SettingsModal />,
-        confirmText: "Done",
-        cancelText: "Escape",
+        confirmText: t("common.done"),
+        cancelText: t("common.escape"),
         onCancel: hideModal
     });
 };

@@ -5,10 +5,13 @@ import { selectStudentIds, removeAll } from "../../../state/slices/studentSlice"
 import H4 from "../../headings/H4";
 import ListElement, { StudentElement } from "./ListElements";
 import { useI18n } from "../../../hooks/useI18n";
+import { useModal } from "../../../context/ModalContext";
 
 const StudentList = () => {
     const [showAll, setShowAll] = useState(false);
     const studentIds = useSelector((state: RootState) => selectStudentIds(state));
+
+    const { showModal, hideModal } = useModal();
 
     const INITIAL_STUDENT_COUNT = 10;//num of students show initially
     const displayedStudentIds = showAll ? studentIds : studentIds.slice(0, INITIAL_STUDENT_COUNT);
@@ -17,10 +20,22 @@ const StudentList = () => {
     const t = useI18n();
 
     const handleRemoveAll = () => {
-        if (confirm(t("screens.addStudents.added.removeAllError"))) {
-            dispatch(removeAll())
-            setShowAll(false)
-        }
+        showModal({
+            title: t("common.warning"),
+            component: (
+                <div className="mb-2 text-text-muted" >
+                    {t("errors.removeAllStudents")}
+                </div >
+            ),
+            cancelText: t("common.cancel"),
+            confirmText: t("common.continueAnyways"),
+            onConfirm: () => {
+                hideModal();
+                dispatch(removeAll());
+                setShowAll(false);
+            },
+            onCancel: hideModal
+        })
     }
 
     return (

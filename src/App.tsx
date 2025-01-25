@@ -35,10 +35,10 @@ const App = () => {
       redirect: (value: string) => {
         if (value === "true") {
           showModal({
-            title: "We've moved to Seatplan.xyz!",
+            title: t("messages.newDomain.title"),
             component: (
               <div className="mb-2 text-text-muted">
-                You’ve been redirected from our old domain. We’re now at <span className="font-bold text-default">SeatPlan.xyz</span> with some great new features! Make sure to update your bookmarks. 🎉
+                {t("messages.newDomain.content")}
               </div>
             ),
           });

@@ -14,7 +14,8 @@ export type I18nKeys = {
       };
       manual: {
         heading: string;
-        placeholder: string
+        placeholder: string;
+        error: string;
       };
       added: {
         heading: string;
@@ -24,7 +25,6 @@ export type I18nKeys = {
         continue: string;
         remove: string;
         removeAll: string;
-        removeAllError: string;
       };
     };
     create: {
@@ -47,9 +47,32 @@ export type I18nKeys = {
       shuffle: string;
     };
   };
+  modals: {
+    settings: {
+      heading: string;
+      theme: {
+        heading: string;
+        content: string;
+        themes: {
+          dark: string;
+          light: string;
+          system: string;
+        };
+      };
+      language: {
+        heading: string;
+        content: string;
+        requestLink: string;
+      };
+    };
+    export: {
+      heading: string;
+    };
+  };
   errors: {
     notEnoughDesks: string;
     noDesk: string;
+    removeAllStudents: string;
   };
   components: {
     grid: {
@@ -76,5 +99,17 @@ export type I18nKeys = {
     export: string;
     na: string;
     copy: string;
+    error: string;
+    warning: string;
+    cancel: string;
+    done: string;
+    escape: string
+    continueAnyways: string;
   };
-};
+  messages: {
+    newDomain: {
+      title: string;
+      content: string;
+    };
+  };
+}

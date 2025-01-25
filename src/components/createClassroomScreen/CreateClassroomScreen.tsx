@@ -26,27 +26,25 @@ const CreateClassroomScreen = () => {
   const handleCreateClassroom = () => {
     if (numberOfDesks === 0) {
       showModal({
-        title: "Error",
+        title: t("common.error"),
         component: (
           <div className="mb-2 text-text-muted">
             {t("errors.noDesk")}
           </div>
         )
       })
-
-
       return;
     }
     if (numberOfDesks < numberOfStudents) {
       showModal({
-        title: "Warning",
+        title: t("common.warning"),
         component: (
           <div className="mb-2 text-text-muted">
             {t("errors.notEnoughDesks")}
           </div>
         ),
-        cancelText: "Cancel",
-        confirmText: "Continue anyways",
+        cancelText: t("common.cancel"),
+        confirmText: t("common.continueAnyways"),
         onConfirm: () => {
           hideModal();
           dispatch(purgeEmptyEdges());

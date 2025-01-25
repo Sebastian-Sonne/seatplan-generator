@@ -35,11 +35,12 @@ const ShareLinkModal = () => {
 
 export const useShareLinkModal = () => {
     const { showModal, hideModal } = useModal();
+    const t = useI18n();
     return () => showModal({
-        title: "Export your Seatplan",
+        title: t("modals.export.heading"),
         component: <ShareLinkModal />,
-        confirmText: "Done",
-        cancelText: "Cancel",
+        confirmText: t("common.done"),
+        cancelText: t("common.cancel"),
         onCancel: hideModal
     });
 };

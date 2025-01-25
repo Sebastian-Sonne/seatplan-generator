@@ -3,12 +3,15 @@ import { RootState } from "../../state/store";
 import { PreviewIcon } from "../../components/icons/ThemePreview";
 import H3 from "../../components/headings/H3";
 import { setThemeSetting, ThemeSettingType } from "../../state/slices/themeSlice";
+import { useI18n } from "../../hooks/useI18n";
 
 const ThemeSettings = () => {
+    const t = useI18n();
+
     return (
         <div className="mb-6">
-            <H3 value="Theme Preferences" />
-            <p className="text-text-muted-extra -mt-3 mb-2">Choose your prefered color theme or use your system default.</p>
+            <H3 value={t("modals.settings.theme.heading")} />
+            <p className="text-text-muted-extra -mt-3 mb-2">{t("modals.settings.theme.content")}</p>
 
             <div className="flex flex-row gap-4">
                 <ThemeSettingsCard theme="light" />
@@ -23,6 +26,7 @@ export default ThemeSettings
 const ThemeSettingsCard = ({ theme }: { theme: ThemeSettingType }) => {
     const themeSetting = useSelector((state: RootState) => state.theme.setting);
     const dispatch = useDispatch();
+    const t = useI18n();
 
     const handleClick = () => {
         if (theme !== themeSetting) {
@@ -38,7 +42,8 @@ const ThemeSettingsCard = ({ theme }: { theme: ThemeSettingType }) => {
             <PreviewIcon theme={theme} />
 
             <div className="flex justify-start items-center bg-card h-8 p-2 rounded-lg">
-                <span className="text-text">{theme === "dark" ? "Dark Theme" : theme === "light" ? "Light Theme" : "System Default"}</span>
+                <span className="text-text">{theme === "dark" ? t("modals.settings.theme.themes.dark") : theme === "light"
+                    ? t("modals.settings.theme.themes.light") : t("modals.settings.theme.themes.system")}</span>
             </div>
         </div>
     )

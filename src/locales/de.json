@@ -1,56 +1,78 @@
 {
-  "siteTitle": "Sitzplan-Generator",
+  "siteTitle": "Sitzplan Generator",
   "screens": {
     "addStudents": {
-      "title": "Studenten hochladen",
-      "heading": "Datei hochladen oder Studenten manuell hinzufügen",
+      "title": "Schüler hochladen",
+      "heading": "Datei hochladen oder Schüler manuell hinzufügen",
       "upload": {
         "heading": "Datei hochladen:",
         "dndArea": {
-          "instruction": "Wählen Sie eine Datei aus oder ziehen Sie eine hierher",
-          "format": ".xlsx Format, max. 50 MB",
+          "instruction": "Wählen Sie eine Datei oder ziehen Sie eine hierher",
+          "format": ".xlsx-Format, max. 50MB",
           "onDrag": "Datei hier ablegen..."
         }
       },
       "manual": {
-        "heading": "Studenten manuell hinzufügen:",
-        "placeholder": "John Doe",
+        "heading": "Schüler manuell hinzufügen:",
+        "placeholder": "Max Mustermann",
         "error": "NICHT IMPLEMENTIERT"
       },
       "added": {
-        "heading": "Hinzugefügte Studenten:",
-        "noStudentsAddedMessage": "Derzeit wurden keine Studenten hinzugefügt.",
-        "totalStudents": "Anzahl der Studenten:",
-        "showAll": "Alle Studenten anzeigen",
+        "heading": "Hinzugefügte Schüler:",
+        "noStudentsAddedMessage": "Derzeit sind keine Schüler hinzugefügt.",
+        "totalStudents": "Schüleranzahl:",
+        "showAll": "Alle Schüler anzeigen",
         "continue": "Weiter zum nächsten Schritt",
         "remove": "Entfernen",
-        "removeAll": "Alle entfernen",
-        "removeAllError": "NICHT IMPLEMENTIERT"
+        "removeAll": "Alle entfernen"
       }
     },
     "create": {
-      "title": "Klassenzimmer erstellen",
-      "heading": "Klassenzimmerlayout erstellen",
-      "numberOfTables": "Anzahl der Tische:",
-      "numberOfStudents": "Anzahl der Studenten:",
+      "title": "Sitzplan erstellen",
+      "heading": "Sitzplan erstellen",
+      "numberOfTables": "Tischanzahl:",
+      "numberOfStudents": "Schüleranzahl:",
       "create": "Klassenzimmer erstellen"
     },
     "assign": {
-      "title": "Plätze zuweisen",
-      "heading": "Studenten zuweisen",
+      "title": "Sitzplätze zuweisen",
+      "heading": "Sitzplätze zuweisen",
       "dnd": {
-        "heading": "Studenten zu Tischen ziehen und ablegen",
-        "autoAssign": "Automatische Zuweisung",
+        "heading": "Ziehen Sie die Schüler auf die Tische",
+        "autoAssign": "Automatisch zuweisen",
         "clearAssign": "Zuweisung löschen",
-        "allAssigned": "Alle Studenten sind zugewiesen",
+        "allAssigned": "Alle Schüler sind zugewiesen",
         "dropHere": "Hier ablegen"
       },
       "shuffle": "Mischen"
     }
   },
+  "modals": {
+    "settings": {
+      "heading": "Einstellungen",
+      "theme": {
+        "heading": "Themen-Einstellungen",
+        "content": "Bevorzugtes Farbschema wählen oder den Systemstandard verwenden.",
+        "themes": {
+          "dark": "Dunkel",
+          "light": "Hell",
+          "system": "Systemstandard"
+        }
+      },
+      "language": {
+        "heading": "Sprache",
+        "content": "Bevorzugte Sprache wählen",
+        "requestLink": "Eine neue Sprache hinzufügen"
+      }
+    },
+    "export": {
+      "heading": "Sitzplan exportieren"
+    }
+  },
   "errors": {
-    "notEnoughDesks": "Es sind nicht genug Tische für alle Studenten vorhanden. Möchten Sie fortfahren? Einige Studenten werden keinen Tisch zugewiesen bekommen.",
-    "noDesk": "Bitte fügen Sie mindestens einen Tisch hinzu, um fortzufahren."
+    "notEnoughDesks": "Es gibt nicht genug Tische für alle Schüler. Einige Schüler werden keinen Tisch haben. Möchten Sie trotzdem fortfahren?",
+    "noDesk": "Bitte fügen Sie mindestens einen Tisch hinzu, um fortzufahren.",
+    "removeAllStudents": "Sie sind gerade dabei alle Schüler zu entfernen. Diese Aktion kann nicht rückgängig gemacht werden."
   },
   "components": {
     "grid": {
@@ -58,9 +80,9 @@
       "row": "Reihe",
       "col": "Spalte",
       "toolTips": {
-        "remove": "Entfernen",
-        "insert": "Neuen hinzufügen",
-        "select": "Auswählen"
+        "remove": "entfernen",
+        "insert": "einfügen",
+        "select": "auswählen"
       }
     },
     "export": {
@@ -76,6 +98,18 @@
     "reset": "Zurücksetzen",
     "export": "Exportieren",
     "na": "N/A",
-    "copy": "Kopieren"
+    "copy": "Kopieren",
+    "error": "Fehler",
+    "warning": "Warnung",
+    "cancel": "Abbrechen",
+    "done": "Fertig",
+    "escape": "Schließen",
+    "continueAnyways": "Trotzdem fortfahren"
+  },
+  "messages": {
+    "newDomain": {
+      "title": "Wir sind umgezogen!",
+      "content": "Sie wurden von unserer alten Domain umgeleitet. Wir sind jetzt auf SeatPlan.xyz mit neuen Funktionen verfügbar! Vergessen Sie nicht, Ihre Lesezeichen zu aktualisieren. 🎉"
+    }
   }
 }

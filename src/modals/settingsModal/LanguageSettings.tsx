@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import H3 from "../../components/headings/H3";
+import { useI18n } from "../../hooks/useI18n";
 
 
 
@@ -12,6 +13,7 @@ const LanguageSettings = () => {
     const [isOpen, setIsOpen] = useState(false);
     const systemLanguage = useSelector((state: RootState) => state.app.language);
     const dispatch = useDispatch();
+    const t = useI18n();
 
     const languages = [
         { code: "en", label: "🇬🇧 English" },
@@ -20,10 +22,10 @@ const LanguageSettings = () => {
 
     return (
         <>
-            <H3 value="Language" />
+            <H3 value={t("modals.settings.language.heading")} />
             <p className="text-text-muted-extra -mt-3 mb-2">
-                Choose your prefered language. <a className="text-default" href="mailto:languageRequest@seatplan.xyz?subject=Language%20Request&body=Hello,%0D%0A%0D%0AI would like to request the following language: ">
-                    Request a new language
+                {t("modals.settings.language.content")} <a className="text-default" href="mailto:languageRequest@seatplan.xyz?subject=Language%20Request&body=Hello,%0D%0A%0D%0AI would like to request the following language: ">
+                    {t("modals.settings.language.requestLink")}
                 </a>
 
             </p>

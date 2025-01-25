@@ -24,8 +24,7 @@
         "showAll": "Show all students",
         "continue": "Continue to next step",
         "remove": "Remove",
-        "removeAll": "Remove all",
-        "removeAllError": "NOT IMPLEMENTED"
+        "removeAll": "Remove all"
       }
     },
     "create": {
@@ -48,9 +47,32 @@
       "shuffle": "Shuffle"
     }
   },
+  "modals": {
+    "settings": {
+      "heading": "Settings",
+      "theme": {
+        "heading": "Theme preferences",
+        "content": "Choose your prefered color theme or use your system default.",
+        "themes": {
+          "dark": "Dark theme",
+          "light": "Light theme",
+          "system": "System default"
+        }
+      },
+      "language": {
+        "heading": "Language",
+        "content": "Choose your prefered language",
+        "requestLink": "Request a new language"
+      }
+    },
+    "export": {
+      "heading": "Export your Seatplan"
+    }
+  },
   "errors": {
     "notEnoughDesks": "There are not enough desks for all students. Are you sure you want to continue? Some students will not have a desk assigned to them.",
-    "noDesk": "Please add at least one desk in order to continue."
+    "noDesk": "Please add at least one desk in order to continue.",
+    "removeAllStudents": "You are about to delete all students. This action cannot be undone"
   },
   "components": {
     "grid": {
@@ -76,6 +98,18 @@
     "reset": "Reset",
     "export": "Export",
     "na": "N/A",
-    "copy": "Copy"
+    "copy": "Copy",
+    "error": "Error",
+    "warning": "Warning",
+    "cancel": "cancel",
+    "done": "Done",
+    "escape": "Escape",
+    "continueAnyways": "Continue anyways"
+  },
+  "messages": {
+    "newDomain": {
+      "title": "We've moved to Seatplan.xyz!",
+      "content": "We've moved to Seatplan.xyz! You’ve been redirected from our old domain. We’re now at SeatPlan.xyz with some great new features! Make sure to update your bookmarks. 🎉"
+    }
   }
 }
