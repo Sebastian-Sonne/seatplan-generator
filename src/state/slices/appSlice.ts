@@ -1,5 +1,4 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { getTheme, setTheme } from "../../service/storage.service";
 import i18n from "../../i18n";
 
 export const ProcessSteps = {
@@ -8,17 +7,13 @@ export const ProcessSteps = {
     STEP_THREE: 3,
 };
 
-export const getUserPreferedTheme = (): 'dark' | 'light' => window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-
 interface Appstate {
     step: number;
-    theme: "dark" | "light";
     language: string;
 }
 
 const initialState: Appstate = {
     step: ProcessSteps.STEP_ONE,
-    theme: ('theme' in localStorage) ? getTheme() : getUserPreferedTheme(),
     language: i18n.language || "en",
 }
 
@@ -33,11 +28,6 @@ const appSlice = createSlice({
             params.set('tab', action.payload.toString());
             window.history.replaceState(null, "", `${window.location.pathname}?${params.toString()}`);
         },
-        toggleTheme: (state) => {
-            const newTheme = (state.theme === 'dark') ? 'light' : 'dark';
-            setTheme(newTheme);
-            state.theme = newTheme;
-        },
         setLanguage: (state, action: PayloadAction<string>) => {
             state.language = action.payload;
             i18n.changeLanguage(action.payload);
@@ -45,5 +35,5 @@ const appSlice = createSlice({
     },
 });
 
-export const { setProcessStep, toggleTheme, setLanguage } = appSlice.actions;
+export const { setProcessStep, setLanguage } = appSlice.actions;
 export default appSlice.reducer;

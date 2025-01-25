@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import PrimaryButton from "../components/buttons/PrimaryButton";
 import SecondaryButton from "../components/buttons/SecondaryButton";
-import H2 from "../components/headings/H2";
+import H1 from "../components/headings/H1";
 
 interface ModalProps {
     title: string;
@@ -39,7 +39,7 @@ const Modal: React.FC<ModalProps> = ({ title, component, confirmText = "OK", can
                 exit={{ scale: 0.8, opacity: 0 }}
                 className="bg-card m-4 p-6 rounded-2xl shadow-lg flex flex-col w-full lg:max-w-2xl"
             >
-                <H2 value={title} className="mb-2" />
+                <H1 value={title} className="mb-4" />
                 <div className="mb-4">{component}</div>
                 <div className="flex justify-end space-x-2">
                     {onCancel && <SecondaryButton onClick={onCancel}>{cancelText}</SecondaryButton>}

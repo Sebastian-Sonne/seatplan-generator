@@ -21,7 +21,7 @@ import SettingsButton from "./components/buttons/SettingsButton";
 
 const App = () => {
   const step = useSelector((state: RootState) => state.app.step);
-  const theme = useSelector((state: RootState) => state.app.theme);
+  const theme = useSelector((state: RootState) => state.theme.theme);
   const t = useI18n();
   const { showModal } = useModal();
   const dispatch = useDispatch();

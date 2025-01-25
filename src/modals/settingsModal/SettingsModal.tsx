@@ -1,27 +1,15 @@
-import { useState } from "react";
 import { useModal } from "../../context/ModalContext";
-import LanguageSwitcher from "./LanguageSwitcher";
-import ThemeSwitcher from "./ThemeSwitcher";
-import { useDispatch } from "react-redux";
+import ThemeSettings from "./ThemeSettings";
 
 const SettingsModal = () => {
-    const [settings, setSettings] = useState("");
-    const dispatch = useDispatch();
-
-    const handleSubmit = () => {
-        
-    }
-
-    const handleUpdate = (change: string) => {
-        setSettings(change)
-    }
-
+    
     return (
-            <div className="flex flex-col">
+        <div className="flex flex-col pl-1">
 
-                <LanguageSwitcher />
-                <ThemeSwitcher />
-            </div>
+            <ThemeSettings />
+
+            {/** //! Language Settings */}
+        </div>
     )
 };
 

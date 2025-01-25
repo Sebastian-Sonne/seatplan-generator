@@ -35,14 +35,11 @@ export const decodeData = (data: string) => {
         throw new Error('No data found in the URL');
     }
 
-    //decode
     const binaryString = atob(data);
     const compressedData = Uint8Array.from(binaryString, char => char.charCodeAt(0));
 
-    //decompress
     const jsonData = pako.inflate(compressedData, { to: 'string' });
 
-    //parse json
     const params = JSON.parse(jsonData);
 
     return params;
