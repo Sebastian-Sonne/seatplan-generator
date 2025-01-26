@@ -28,7 +28,6 @@ const StudentList = () => {
                 </div >
             ),
             cancelText: t("common.cancel"),
-            confirmText: t("common.continueAnyways"),
             onConfirm: () => {
                 hideModal();
                 dispatch(removeAll());

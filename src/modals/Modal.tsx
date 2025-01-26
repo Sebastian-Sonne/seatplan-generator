@@ -49,7 +49,7 @@ const Modal: React.FC<ModalProps> = ({ title, component, confirmText = "OK", can
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.8, opacity: 0 }}
-                className="bg-card m-4 p-6 rounded-2xl shadow-lg flex flex-col w-full lg:max-w-2xl"
+                className="bg-card m-4 p-6 rounded-2xl shadow-lg flex flex-col w-full md:max-w-2xl"
             >
                 <H1 value={title} className="mb-4" />
                 <div className="mb-4">{component}</div>

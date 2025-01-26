@@ -200,7 +200,7 @@ const gridSlice = createSlice({
                 })
             );
         },
-        assignStudent: (state, action: PayloadAction<{ row: number, col: number, id: string }>) => {
+        assignStudent: (state, action: PayloadAction<{ row: number, col: number, id: string | null }>) => {
             const { row, col, id } = action.payload;
             state.deskSetup[row][col].studentId = id;
         },
