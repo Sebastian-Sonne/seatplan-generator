@@ -53,7 +53,9 @@ const StudentDeskelement = ({ row, col }: { row: number, col: number }) => {
 
     //update global dnd state for ui update
     useEffect(() => {
-        dispatch(setIsOver(isOver))
+        if (!isDragging) {
+            dispatch(setIsOver(isOver))
+        }
     }, [isOver])
 
     useEffect(() => {
