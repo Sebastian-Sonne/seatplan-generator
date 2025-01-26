@@ -2,17 +2,15 @@ import { useDispatch, useSelector } from "react-redux";
 import H2 from "../headings/H2"
 import StudentCard from "./StudentCard"
 import { selectAllStudent, selectStudentIds } from "../../state/slices/studentSlice";
-import { useRef, useState, useEffect } from "react";
-import PrimaryButton from "../buttons/PrimaryButton";
-import { randAssignStudents } from "../../state/thunks/randAssignStudents.thunk";
+import { useRef } from "react";
 import { AppDispatch, RootState } from "../../state/store";
-import TertiaryButton from "../buttons/TertiaryButton";
-import { clearAssignments } from "../../state/thunks/clearAssignments.thunk";
 import H4 from "../headings/H4";
 import { useI18n } from "../../hooks/useI18n";
 import { useDrop } from "react-dnd";
 import { Coordinates } from "../../state/slices/gridSlice";
 import { unAssignStudent } from "../../state/thunks/unassignStudent.thunk";
+import useOverflowCheck from "../../hooks/useOverflowCheck";
+import ActionButtons from "./ActionButtons";
 
 const StudentList = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -23,26 +21,9 @@ const StudentList = () => {
     const allAssigned = students.every(student => student.isAssigned);
 
     const scrollContainerRef = useRef<HTMLDivElement | null>(null);
-    const [isOverflowing, setIsOverflowing] = useState(false);
+    const isOverflowing = useOverflowCheck(scrollContainerRef, [studentIds]);
 
     const t = useI18n();
-
-    //overflow shadow if applicable
-    useEffect(() => {
-        const checkOverflow = () => {
-            const scrollContainer = scrollContainerRef.current;
-            if (scrollContainer) {
-                setIsOverflowing(scrollContainer.scrollWidth > scrollContainer.clientWidth);
-            }
-        };
-
-        checkOverflow();
-        window.addEventListener("resize", checkOverflow);
-
-        return () => {
-            window.removeEventListener("resize", checkOverflow);
-        };
-    }, [studentIds]);
 
     const [{ isOver }, drop] = useDrop(() => ({
         accept: "STUDENT",
@@ -94,15 +75,7 @@ const StudentList = () => {
                 )}
             </div>
 
-            <div className="flex flex-row justify-between">
-                <PrimaryButton onClick={() => dispatch(randAssignStudents())} disabled={allAssigned} >
-                    {t("screens.assign.dnd.autoAssign")}
-                </PrimaryButton>
-
-                <TertiaryButton onClick={() => dispatch(clearAssignments())} >
-                    {t("screens.assign.dnd.clearAssign")}
-                </TertiaryButton>
-            </div>
+            <ActionButtons />
         </>
     )
 }
