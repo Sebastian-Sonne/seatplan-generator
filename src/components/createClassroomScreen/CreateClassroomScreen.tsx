@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { purgeEmptyEdges, resetGrid } from "../../state/slices/gridSlice";
 import ClassroomGrid from "../grid/ClassroomGrid";
 import { setProcessStep } from "../../state/slices/appSlice";
-import { RootState } from "../../state/store";
+import { AppDispatch, RootState } from "../../state/store";
 import { selectStudentIds } from "../../state/slices/studentSlice";
 import H4 from "../headings/H4";
 import Container from "../Container";
@@ -11,11 +11,12 @@ import TertiaryButton from "../buttons/TertiaryButton";
 import SecondaryButton from "../buttons/SecondaryButton";
 import { useI18n } from "../../hooks/useI18n";
 import { useModal } from "../../context/ModalContext";
+import { checkIsAssigned } from "../../state/thunks/checkIsAssigned.thunk";
 
 const CreateClassroomScreen = () => {
   const numberOfDesks = useSelector((state: RootState) => state.grid.numberOfDesks);
   const numberOfStudents = useSelector(selectStudentIds).length;
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const t = useI18n();
   const { showModal, hideModal } = useModal();
 
@@ -47,6 +48,7 @@ const CreateClassroomScreen = () => {
         confirmText: t("common.continueAnyways"),
         onConfirm: () => {
           hideModal();
+          dispatch(checkIsAssigned())
           dispatch(purgeEmptyEdges());
           dispatch(setProcessStep(3));
         },
@@ -55,6 +57,7 @@ const CreateClassroomScreen = () => {
       return;
     }
 
+    dispatch(checkIsAssigned())
     dispatch(purgeEmptyEdges())
     dispatch(setProcessStep(3));
   }
