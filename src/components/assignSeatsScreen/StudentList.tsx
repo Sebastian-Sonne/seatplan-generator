@@ -63,7 +63,7 @@ const StudentList = () => {
 
                 {dndState.isDragging && (
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                        <H4 value={isOver ? "Drop here... " : "Unassign Student"} />
+                        <H4 value={isOver ? t("screens.assign.dnd.dropHere") : t("screens.assign.dnd.unAssign")} />
                     </div>
                 )}
 

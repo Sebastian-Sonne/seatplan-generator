@@ -9,7 +9,7 @@
         "dndArea": {
           "instruction": "Choose a file or drag & drop one here",
           "format": ".xlsx format, max 50MB",
-          "onDrag": "Drop file here..."
+          "onDrag": "Drop here..."
         }
       },
       "manual": {
@@ -42,7 +42,8 @@
         "autoAssign": "Auto Assign",
         "clearAssign": "Clear Assignment",
         "allAssigned": "All students are assigned",
-        "dropHere": "Drop here"
+        "dropHere": "Drop here",
+        "unAssign": "Unassign Student"
       },
       "shuffle": "Shuffle"
     }

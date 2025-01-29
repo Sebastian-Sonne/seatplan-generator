@@ -1,23 +1,24 @@
+import { AnimatePresence, motion } from "framer-motion";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 import AddStudentsScreen from "./components/addStudentsScreen/AddStudentsScreen";
 import CreateClassroomScreen from "./components/createClassroomScreen/CreateClassroomScreen";
 import AssignSeatsScreen from "./components/assignSeatsScreen/AssignSeatsScreen";
 import Progressbar from "./components/Progressbar";
+import SettingsButton from "./components/buttons/SettingsButton";
+import H1 from "./components/headings/H1";
+import Container from "./components/Container";
+import { useI18n } from "./hooks/useI18n";
+import { ProcessSteps, setProcessStep } from "./state/slices/appSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./state/store";
-import { ProcessSteps, setProcessStep } from "./state/slices/appSlice";
-import { Footer } from "./components/footer/Footer";
 import { useEffect } from "react";
 import { setDeskGrid } from "./state/slices/gridSlice";
 import { addStudents } from "./state/slices/studentSlice";
 import { decodeData } from "./service/link.service";
 import validate from "./service/validate.service";
-import Container from "./components/Container";
-import H1 from "./components/headings/H1";
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
-import { useI18n } from "./hooks/useI18n";
 import { useModal } from "./context/ModalContext";
-import SettingsButton from "./components/buttons/SettingsButton";
+import { Footer } from "./components/footer/Footer";
 
 const App = () => {
   const step = useSelector((state: RootState) => state.app.step);
@@ -105,17 +106,48 @@ const App = () => {
           </div>
         </Container>
 
-        {step === ProcessSteps.STEP_ONE && <AddStudentsScreen />}
-        {step === ProcessSteps.STEP_TWO && <CreateClassroomScreen />}
-        {step === ProcessSteps.STEP_THREE && (
-          <DndProvider backend={HTML5Backend}>
-            <AssignSeatsScreen />
-          </DndProvider>
-        )}
+        <AnimatePresence mode="wait">
+          {step === ProcessSteps.STEP_ONE && (
+            <motion.div
+              key="step-one"
+              initial={{ opacity: 0, x: 0 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -100 }}
+              transition={{ duration: 0.2 }}
+            >
+              <AddStudentsScreen />
+            </motion.div>
+          )}
+          {step === ProcessSteps.STEP_TWO && (
+            <motion.div
+              key="step-two"
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -100 }}
+              transition={{ duration: 0.2 }}
+            >
+              <CreateClassroomScreen />
+            </motion.div>
+          )}
+          {step === ProcessSteps.STEP_THREE && (
+            <motion.div
+              key="step-three"
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -100 }}
+              transition={{ duration: 0.5 }}
+            >
+              <DndProvider backend={HTML5Backend}>
+                <AssignSeatsScreen />
+              </DndProvider>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       <Footer />
     </div>
   );
 };
+
 export default App;

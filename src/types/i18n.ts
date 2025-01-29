@@ -43,6 +43,7 @@ export type I18nKeys = {
         clearAssign: string;
         allAssigned: string;
         dropHere: string;
+        unAssign: string;
       };
       shuffle: string;
     };

@@ -42,7 +42,8 @@
         "autoAssign": "Automatisch zuweisen",
         "clearAssign": "Zuweisung löschen",
         "allAssigned": "Alle Schüler sind zugewiesen",
-        "dropHere": "Hier ablegen"
+        "dropHere": "Hier ablegen",
+        "unAssign": "Schüler entfernen"
       },
       "shuffle": "Mischen"
     }

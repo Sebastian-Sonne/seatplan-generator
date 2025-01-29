@@ -48,7 +48,7 @@ const DragAndDropArea: React.FC<DragAndDropAreaProps> = ({ setError, setFile }) 
                     <UploadIcon color="#419eaf" />
                 </div>
                 {isDragActive ? (
-                    <p className="text-text-800">{t("screens.addStudents.upload.dndArea.onDrag")}</p>
+                    <p className="text-text-muted-extra">{t("screens.addStudents.upload.dndArea.onDrag")}</p>
                 ) : (
                     <>
                         <H4 value={t("screens.addStudents.upload.dndArea.instruction")} />
