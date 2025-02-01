@@ -6,6 +6,7 @@ export const swapStudents = createAsyncThunk(
     'students/swapStudents',
     async ({ fromCoords, toCoords }: {fromCoords: Coordinates, toCoords: Coordinates}, { getState, dispatch }) => {
         const state = getState() as RootState;
+
         const deskSetup = state.grid.deskSetup.map(row => row.map(desk => ({ ...desk })));
 
         const fromStudentId = deskSetup[fromCoords.row][fromCoords.col].studentId;

@@ -7,13 +7,9 @@ export const shuffleAssignedStudents = createAsyncThunk(
     'students/shuffleAssignedStudents',
     async (_, { getState, dispatch }) => {
         const state = getState() as RootState;
-        const students = Object.values(state.students.entities);
         const desks = state.grid.deskSetup
 
-        const availableStudentIds = students
-            .filter(student => student.isAssigned)
-            .map(student => student.id);
-
+        const availableStudentIds = desks.flat().filter(desk => desk.deskState === 1 && desk.isLocked === false).map(desk => desk.studentId);
 
         dispatch(clearDeskAssignments());
 
@@ -22,7 +18,7 @@ export const shuffleAssignedStudents = createAsyncThunk(
             const row = desks[rowIndex];
             for (let colIndex = 0; colIndex < row.length; colIndex++) {
                 const desk = row[colIndex];
-                if (desk.deskState === 1) {
+                if (desk.deskState === 1 && desk.isLocked === false) {
                     availableDesks.push({ row: rowIndex, col: colIndex });
                 }
             }
@@ -34,8 +30,10 @@ export const shuffleAssignedStudents = createAsyncThunk(
         shuffledStudentIds.forEach((studentId, index) => {
             if (shuffledDesks[index]) {
                 const { row, col } = shuffledDesks[index];
-                dispatch(setIsAssigned({ id: studentId, val: true }));
-                dispatch(assignStudent({ row: row, col: col, id: studentId }));
+                if (studentId) {
+                    dispatch(setIsAssigned({ id: studentId, val: true }));
+                    dispatch(assignStudent({ row: row, col: col, id: studentId }));
+                }
             }
         });
     }

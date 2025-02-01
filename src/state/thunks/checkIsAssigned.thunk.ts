@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { RootState } from "../store";
-import { clearStudentAssignements, setIsAssigned } from "../slices/studentSlice";
+import { forceClearStudentAssignements, setIsAssigned } from "../slices/studentSlice";
 import { Desk } from "../slices/gridSlice";
 
 export const checkIsAssigned = createAsyncThunk(
@@ -8,7 +8,7 @@ export const checkIsAssigned = createAsyncThunk(
     async (_, { getState, dispatch }) => {
         const state = getState() as RootState;
 
-        dispatch(clearStudentAssignements());
+        dispatch(forceClearStudentAssignements());
 
         const occupiedDesks: Desk[] = [];
         state.grid.deskSetup.forEach((row, _) => {
@@ -18,8 +18,6 @@ export const checkIsAssigned = createAsyncThunk(
                 }
             });
         });
-
-        console.log(occupiedDesks)
 
         occupiedDesks.forEach(desk => {
             if (desk.studentId) {

@@ -3,14 +3,16 @@ import { AppDispatch, RootState } from "../../../state/store";
 import { selectStudentById } from "../../../state/slices/studentSlice";
 import { swapStudents } from "../../../state/thunks/swapStudents.thunk";
 import { useEffect } from "react";
-import { Coordinates, DndState, setIsDragging, setIsOver } from "../../../state/slices/gridSlice";
+import { Coordinates, DndState, setIsDragging, setIsLocked, setIsOver } from "../../../state/slices/gridSlice";
 import { assignStudent } from "../../../state/thunks/assingStudent.thunk";
 import { useI18n } from "../../../hooks/useI18n";
 import { useDrag, useDrop } from "react-dnd";
+import { LockIcon, LockOpenIcon } from "lucide-react";
 
 const StudentDeskelement = ({ row, col }: { row: number, col: number }) => {
     const dispatch = useDispatch<AppDispatch>();
     const deskState = useSelector((state: RootState) => state.grid.deskSetup[row][col]);
+    const isLocked = useSelector((state: RootState) => state.grid.deskSetup[row][col].isLocked);
     const dndState = useSelector((state: RootState) => state.grid.dndState);
 
     const { index, type } = useSelector((state: RootState) => state.grid.hoverState)
@@ -63,34 +65,59 @@ const StudentDeskelement = ({ row, col }: { row: number, col: number }) => {
     }, [isDragging]);
 
     return (
-        <div ref={dragDropRef} className={getClassNames({ isActive, isOver, dndState, deskState, isDragging })} >
-            <StudentElement id={deskState.studentId} dndState={dndState} />
+        <div ref={dragDropRef} className={getClassNames({ isActive, isOver, dndState, deskState, isDragging, isLocked })} >
+            <StudentElement id={deskState.studentId} dndState={dndState} isLocked={isLocked} />
+
+            <LockButton row={row} col={col} />
         </div>
     );
 };
 export default StudentDeskelement;
 
-const StudentElement = ({ id, dndState }: { id: string | null; dndState: DndState }) => {
+const StudentElement = ({ id, dndState, isLocked }: { id: string | null; dndState: DndState, isLocked: boolean }) => {
     const student = useSelector((state: RootState) => (id ? selectStudentById(state, id) : null));
     const t = useI18n();
 
     return (
         <span className="font-semibold break-words overflow-hidden leading-tight select-none">
             {student?.name || (
-                <span className={`font-semibold text-element-hover transition-colors ${dndState.isDragging && "text-text-muted-extra"}`}>
-                    {t(dndState.isDragging ? "screens.assign.dnd.dropHere" : "common.na")}
+                <span className={`font-semibold text-element-hover transition-colors ${dndState.isDragging && !isLocked && "text-text-muted-extra"}`}>
+                    {t(dndState.isDragging && !isLocked ? "screens.assign.dnd.dropHere" : "common.na")}
                 </span>
             )}
         </span>
     );
 };
 
+const LockButton = ({ row, col }: { row: number, col: number }) => {
+    const dispatch = useDispatch();
+    const isLocked = useSelector((state: RootState) => state.grid.deskSetup[row][col].isLocked);
+
+    const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.stopPropagation();
+        dispatch(setIsLocked({ row, col, isLocked: !isLocked }));
+    }
+
+    return (
+        <div className={`absolute bottom-0 right-0 pr-0.5 -my-0.5 text-text-muted-extra ${isLocked ? "!text-error bg-opacity-30" : "hover:text-success"} transition-colors`}>
+            <button onClick={handleClick} className="pt-3 pl-3">
+                {isLocked ? (
+                    <LockIcon size={16} strokeWidth={3} color="currentcolor" />
+                ) : (
+                    <LockOpenIcon size={16} strokeWidth={3} color="currentcolor" />
+                )}
+            </button>
+        </div>
+    )
+}
+
 //util function for desk element classnames
-const getClassNames = ({ isActive, isOver, dndState, deskState, isDragging }: any) =>
-    `h-16 flex justify-center items-center rounded-md transition-all relative text-default bg-element border-2 border-default shadow-md 
+const getClassNames = ({ isActive, isOver, dndState, deskState, isDragging, isLocked }: any) =>
+    `relative h-16 flex justify-center items-center rounded-md transition-all text-default bg-element border-2 border-default shadow-md 
     ${isActive && "!bg-background"}
-    ${isOver && "shadow-success border-success bg-element-hover"}
-    ${dndState.isDragging && !dndState.isOver && "bg-element-hover shadow-md shadow-default"}
-    ${deskState.studentId && isOver && "shadow-warning border-warning"}
+    ${isOver && !isLocked && "shadow-success border-success bg-element-hover"}
+    ${dndState.isDragging && !dndState.isOver && !isLocked && "bg-element-hover shadow-md shadow-default"}
+    ${deskState.studentId && isOver && "shadow-warning !border-warning"}
     ${deskState.studentId ? "cursor-pointer" : "cursor-default"}
-    ${isDragging && "opacity-15"}`;
+    ${isDragging && "opacity-15"}
+    ${isLocked && "!border-border"}`;

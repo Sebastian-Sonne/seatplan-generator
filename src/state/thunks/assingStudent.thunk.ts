@@ -7,6 +7,7 @@ export const assignStudent = createAsyncThunk(
     'students/assignStudent',
     async ({ id, coords }: { id: string, coords: Coordinates }, { getState, dispatch }) => {
         const state = getState() as RootState;
+
         const prevStudentId = state.grid.deskSetup[coords.row][coords.col].studentId;
         if (prevStudentId) {
             dispatch(setIsAssigned({ id: prevStudentId, val: false }))

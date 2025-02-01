@@ -5,8 +5,8 @@
 @layer base {
     :root {
         --text: #091010;
-        --text-muted: #131f20;
-        --text-muted-extra: #253e41;
+        --text-muted: #3a3a3a;
+        --text-muted-extra: #585858;
 
         --background: #ffffff;
         --card: #f8f8f9;

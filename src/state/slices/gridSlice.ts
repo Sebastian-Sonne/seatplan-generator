@@ -12,6 +12,7 @@ export interface RowColCoordinates {
 
 export interface Desk {
     deskState: -1 | 1; // -1 = no desk, 1 = desk
+    isLocked: boolean;
     studentId: string | null;
 }
 
@@ -35,6 +36,7 @@ const createEmptyGrid = (rows: number, cols: number): Desk[][] => {
             Array(cols)
                 .fill({
                     deskState: -1,
+                    isLocked: false,
                     studentId: null,
                 }))
 };
@@ -99,6 +101,7 @@ const gridSlice = createSlice({
             state.hoverState = action.payload;
         },
 
+        //edit grid
         add: (state, action: PayloadAction<RowColCoordinates>) => {
             const { type, index } = action.payload;
 
@@ -107,7 +110,7 @@ const gridSlice = createSlice({
                 state.deskSetup.splice(index, 0, newRow);
             } else {
                 state.deskSetup.forEach((deskRow) => {
-                    deskRow.splice(index, 0, { deskState: -1, studentId: null });
+                    deskRow.splice(index, 0, { deskState: -1, studentId: null, isLocked: false});
                 });
             }
         },
@@ -196,6 +199,13 @@ const gridSlice = createSlice({
         clearDeskAssignments: (state) => {
             state.deskSetup.forEach((row) =>
                 row.forEach((cell) => {
+                    if (cell.deskState === 1 && !cell.isLocked) cell.studentId = null;
+                })
+            );
+        },
+        forceClearDeskAssignments: (state) => {
+            state.deskSetup.forEach((row) =>
+                row.forEach((cell) => {
                     if (cell.deskState === 1) cell.studentId = null;
                 })
             );
@@ -203,6 +213,10 @@ const gridSlice = createSlice({
         assignStudent: (state, action: PayloadAction<{ row: number, col: number, id: string | null }>) => {
             const { row, col, id } = action.payload;
             state.deskSetup[row][col].studentId = id;
+        },
+        setIsLocked: (state, action: PayloadAction<{ row: number, col: number, isLocked: boolean }>) => {
+            const { row, col, isLocked } = action.payload;
+            state.deskSetup[row][col].isLocked = isLocked;
         },
 
         setIsDragging: (state, action: PayloadAction<boolean>) => {
@@ -225,7 +239,9 @@ export const { addDesk,
     set,
     assignStudent,
     clearDeskAssignments,
+    forceClearDeskAssignments,
     purgeEmptyEdges,
+    setIsLocked,
     setIsDragging,
     setIsOver } = gridSlice.actions;
 export default gridSlice.reducer;
