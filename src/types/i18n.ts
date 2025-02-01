@@ -65,14 +65,22 @@ export type I18nKeys = {
         requestLink: string;
       };
     };
+    error: {
+      heading: string;
+      oops: string;
+      supportString: string;
+      mailToString: string;
+      errors: {
+        unKown: string;
+        notEnoughDesks: string;
+        noDesk: string;
+        removeAllStudents: string;
+        invalidShareData: string;
+      }
+    }
     export: {
       heading: string;
     };
-  };
-  errors: {
-    notEnoughDesks: string;
-    noDesk: string;
-    removeAllStudents: string;
   };
   components: {
     grid: {

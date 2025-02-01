@@ -67,12 +67,20 @@
     },
     "export": {
       "heading": "Export your Seatplan"
+    },
+    "error": {
+      "heading": "Error",
+      "oops": "Oops! It seems like an error has occured.",
+      "supportString": "Please contact support if the problem persists.",
+      "mailToString": "Hello,\nI stumbled upon an error in the Seatplan Generator. Here are the details: ",
+      "errors": {
+        "unKown": "An unknown error has occured.",
+        "notEnoughDesks": "There are not enough desks for all students. Are you sure you want to continue? Some students will not have a desk assigned to them.",
+        "noDesk": "Please add at least one desk in order to continue.",
+        "removeAllStudents": "You are about to delete all students. This action cannot be undone",
+        "invalidShareData": "Invalid seatplan data. Please verify your url and try again."
+      }
     }
-  },
-  "errors": {
-    "notEnoughDesks": "There are not enough desks for all students. Are you sure you want to continue? Some students will not have a desk assigned to them.",
-    "noDesk": "Please add at least one desk in order to continue.",
-    "removeAllStudents": "You are about to delete all students. This action cannot be undone"
   },
   "components": {
     "grid": {

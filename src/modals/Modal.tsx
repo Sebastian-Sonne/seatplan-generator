@@ -13,7 +13,6 @@ interface ModalProps {
     onCancel?: () => void;
     onClose: () => void;
 }
-
 const Modal: React.FC<ModalProps> = ({ title, component, confirmText = "OK", cancelText, onConfirm, onCancel, onClose }) => {
     const modalRef = useRef<HTMLDivElement>(null);
 
@@ -61,5 +60,4 @@ const Modal: React.FC<ModalProps> = ({ title, component, confirmText = "OK", can
         </motion.div>
     );
 };
-
 export default Modal;

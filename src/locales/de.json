@@ -67,12 +67,20 @@
     },
     "export": {
       "heading": "Sitzplan exportieren"
+    },
+    "error": {
+      "heading": "Fehler",
+      "oops": "Ups, es scheint so als ob ein Fehler aufgetreten ist.",
+      "supportString": "Falls dieser Fehler weiterhin besteht, kontaktieren Sie bitte unseren Support.",
+      "mailToString": "Hallo, \nich habe einen Fehler gefunden und benötige Hilfe.",
+      "errors": {
+        "unKown": "Ein unbekannter Fehler ist aufgetreten.",
+        "notEnoughDesks": "Es gibt nicht genug Tische für alle Schüler. Einige Schüler werden keinen Tisch haben. Möchten Sie trotzdem fortfahren?",
+        "noDesk": "Bitte fügen Sie mindestens einen Tisch hinzu, um fortzufahren.",
+        "removeAllStudents": "Sie sind gerade dabei alle Schüler zu entfernen. Diese Aktion kann nicht rückgängig gemacht werden.",
+        "invalidShareData": "Fehlerhafte Sitzplandaten. Bitte überprüfen Sie die URL und versuchen Sie es erneut."
+      }
     }
-  },
-  "errors": {
-    "notEnoughDesks": "Es gibt nicht genug Tische für alle Schüler. Einige Schüler werden keinen Tisch haben. Möchten Sie trotzdem fortfahren?",
-    "noDesk": "Bitte fügen Sie mindestens einen Tisch hinzu, um fortzufahren.",
-    "removeAllStudents": "Sie sind gerade dabei alle Schüler zu entfernen. Diese Aktion kann nicht rückgängig gemacht werden."
   },
   "components": {
     "grid": {

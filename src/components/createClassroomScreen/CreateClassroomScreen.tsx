@@ -30,7 +30,7 @@ const CreateClassroomScreen = () => {
         title: t("common.error"),
         component: (
           <div className="mb-2 text-text-muted">
-            {t("errors.noDesk")}
+            {t("modals.error.errors.noDesk")}
           </div>
         )
       })
@@ -41,7 +41,7 @@ const CreateClassroomScreen = () => {
         title: t("common.warning"),
         component: (
           <div className="mb-2 text-text-muted">
-            {t("errors.notEnoughDesks")}
+            {t("modals.error.errors.notEnoughDesks")}
           </div>
         ),
         cancelText: t("common.cancel"),

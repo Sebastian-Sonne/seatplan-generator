@@ -18,12 +18,15 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import { useI18n } from "./hooks/useI18n";
 import { useModal } from "./context/ModalContext";
 import SettingsButton from "./components/buttons/SettingsButton";
+import SupportComponent from "./modals/SupportComponent";
 
 const App = () => {
   const step = useSelector((state: RootState) => state.app.step);
   const theme = useSelector((state: RootState) => state.theme.theme);
   const t = useI18n();
   const { showModal } = useModal();
+
+  //! fix unkown error
   const dispatch = useDispatch();
 
   //parse and handle url params
@@ -54,17 +57,32 @@ const App = () => {
 
         try {
           const { layout, students } = decodeData(value);
-          if (!validate(layout, students)) throw new Error("Invalid data");
+          validate(layout, students);
 
           dispatch(setProcessStep(3));
           dispatch(setDeskGrid(layout));
           dispatch(addStudents(students));
-        } catch {
-          dispatch(setProcessStep(1));
-        }
+        } catch (error: any) {
+          showModal({
+            title: t("modals.error.heading"),
+            component: (
+              <div className="text-text-muted -mt-2">
+                <div className="flex flex-col mb-2">
+                  {t("modals.error.oops")}
+                  <span className="text-error">
+                    {t("modals.error.errors.invalidShareData")}
+                  </span>
+                </div>
+
+
+                <SupportComponent errorMessage="Invalid share data" error={error} />
+              </div>
+            ),
+          })
+        };
 
         shouldUpdateUrl = true;
-      }
+      },
     };
 
     //proccess url params dynamically -> for new params, add new action
@@ -81,6 +99,7 @@ const App = () => {
         window.history.replaceState({}, '', `${window.location.pathname}?${params.toString()}`);
       }, 0);
     }
+
   }, [dispatch]);
 
   useEffect(() => {
