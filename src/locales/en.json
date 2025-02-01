@@ -75,7 +75,7 @@
       "mailToString": "Hello,\nI stumbled upon an error in the Seatplan Generator. Here are the details: ",
       "errors": {
         "unKown": "An unknown error has occured.",
-        "notEnoughDesks": "There are not enough desks for all students. Are you sure you want to continue? Some students will not have a desk assigned to them.",
+        "notEnoughDesks": "There are not enough desks for all students. Some students will not have a desk assigned to them. Are you sure you want to continue?",
         "noDesk": "Please add at least one desk in order to continue.",
         "removeAllStudents": "You are about to delete all students. This action cannot be undone",
         "invalidShareData": "Invalid seatplan data. Please verify your url and try again."
