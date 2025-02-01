@@ -1,7 +1,8 @@
 import React, { createContext, useContext, useState, ReactNode, Suspense } from "react";
-import Modal from "../modals/Modal";
 import { AnimatePresence } from "motion/react";
 import LoadingSpinner from "../components/loading/LoadingSpinner";
+
+const Modal = React.lazy(() => import("../modals/Modal"));
 
 interface ModalOptions {
     title: string;
