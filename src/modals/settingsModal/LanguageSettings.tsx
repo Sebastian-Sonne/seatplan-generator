@@ -24,7 +24,7 @@ const LanguageSettings = () => {
         <>
             <H3 value={t("modals.settings.language.heading")} />
             <p className="text-text-muted-extra -mt-3 mb-2">
-                {t("modals.settings.language.content")} <a className="text-default" href="mailto:languageRequest@seatplan.xyz?subject=Language%20Request&body=Hello,%0D%0A%0D%0AI would like to request the following language: ">
+                {t("modals.settings.language.content")} <a className="text-default" href="mailto:support@seatplan.xyz?subject=Language%20Request&body=Hello,%0D%0A%0D%0AI would like to request the following language: ">
                     {t("modals.settings.language.requestLink")}
                 </a>
 

@@ -38,7 +38,7 @@
       "title": "Sitzplätze zuweisen",
       "heading": "Sitzplätze zuweisen",
       "dnd": {
-        "heading": "Ziehen Sie die Schüler auf die Tische",
+        "heading": "Schüler manuell zuweisen",
         "autoAssign": "Automatisch zuweisen",
         "clearAssign": "Zuweisung löschen",
         "allAssigned": "Alle Schüler sind zugewiesen",

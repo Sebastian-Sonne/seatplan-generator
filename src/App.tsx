@@ -25,8 +25,6 @@ const App = () => {
   const theme = useSelector((state: RootState) => state.theme.theme);
   const t = useI18n();
   const { showModal } = useModal();
-
-  //! fix unkown error
   const dispatch = useDispatch();
 
   //parse and handle url params
@@ -78,7 +76,8 @@ const App = () => {
                 <SupportComponent errorMessage="Invalid share data" error={error} />
               </div>
             ),
-          })
+          });
+          dispatch(setProcessStep(1));
         };
 
         shouldUpdateUrl = true;
