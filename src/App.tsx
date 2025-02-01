@@ -1,12 +1,9 @@
-import AddStudentsScreen from "./components/addStudentsScreen/AddStudentsScreen";
-import CreateClassroomScreen from "./components/createClassroomScreen/CreateClassroomScreen";
-import AssignSeatsScreen from "./components/assignSeatsScreen/AssignSeatsScreen";
 import Progressbar from "./components/Progressbar";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./state/store";
 import { ProcessSteps, setProcessStep } from "./state/slices/appSlice";
 import { Footer } from "./components/footer/Footer";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { setDeskGrid } from "./state/slices/gridSlice";
 import { addStudents } from "./state/slices/studentSlice";
 import { decodeData } from "./service/link.service";
@@ -14,11 +11,29 @@ import validate from "./service/validate.service";
 import Container from "./components/Container";
 import H1 from "./components/headings/H1";
 import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
 import { useI18n } from "./hooks/useI18n";
 import { useModal } from "./context/ModalContext";
 import SettingsButton from "./components/buttons/SettingsButton";
 import SupportComponent from "./modals/SupportComponent";
+import React from "react";
+import LoadingSpinner from "./components/loading/LoadingSpinner";
+
+//lazy load components
+const AddStudentsScreen = React.lazy(() => import("./components/addStudentsScreen/AddStudentsScreen"));
+const CreateClassroomScreen = React.lazy(() => import("./components/createClassroomScreen/CreateClassroomScreen"));
+const AssignSeatsScreen = React.lazy(async () => {
+  const [{ default: AssignSeatsScreen }, { HTML5Backend }] = await Promise.all([
+    import("./components/assignSeatsScreen/AssignSeatsScreen"),
+    import("react-dnd-html5-backend"),
+  ]);
+  return {
+    default: (props) => (
+      <DndProvider backend={HTML5Backend}>
+        <AssignSeatsScreen {...props} />
+      </DndProvider>
+    )
+  };
+});
 
 const App = () => {
   const step = useSelector((state: RootState) => state.app.step);
@@ -112,6 +127,7 @@ const App = () => {
   return (
     <div className="lg:px-[8%] flex flex-col items-center gap-2 bg-background min-h-screen pt-5">
       <div className="w-full max-w-[2000px] px-4">
+        
         <Container className="flex flex-col gap-4">
           <Progressbar />
           <div className="flex flex-row justify-between items-center">
@@ -123,13 +139,17 @@ const App = () => {
           </div>
         </Container>
 
-        {step === ProcessSteps.STEP_ONE && <AddStudentsScreen />}
-        {step === ProcessSteps.STEP_TWO && <CreateClassroomScreen />}
-        {step === ProcessSteps.STEP_THREE && (
-          <DndProvider backend={HTML5Backend}>
-            <AssignSeatsScreen />
-          </DndProvider>
-        )}
+        <Suspense fallback={<LoadingSpinner />}>
+          {step === ProcessSteps.STEP_ONE && <AddStudentsScreen />}
+        </Suspense>
+
+        <Suspense fallback={<LoadingSpinner />}>
+          {step === ProcessSteps.STEP_TWO && <CreateClassroomScreen />}
+        </Suspense>
+
+        <Suspense fallback={<LoadingSpinner />}>
+          {step === ProcessSteps.STEP_THREE && <AssignSeatsScreen />}
+        </Suspense>
       </div>
 
       <Footer />

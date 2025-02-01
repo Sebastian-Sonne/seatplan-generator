@@ -1,6 +1,7 @@
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import React, { createContext, useContext, useState, ReactNode, Suspense } from "react";
 import Modal from "../modals/Modal";
 import { AnimatePresence } from "motion/react";
+import LoadingSpinner from "../components/loading/LoadingSpinner";
 
 interface ModalOptions {
     title: string;
@@ -36,7 +37,9 @@ export const ModalProvider: React.FC<{ children: ReactNode }> = ({ children }) =
         <ModalContext.Provider value={{ showModal, hideModal }} >
             {children}
             <AnimatePresence>
-                {modalOptions && <Modal {...modalOptions} onClose={hideModal} />}
+                <Suspense fallback={<LoadingSpinner />}>
+                    {modalOptions && <Modal {...modalOptions} onClose={hideModal} />}
+                </Suspense>
             </AnimatePresence>
         </ModalContext.Provider>
     );

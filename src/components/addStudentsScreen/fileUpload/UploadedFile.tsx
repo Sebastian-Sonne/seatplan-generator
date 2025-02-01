@@ -2,7 +2,7 @@ import { nanoid } from "@reduxjs/toolkit";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addStudents, Student } from "../../../state/slices/studentSlice";
-import Loadingbar from "../../loading/LoadingScreen";
+import Loadingbar from "../../loading/Loadingbar";
 import FileItem from "./FileItem";
 import * as XLSX from "xlsx";
 import PrimaryButton from "../../buttons/PrimaryButton";
