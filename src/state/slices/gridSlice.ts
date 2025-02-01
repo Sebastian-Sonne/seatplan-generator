@@ -218,6 +218,14 @@ const gridSlice = createSlice({
             const { row, col, isLocked } = action.payload;
             state.deskSetup[row][col].isLocked = isLocked;
         },
+        setAllIsLocked: (state, action: PayloadAction<boolean>) => {
+            const isLocked = action.payload;
+            state.deskSetup.forEach((row) =>
+                row.forEach((cell) => {
+                    if (cell.deskState === 1) cell.isLocked = isLocked;
+                })
+            );
+        },
 
         setIsDragging: (state, action: PayloadAction<boolean>) => {
             state.dndState.isDragging = action.payload;
@@ -242,6 +250,7 @@ export const { addDesk,
     forceClearDeskAssignments,
     purgeEmptyEdges,
     setIsLocked,
+    setAllIsLocked,
     setIsDragging,
     setIsOver } = gridSlice.actions;
 export default gridSlice.reducer;

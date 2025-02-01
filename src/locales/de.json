@@ -44,6 +44,7 @@
         "allAssigned": "Alle Schüler sind zugewiesen",
         "dropHere": "Hier ablegen"
       },
+      "lockInfoText": "Sperren oder entsperren Sie einzelne oder alle Tische, um sie vor dem Mischen zu schützen",
       "shuffle": "Mischen"
     }
   },

@@ -34,7 +34,7 @@ const Tooltip = ({ text, children }: { text: string; children: React.ReactNode }
                 >
                     {children}
                     {visible && (
-                        <div className="absolute bottom-full left-1/2 -translate-x-1/2 bg-element text-text-muted font-medium text-sm xl:text-nowrap p-2 rounded-lg z-50">
+                        <div className="absolute bottom-full left-1/2 -translate-x-1/2 bg-element text-text-muted font-medium text-sm lg:w-24  p-2 rounded-lg z-50">
                             {text}
                         </div>
                     )}

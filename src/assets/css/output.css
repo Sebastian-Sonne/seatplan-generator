@@ -1451,6 +1451,18 @@ video {
 }
 
 @media (min-width: 1024px) {
+  .lg\:w-12 {
+    width: 3rem;
+  }
+
+  .lg\:w-14 {
+    width: 3.5rem;
+  }
+
+  .lg\:w-24 {
+    width: 6rem;
+  }
+
   .lg\:px-\[8\%\] {
     padding-left: 8%;
     padding-right: 8%;

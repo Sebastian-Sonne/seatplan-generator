@@ -10,6 +10,7 @@ import { AppDispatch } from "../../state/store";
 import { shuffleAssignedStudents } from "../../state/thunks/shuffleAssignedStudents.thunk";
 import { useI18n } from "../../hooks/useI18n";
 import { useShareLinkModal } from "../../modals/ShareLinkModal";
+import { LockAllButton, LockInfoButton, UnlockAllButton } from "../buttons/LockButtons";
 
 const AssignSeatsScreen = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -33,7 +34,12 @@ const AssignSeatsScreen = () => {
             <Container className="flex flex-col gap-4" >
                 <ClassroomGrid disabled={true} />
 
-                <div className="flex flex-row justify-end w-full">
+                <div className="flex flex-row justify-between w-full">
+                    <div className="flex flex-row gap-2">
+                        <LockAllButton />
+                        <UnlockAllButton />
+                        <LockInfoButton />
+                    </div>
                     <PrimaryButton onClick={() => dispatch(shuffleAssignedStudents())} >
                         {t("screens.assign.shuffle")}
                     </PrimaryButton>

@@ -45,6 +45,7 @@ export type I18nKeys = {
         dropHere: string;
       };
       shuffle: string;
+      lockedInfoText: string;
     };
   };
   modals: {

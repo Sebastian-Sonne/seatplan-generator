@@ -13,7 +13,7 @@ export const randAssignStudents = createAsyncThunk(
         const availableDesks: { row: number; col: number }[] = [];
         desks.forEach((row, rowIndex) => {
             row.forEach((desk, colIndex) => {
-                if (desk.deskState === 1 && !desk.studentId) {
+                if (desk.deskState === 1 && !desk.studentId && !desk.isLocked) {
                     availableDesks.push({ row: rowIndex, col: colIndex });
                 }
             });
