@@ -1,1 +1,0 @@
-import{j as e,P as o}from"./index-C-sK9tWO.js";const i=({onClick:t,children:r,className:a=""})=>e.jsx(o,{onClick:t,className:`bg-disabled hover:bg-active active:bg-hover ${a}`,children:r});export{i as S};
