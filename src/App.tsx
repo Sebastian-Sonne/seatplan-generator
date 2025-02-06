@@ -17,6 +17,7 @@ import SettingsButton from "./components/buttons/SettingsButton";
 import SupportComponent from "./modals/SupportComponent";
 import React from "react";
 import LoadingSpinner from "./components/loading/LoadingSpinner";
+import Loadingbar from "./components/loading/Loadingbar";
 
 //lazy load components
 const AddStudentsScreen = React.lazy(() => import("./components/addStudentsScreen/AddStudentsScreen"));
