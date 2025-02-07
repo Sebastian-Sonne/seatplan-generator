@@ -1,34 +1,43 @@
-import { useEffect, useState } from "react"
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 interface LoadingbarProps {
     onComplete: () => void;
     speed: number;
 }
-const Loadingbar: React.FC<LoadingbarProps> = ({onComplete, speed}) => {
-    const [percent, setPercent] = useState(0);
+
+const Loadingbar: React.FC<LoadingbarProps> = ({ onComplete, speed }) => {
+    const [progress, setProgress] = useState(0);
 
     useEffect(() => {
+        let p = 0;
         const interval = setInterval(() => {
-            setPercent((p) => {
-                if (p < 10) {
-                    return p + 1;
-                } else if (p < 100) {
-                    return p + Math.floor(Math.random() * 10) + 1;
-                } else {
-                    clearInterval(interval);
-                    onComplete();
-                    return 0;
-                }
-            });
+            if (p < 10) {
+                p += 1;
+            } else if (p < 100) {
+                p += Math.floor(Math.random() * 10) + 1;
+            }
+            setProgress(Math.min(p, 100));
+
+            if (p >= 100) {
+                clearInterval(interval);
+            }
         }, speed);
 
         return () => clearInterval(interval);
-    }, [onComplete, speed]);
+    }, [speed]);
 
     return (
-        <div className="w-full bg-background rounded-full h-2.5">
-            <div className="bg-default h-2.5 rounded-full" style={{ width: `${percent}%` }}></div>
+        <div className="w-full bg-background rounded-full h-2.5 overflow-hidden">
+            <motion.div
+                className="bg-default h-2.5 rounded-full"
+                initial={{ width: "0%" }}
+                animate={{ width: `${progress}%` }}
+                transition={{ ease: "easeInOut", duration: speed / 1000 }}
+                onAnimationComplete={() => progress === 100 && onComplete()}
+            />
         </div>
-    )
-}
-export default Loadingbar
+    );
+};
+
+export default Loadingbar;
