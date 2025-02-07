@@ -47,10 +47,12 @@ const StudentDeskelement = ({ row, col }: { row: number, col: number }) => {
     }));
 
     const dragDropRef = (node: HTMLDivElement | null) => {
-        if (deskState.studentId) {
+        if (deskState.studentId && !isLocked) {
             drag(node);
         }
-        drop(node);
+        if (!isLocked) {
+            drop(node);
+        }
     }
 
     //update global dnd state for ui update
