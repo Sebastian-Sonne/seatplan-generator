@@ -50,4 +50,4 @@ We welcome contributions! If you encounter any bugs or have feature suggestions,
 
 ## License
 
-This project is licensed under the MIT License. See the `LICENSE` file for more details.
+This project is not licensed under an open-source license and is the intellectual property of Sebastian Sonne. The source is available only as an educational resource and to accept fixes for minor mistakes.
