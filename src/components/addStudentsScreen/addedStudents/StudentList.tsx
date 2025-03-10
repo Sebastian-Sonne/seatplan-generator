@@ -24,7 +24,7 @@ const StudentList = () => {
             title: t("common.warning"),
             component: (
                 <div className="mb-2 text-text-muted" >
-                    {t("errors.removeAllStudents")}
+                    {t("modals.error.errors.removeAllStudents")}
                 </div >
             ),
             cancelText: t("common.cancel"),
