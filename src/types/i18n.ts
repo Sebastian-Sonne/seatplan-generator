@@ -25,6 +25,8 @@ export type I18nKeys = {
         continue: string;
         remove: string;
         removeAll: string;
+        continueWithoutStudents: string;
+        note: string; //continue without students information
       };
     };
     create: {

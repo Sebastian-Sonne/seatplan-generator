@@ -24,7 +24,9 @@
         "showAll": "Show all students",
         "continue": "Continue to next step",
         "remove": "Remove",
-        "removeAll": "Remove all"
+        "removeAll": "Remove all",
+        "continueWithoutStudents": "Continue without Students",
+        "note": "You can always add students later"
       }
     },
     "create": {

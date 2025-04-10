@@ -24,7 +24,9 @@
         "showAll": "Alle Schüler anzeigen",
         "continue": "Weiter zum nächsten Schritt",
         "remove": "Entfernen",
-        "removeAll": "Alle entfernen"
+        "removeAll": "Alle entfernen",
+        "continueWithoutStudents": "Ohne Schüler fortfahren",
+        "note": "Sie können Schüler auch später hinzufügen"
       }
     },
     "create": {
