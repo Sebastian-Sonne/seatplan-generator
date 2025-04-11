@@ -25,8 +25,7 @@
         "continue": "Weiter zum nächsten Schritt",
         "remove": "Entfernen",
         "removeAll": "Alle entfernen",
-        "continueWithoutStudents": "Ohne Schüler fortfahren",
-        "note": "Sie können Schüler auch später hinzufügen"
+        "note": "Sie können Schüler auch später hinzufügen."
       }
     },
     "create": {
