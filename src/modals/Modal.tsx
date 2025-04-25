@@ -42,13 +42,14 @@ const Modal: React.FC<ModalProps> = ({ title, component, confirmText = "OK", can
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 overflow-auto"
+        >
             <motion.div
                 ref={modalRef}
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.8, opacity: 0 }}
-                className="bg-card m-4 p-6 rounded-2xl shadow-lg flex flex-col w-full md:max-w-2xl"
+                className="bg-card m-4 p-6 rounded-2xl shadow-lg flex flex-col w-full md:max-w-2xl max-h-[90vh] overflow-y-auto"
             >
                 <H1 value={title} className="mb-4" />
                 <div className="mb-4">{component}</div>
@@ -58,6 +59,7 @@ const Modal: React.FC<ModalProps> = ({ title, component, confirmText = "OK", can
                 </div>
             </motion.div>
         </motion.div>
+
     );
 };
 export default Modal;

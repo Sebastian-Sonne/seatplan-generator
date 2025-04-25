@@ -83,6 +83,9 @@ export type I18nKeys = {
     export: {
       heading: string;
     };
+    addStudents: {
+      heading: string;
+    },
   };
   components: {
     grid: {

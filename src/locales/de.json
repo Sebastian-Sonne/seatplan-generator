@@ -2,7 +2,7 @@
   "siteTitle": "Sitzplan Generator",
   "screens": {
     "addStudents": {
-      "title": "Schüler hochladen",
+      "title": "Schüler hinzufügen",
       "heading": "Datei hochladen oder Schüler manuell hinzufügen",
       "upload": {
         "heading": "Datei hochladen:",
@@ -42,7 +42,7 @@
         "heading": "Schüler manuell zuweisen",
         "autoAssign": "Automatisch zuweisen",
         "clearAssign": "Zuweisung löschen",
-        "allAssigned": "Alle Schüler sind zugewiesen",
+        "allAssigned": "Es sind keine Schüler (mehr) vorhanden.",
         "dropHere": "Hier ablegen"
       },
       "lockedInfoText": "Sperren oder entsperren Sie einzelne oder alle Tische, um sie vor dem Mischen zu schützen",
@@ -69,6 +69,9 @@
     },
     "export": {
       "heading": "Sitzplan exportieren"
+    },
+    "addStudents": {
+      "heading": "Schüler hinzufügen"
     },
     "error": {
       "heading": "Fehler",

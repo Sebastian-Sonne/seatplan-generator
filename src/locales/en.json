@@ -2,7 +2,7 @@
   "siteTitle": "Seatplan Generator",
   "screens": {
     "addStudents": {
-      "title": "Upload Students",
+      "title": "Add Students",
       "heading": "Upload file or add students manually",
       "upload": {
         "heading": "Upload file:",
@@ -42,7 +42,7 @@
         "heading": "Drag and drop students to desks",
         "autoAssign": "Auto Assign",
         "clearAssign": "Clear Assignment",
-        "allAssigned": "All students are assigned",
+        "allAssigned": "There are no more students to be assigned",
         "dropHere": "Drop here"
       },
       "lockedInfoText": "Lock or unlock one single or all desks to preserve them from being shuffled",
@@ -69,6 +69,9 @@
     },
     "export": {
       "heading": "Export your Seatplan"
+    },
+    "addStudents": {
+      "heading": "Add students"
     },
     "error": {
       "heading": "Error",

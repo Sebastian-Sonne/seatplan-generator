@@ -1,15 +1,17 @@
 import { useSelector, useDispatch } from "react-redux";
 import { selectStudentById, removeStudent } from "../../../state/slices/studentSlice";
 import H5 from "../../headings/H5";
-import { RootState } from "../../../state/store";
+import { AppDispatch, RootState } from "../../../state/store";
 import { useI18n } from "../../../hooks/useI18n";
+import { unAssignStudentById } from "../../../state/thunks/unassignStudent.thunk";
 
 export const StudentElement = ({ id }: { id: string }) => {
     const student = useSelector((state: RootState) => selectStudentById(state, id));
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
     const t = useI18n();
 
     const handleRemoveStudent = () => {
+        dispatch(unAssignStudentById({studentId: id}));
         dispatch(removeStudent(id));
     };
 

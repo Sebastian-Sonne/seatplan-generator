@@ -15,3 +15,24 @@ export const unAssignStudent = createAsyncThunk(
         }
     }
 )
+
+export const unAssignStudentById = createAsyncThunk(
+    'students/unAssignStudentById',
+    async ({ studentId }: { studentId: string }, { getState, dispatch }) => {
+        const state = getState() as RootState;
+
+        // Find the coordinates of the student in the grid
+        const { deskSetup } = state.grid;
+        for (let row = 0; row < deskSetup.length; row++) {
+            for (let col = 0; col < deskSetup[row].length; col++) {
+                if (deskSetup[row][col].studentId === studentId) {
+                    // Unassign the student from the grid
+                    dispatch(assignStudent({ row, col, id: null }));
+                    // Update the student's assigned status
+                    dispatch(setIsAssigned({ id: studentId, val: false }));
+                    return;
+                }
+            }
+        }
+    }
+);
