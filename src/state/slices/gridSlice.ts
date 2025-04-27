@@ -36,8 +36,8 @@ const createEmptyGrid = (rows: number, cols: number): Desk[][] => {
             Array(cols)
                 .fill({
                     deskState: -1,
-                    isLocked: false,
                     studentId: null,
+                    isLocked: false,
                 }))
 };
 
@@ -106,7 +106,7 @@ const gridSlice = createSlice({
             const { type, index } = action.payload;
 
             if (type === "row") {
-                const newRow = Array(state.deskSetup[0]?.length || 0).fill({ deskState: -1, studentId: null });
+                const newRow = Array(state.deskSetup[0]?.length || 0).fill({ deskState: -1, studentId: null, isLocked: false });
                 state.deskSetup.splice(index, 0, newRow);
             } else {
                 state.deskSetup.forEach((deskRow) => {
@@ -145,7 +145,7 @@ const gridSlice = createSlice({
 
                 state.deskSetup[index] = row.map(desk => ({
                     ...desk,
-                    deskState: majority
+                    deskState: majority,
                 }));
             } else if (type === "col") {
                 //determine the majority of the column, in order to set all desks in the column opposite to the majority

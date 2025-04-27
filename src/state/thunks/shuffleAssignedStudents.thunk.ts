@@ -9,16 +9,9 @@ export const shuffleAssignedStudents = createAsyncThunk(
         const state = getState() as RootState;
         const desks = state.grid.deskSetup
 
-        console.log("desks", desks.length);
-        console.log(desks);
-
-        const availableStudents = desks.flat().filter(desk => desk.deskState === 1 && desk.isLocked === false);
-        console.log("availableStudents", availableStudents.length);
-        console.log(availableStudents);
-
-        const availableStudentIds = availableStudents.map(desk => desk.studentId)
-        console.log("availableStudentIds", availableStudentIds.length);
-        console.log(availableStudentIds);
+        const availableStudentIds = desks.flat()
+            .filter(desk => desk.deskState === 1 && desk.isLocked === false)
+            .map(desk => desk.studentId);
 
         dispatch(clearDeskAssignments());
 
@@ -33,9 +26,6 @@ export const shuffleAssignedStudents = createAsyncThunk(
             }
         }
 
-        console.log("availableDesks", availableDesks.length);
-        console.log(availableDesks);
-
         const shuffledStudentIds = availableStudentIds.sort(() => Math.random() - 0.5);
         const shuffledDesks = availableDesks.sort(() => Math.random() - 0.5);
 
@@ -49,6 +39,4 @@ export const shuffleAssignedStudents = createAsyncThunk(
             }
         });
     }
-
-    //! fix where studens go missing
 )
