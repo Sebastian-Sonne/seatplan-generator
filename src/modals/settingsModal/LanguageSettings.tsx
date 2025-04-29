@@ -18,6 +18,7 @@ const LanguageSettings = () => {
     const languages = [
         { code: "en", label: "🇬🇧 English" },
         { code: "de", label: "🇩🇪 Deutsch" },
+        { code: "Ox2a", label: "🖥️ 0x2a" },
     ];
 
     return (

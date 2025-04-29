@@ -1,0 +1,124 @@
+{
+  "siteTitle": "namespace SeatplanGen",
+  "screens": {
+    "addStudents": {
+      "title": "States.UploadStudents",
+      "heading": "uploadFile() || addStudents()",
+      "upload": {
+        "heading": "uploadFile()",
+        "dndArea": {
+          "instruction": "<input type=\"file\">",
+          "format": "if(format.endswith(\".xlsx\" && file.size <= 50000)",
+          "onDrag": "drop()"
+        }
+      },
+      "manual": {
+        "heading": "addStudents()",
+        "placeholder": "0x4361727374656E",
+        "error": "throw new NotImplementedException();"
+      },
+      "added": {
+        "heading": "Added students:",
+        "noStudentsAddedMessage": "students == null",
+        "totalStudents": "students.length =",
+        "showAll": "showAllStudents()",
+        "continue": "ContinueToNextStep()",
+        "remove": "Remove()",
+        "removeAll": "RemoveAll()"
+      }
+    },
+    "create": {
+      "title": "States.CreateClassroom",
+      "heading": "Create classroom layout",
+      "numberOfTables": "tables.length =",
+      "numberOfStudents": "students.length =",
+      "create": "CreateClassroom()"
+    },
+    "assign": {
+      "title": "States.AssignSeats",
+      "heading": "Assign students",
+      "dnd": {
+        "heading": "Drag and drop students to desks",
+        "autoAssign": "AutoAssign()",
+        "clearAssign": "ClearAssignment()",
+        "allAssigned": "students.assigned = true;",
+        "dropHere": "Drop()"
+      },
+      "lockedInfoText": "Lock or unlock one single or all desks to preserve them from being shuffled",
+      "shuffle": "Shuffle()"
+    }
+  },
+  "modals": {
+    "settings": {
+      "heading": "Settings",
+      "theme": {
+        "heading": "Theme preferences",
+        "content": "Choose your prefered color theme or use your system default.",
+        "themes": {
+          "dark": "#000000",
+          "light": "#ffffff",
+          "system": "System.theme.default"
+        }
+      },
+      "language": {
+        "heading": "Language",
+        "content": "Choose your prefered language",
+        "requestLink": "Request a new language"
+      }
+    },
+    "export": {
+      "heading": "Export your Seatplan"
+    },
+    "error": {
+      "heading": "Error",
+      "oops": "Exception in thread \"main\"",
+      "supportString": "Please contact support if the problem persists.",
+      "mailToString": "Hello,\nI stumbled upon an error in the Seatplan Generator. Here are the details: ",
+      "errors": {
+        "unKown": "Exception in thread \"main\" xyz.seatplan-generator.UnknownException",
+        "notEnoughDesks": "Exception in thread \"main\" xyz.seatplan-generator.NotEnoughDesksException",
+        "noDesk": "Exception in thread \"main\" xyz.seatplan-generator.NoDeskException",
+        "removeAllStudents": "MsgBox(\"Sure?\")",
+        "invalidShareData": "Exception in thread \"main\" xyz.seatplan-generator.InvalidShareData"
+      }
+    }
+  },
+  "components": {
+    "grid": {
+      "desk": "Desk",
+      "row": "Row",
+      "col": "Column",
+      "toolTips": {
+        "remove": "RemoveThis()",
+        "insert": "InsertNew()",
+        "select": "SelectThis()"
+      }
+    },
+    "export": {
+      "title": "Export",
+      "copiedToClipboard": "Copied to clipboard"
+    }
+  },
+  "common": {
+    "add": "Add",
+    "remove": "Remove",
+    "submit": "Submit",
+    "goBack": "Go Back",
+    "reset": "Reset",
+    "export": "Export",
+    "na": "N/A",
+    "copy": "Copy",
+    "error": "Error",
+    "warning": "Warning",
+    "cancel": "cancel",
+    "done": "Done",
+    "escape": "Escape",
+    "continueAnyways": "Continue anyways"
+  },
+  "messages": {
+    "newDomain": {
+      "title": "We've moved to Seatplan.xyz!",
+      "content": "We've moved to Seatplan.xyz! You’ve been redirected from our old domain. We’re now at SeatPlan.xyz with some great new features! Make sure to update your bookmarks. 🎉"
+    }
+  }
+}
